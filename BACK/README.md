@@ -1,4 +1,2 @@
-sqitch init <nom_projet> --engine pg  --top-dir migrations --target db:pg:<nom_bdd>
-
-sqitch add <nom_etape> -m "<descrption_breve_etape>
-       {init souvent au debut}
+à faire :
+-les fonctions sql add_track/album/artist et update
