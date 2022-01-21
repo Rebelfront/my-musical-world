@@ -12,7 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 
-const FormDialog = () => {
+const LoginModal = () => {
   const dispatch = useDispatch();
   const { modalOpened, email, password } = useSelector((state) => state.login);
   const handleClose = () => {
@@ -95,4 +95,4 @@ const FormDialog = () => {
   );
 };
 
-export default FormDialog;
+export default LoginModal;
