@@ -1,5 +1,22 @@
 @host=http://localhost:3200
 
 ### récupérer 1 User
-GET {{host}}/user/1
+GET {{host}}/user/2
+
+
+### update user
+PATCH {{host}}/user/1/save
+Content-Type: application/json
+
+### ajouter un user
+POST {{host}}/signup
+Content-Type: application/json
+
+{
+        "mail": "anthony@gmail.com",
+        "lastname": "false",
+        "firstname": "Anto",
+        "pseudo": "A.du.V",
+        "password": "champignon"
+    }
 

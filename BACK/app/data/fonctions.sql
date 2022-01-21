@@ -8,4 +8,13 @@ VALUES ($1 ->> 'mail',
 ) RETURNING *;
 $$ LANGUAGE SQL STRICT; 
 
-SELECT * FROM add_user()
+CREATE FUNCTION update_user(myJsonData json) RETURNS "USER" AS $$
+	UPDATE "USER" SET
+		mail=myJsonData->>'mail',
+		lastname=myJsonData->>'lastname',
+		firstname=myJsonData->>'firstname',
+		pseudo=myJsonData->>'pseudo',
+		password=myJsonData->>'password'	
+	WHERE mail=(myJsonData->>'mail')::text
+	RETURNING *;
+$$ LANGUAGE SQL STRICT;
