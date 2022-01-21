@@ -15,15 +15,16 @@ const importData = async () => {
 
     for(const user of users) {
         const {rows} = await client.query('INSERT INTO "USER"(mail, lastname, firstname, pseudo, "password") VALUES($1, $2, $3, $4, $5) RETURNING id', 
-        [this.mail,
-        this.lastname,
-        this.firstname,
-        this.pseudo,
-        this.password]); ; 
+        [user.mail,
+        user.lastname,
+        user.firstname,
+        user.pseudo,
+        user.password]); ; 
         console.log(rows);
         usersIds[user.mail] = rows[0].id; 
     }
     console.log(usersIds);
+    console.log(users);
 
     // for(const post of posts) {
     //     const categoryId = categoriesIds[post.category]; 
