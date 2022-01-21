@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { closeLoginModal } from 'src/actions/login';
+import { closeLoginModal, submitLogin } from 'src/actions/login';
 import { changeInput } from 'src/actions';
 
 import Button from '@mui/material/Button';
@@ -10,6 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import DialogTitle from '@mui/material/DialogTitle';
+import Box from '@mui/material/Box';
 
 const FormDialog = () => {
   const dispatch = useDispatch();
@@ -22,41 +23,61 @@ const FormDialog = () => {
     const action = changeInput(event.target.value, event.target.name);
     dispatch(action);
   };
+  const handleSubmit = () => {
+    const action = submitLogin();
+    dispatch(action);
+  };
 
   return (
     <div>
       <Dialog open={modalOpened} onClose={handleClose}>
         <DialogTitle>Connexion</DialogTitle>
         <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            name="email"
-            id="email"
-            label="Email"
-            type="email"
-            fullWidth
-            variant="standard"
-            placeholder="Entrez votre email"
-            value={email}
-            onChange={handleChangeInput}
-          />
-          <TextField
-            margin="dense"
-            name="password"
-            id="password"
-            label="Mot de passe"
-            type="password"
-            fullWidth
-            variant="standard"
-            placeholder="Entrez votre mot de passe"
-            value={password}
-            onChange={handleChangeInput}
-          />
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              autoFocus
+              margin="dense"
+              name="email"
+              id="email"
+              label="Email"
+              type="email"
+              fullWidth
+              variant="standard"
+              placeholder="Entrez votre email"
+              value={email}
+              onChange={handleChangeInput}
+            />
+            <TextField
+              margin="dense"
+              name="password"
+              id="password"
+              label="Mot de passe"
+              type="password"
+              fullWidth
+              variant="standard"
+              placeholder="Entrez votre mot de passe"
+              value={password}
+              onChange={handleChangeInput}
+            />
+            <DialogActions>
+              <Button
+                onClick={() => {
+                  handleClose();
+                  handleSubmit();
+                }}
+              >
+                Se connecter
+              </Button>
+            </DialogActions>
+          </Box>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Se connecter</Button>
-        </DialogActions>
         <IconButton
           aria-label="close"
           onClick={handleClose}

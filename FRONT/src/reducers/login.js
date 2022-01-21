@@ -3,8 +3,8 @@ import { CHANGE_INPUT } from '../actions';
 
 const initialState = {
   modalOpened: false,
-  email: '',
-  password: '',
+  email: 'bouclierman@herocorp.io',
+  password: 'jennifer',
 };
 
 const login = (state = initialState, action = {}) => {
