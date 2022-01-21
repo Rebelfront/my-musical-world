@@ -22,7 +22,7 @@ module.exports = {
         if (type == artist) {
             const artist = await Artist.findOne(id);
         response.json(artist);
-        } else if {
+        } else if (type == album){
 
         }
         
