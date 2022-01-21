@@ -1,3 +1,7 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { closeLoginModal } from 'src/actions/login';
+import { changeInput } from 'src/actions';
+
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -8,34 +12,46 @@ import CloseIcon from '@mui/icons-material/Close';
 import DialogTitle from '@mui/material/DialogTitle';
 
 const FormDialog = () => {
+  const dispatch = useDispatch();
+  const { modalOpened, email, password } = useSelector((state) => state.login);
   const handleClose = () => {
-
+    const action = closeLoginModal();
+    dispatch(action);
+  };
+  const handleChangeInput = (event) => {
+    const action = changeInput(event.target.value, event.target.name);
+    dispatch(action);
   };
 
   return (
     <div>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={modalOpened} onClose={handleClose}>
         <DialogTitle>Connexion</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
+            name="email"
             id="email"
             label="Email"
             type="email"
             fullWidth
             variant="standard"
             placeholder="Entrez votre email"
+            value={email}
+            onChange={handleChangeInput}
           />
           <TextField
-            autoFocus
             margin="dense"
+            name="password"
             id="password"
             label="Mot de passe"
             type="password"
             fullWidth
             variant="standard"
             placeholder="Entrez votre mot de passe"
+            value={password}
+            onChange={handleChangeInput}
           />
         </DialogContent>
         <DialogActions>
