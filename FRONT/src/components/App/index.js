@@ -1,17 +1,11 @@
-// == Import
-import reactLogo from './react-logo.svg';
-import './styles.css';
+import './style.scss';
 
-import Counter from '../Counter';
+import Header from 'src/components/Header';
 
-// == Composant
 const App = () => (
   <div className="app">
-    <img src={reactLogo} alt="react logo" />
-    <h1>Composant : App</h1>
-    <Counter />
+    <Header />
   </div>
 );
 
-// == Export
 export default App;
