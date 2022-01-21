@@ -7,3 +7,5 @@ VALUES ($1 ->> 'mail',
 		$1 ->> 'password'
 ) RETURNING *;
 $$ LANGUAGE SQL STRICT; 
+
+SELECT * FROM add_user()

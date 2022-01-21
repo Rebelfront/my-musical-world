@@ -1,0 +1,5 @@
+@host=http://localhost:3200
+
+### récupérer 1 User
+GET {{host}}/user/1
+
