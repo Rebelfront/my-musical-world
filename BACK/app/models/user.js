@@ -30,7 +30,7 @@ class User {
 
         try{
             const {rows} = await client.query(`SELECT * FROM "USER" WHERE mail=$1`, [mail]); 
-            // Vérification : existe-t-il un user qui a cet id ?
+            // Vérification : existe-t-il un user qui a ce mail ?
             if(rows[0]) {
                 if (password === rows[0].password) {
                     const user = new User(rows[0]);
@@ -41,7 +41,7 @@ class User {
                     return null;
                 }    
             } else {
-                console.log(`No user found for id ${mail}`);
+                console.log(`No user found for mail ${mail}`);
                 return null; 
             }
         } catch (error) {
@@ -114,10 +114,24 @@ class User {
 
     // supprimer un user de la bdd
 
-    async delete() {
+   static async delete(id, password) {
         // Y a-t-il besoin de rajouter une condition if avec message d'erreur si l'id demandé n'existe pas ?
         try {
-            await client.query('DELETE FROM "USER" WHERE id=$1', [this.id]);
+            
+            const {rows} = await client.query(`SELECT * FROM "USER" WHERE id=$1`, [id]); 
+            // Vérification : existe-t-il un user qui a ce mail ?
+            console.log(rows[0]);
+            if (rows[0] === undefined){
+                console.log(`il n'existe aucun compte avec cet id`);
+                return null;
+            } else if (password !== rows[0].password) {
+                console.log('password not the same');
+                return null;
+            } else if (password === rows[0].password) {
+                    // delete user.password 
+                    await client.query('DELETE FROM "USER" WHERE id=$1', [id]);
+                    console.log(`user with id ${id} is deleted`);
+                } 
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);

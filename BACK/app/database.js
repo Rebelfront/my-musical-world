@@ -13,4 +13,6 @@ if (process.env.NODE_ENV === 'production') {
 
 const pool = new Pool(config);
 
+console.log('Connected on Heroku Musical World database');
+
 module.exports = pool;
