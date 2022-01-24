@@ -6,6 +6,7 @@ import { openSignUpModal } from 'src/actions/signup';
 
 import LoginModal from './LoginModal';
 import SignUpModal from './SignUpModal';
+import MobileMenu from './MobileMenu';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Header = () => {
       <button type="button" onClick={handleOpenSignUpModal}>S'inscrire</button>
       <LoginModal />
       <SignUpModal />
+      <MobileMenu />
     </header>
   );
 };
