@@ -1,15 +1,20 @@
 const User = require('../models/user');
+const jwt = require ('../services/jwt');
 
 module.exports = {
 
 
     // Méthode pour se créer un compte : ajouter un user en bdd
+    // Intégrer la méthode makeToken 
     validSignup: async (request, response) => {
         try {
             const instance = new User(request.body);
             const user = await instance.addUser();
           console.log('userconstroller', user);
-            return response.status(201).json(user);
+
+            const token = jwt.makeToken(user);
+
+             return response.setHeader('Authorization', 'Bearer ' + token).status(201).json(user);
        
         } catch (error) {
             console.log(error);
@@ -19,7 +24,7 @@ module.exports = {
     },
 
     // Pour se connecter : retrouver un user enregistré en bdd à partir de son mail
-    // TODO 
+    // TODO : intégrer la méthode makeToken 
     validLogin: async (request, response) => {
         try {
             const mail = request.body.mail; 

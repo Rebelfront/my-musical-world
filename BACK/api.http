@@ -13,11 +13,11 @@ POST {{host}}/signup
 Content-Type: application/json
 
 {
-        "mail": "anthony@gmail.com",
-        "lastname": "false",
-        "firstname": "Anto",
-        "pseudo": "A.du.V",
-        "password": "champignon"
+        "mail": "val@gmail.com",
+        "lastname": "middle",
+        "firstname": "Val",
+        "pseudo": "Val.du.lundi",
+        "password": "tomate"
     }
 
 ###
