@@ -1,46 +1,55 @@
-@host=http://localhost:3200
+@host=http://localhost:3000
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im1haWwiOiJ0cnVjQGdtYWlsLmNvbSIsImxhc3RuYW1lIjoibWlkZGxlIiwiZmlyc3RuYW1lIjoidHJ1YyIsInBzZXVkbyI6InRydWMuZHUubHVuZGkiLCJpZCI6MjF9LCJpYXQiOjE2NDMwNDAwNjYsImV4cCI6MTY0MzA2MTY2Nn0.C5zCeNxOI7mi93j-XXPFd1HXBe0OQw39wKT9aWJBNyo
 
 ### récupérer 1 User
-GET {{host}}/user/3
+GET {{host}}/user
+Authorization:{{token}}
+Content-Type: application/json
+
 
 
 ### update user
-PATCH {{host}}/user/1/save
+PATCH {{host}}/user
+Authorization:{{token}}
 Content-Type: application/json
+
+{
+  
+  "mail": "truc@gmail.com",
+  "lastname": "lucy",
+  "firstname": "insky",
+  "pseudo": "blabla.du.lundi",
+  "password":"mozza"
+}
 
 ### ajouter un user
 POST {{host}}/signup
 Content-Type: application/json
 
 {
-        "mail": "val@gmail.com",
+        "mail": "truc@gmail.com",
         "lastname": "middle",
-        "firstname": "Val",
-        "pseudo": "Val.du.lundi",
-        "password": "tomate"
+        "firstname": "truc",
+        "pseudo": "truc.du.lundi",
+        "password": "pepper"
     }
 
-###
+###se connecter
 POST {{host}}/login
 Content-Type: application/json
 
 {
-        "mail": "anthony@gmail.com",
+        "mail": "truc@gmail.com",
         "lastname": "",
         "firstname": "",
         "pseudo": "",
-        "password": "champignon"
+        "password": ""
     }
 
-###
-DELETE {{host}}/user/5
+### supprimer son compte
+DELETE {{host}}/user
+Authorization:{{token}}
 Content-Type: application/json
 
-{
-        "mail": "anthony@gmail.com",
-        "lastname": "",
-        "firstname": "",
-        "pseudo": "",
-        "password": "champignon"
-    }
+
 

@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const jwt = require ('../services/jwt');
+const jwt = require('../services/jwt');
 
 module.exports = {
 
@@ -10,28 +10,32 @@ module.exports = {
         try {
             const instance = new User(request.body);
             const user = await instance.addUser();
-          console.log('userconstroller', user);
+            console.log('userconstroller', user);
 
             const token = jwt.makeToken(user);
 
-             return response.setHeader('Authorization', 'Bearer ' + token).status(201).json(user);
-       
+            return response.setHeader('Authorization', 'Bearer ' + token).status(201).json(user);
+
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);
         }
-       
+
     },
 
     // Pour se connecter : retrouver un user enregistré en bdd à partir de son mail
     // TODO : intégrer la méthode makeToken 
     validLogin: async (request, response) => {
         try {
-            const mail = request.body.mail; 
-            const password = request.body.password; 
-            const user = await User.findByMail(mail, password); 
-            console.log('user', user);
-            response.json(user)
+            const mail = request.body.mail;
+            const password = request.body.password;
+            const user = await User.findByMail(mail, password);
+
+            const token = jwt.makeToken(user);
+
+            return response.setHeader('Authorization', 'Bearer ' + token).status(200).json(user);
+
+            //    return response.status(200).json(user);
 
         } catch (error) {
             console.log(error);
@@ -43,9 +47,15 @@ module.exports = {
 
     // récupérer un user en bdd 
     getUserInfos: async (request, response) => {
-        const id = parseInt(request.params.id, 10);
-        const user = await User.findOne(id);
-        response.json(user);
+        try {
+            const id = request.user.id;
+            const user = await User.findOne(id);
+            response.json(user);
+        } catch (error) {
+            console.log(error);
+            response.status(500).json(error.message);
+        }
+
 
     },
 
@@ -53,36 +63,44 @@ module.exports = {
     updateUser: async (request, response) => {
         try {
             const instance = new User(request.body);
+            instance.id = request.user.id;
             const user = await instance.updateUser();
-          
+
             return response.status(201).json(user);
-       
+
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);
         }
     },
 
-    
+
 
     // Supprimer un user 
     deleteUser: async (request, response) => {
 
-        try {  
-            let password = '';
-            if(password === undefined) {        
-                console.log('This password doesn\'t exists');
-            } else {
-                const id = request.params.id; 
-            password = request.body.password; 
-            const user = await User.delete(id, password); 
-            response.json(user);
-            }
+        try {
+            const id = request.user.id;
+            await User.delete(id);
+
+            response.json(`user with id ${id} is deleted`);
+
+
+            // const password = request.body.password;
+            // console.log(password);
+            // if (password === undefined) {
+            //     console.log('This password doesn\'t exists');
+            // } else {
+            //     const id = request.user.id;
+            //     await User.delete(id, password);
+
+            //     response.json(`user with id ${id} is deleted`);
+            // }
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);
         }
-        
+
 
     }
 
@@ -104,7 +122,7 @@ validLogin: async (request, response) => {
             return response.render('login', {error: 'Vérifiez votre saisie', fields: request.body})
         }
 
-        
+
 
         //si oui
         //on va checker que le mot de passe en clair dans le formulaire matche avec la version chiffrée stockée en BDD

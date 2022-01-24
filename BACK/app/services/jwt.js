@@ -1,19 +1,18 @@
-// require('dotenv').config();
+require('dotenv').config();
 const JWT = require('jsonwebtoken');
 
 
 module.exports = {
     makeToken: user => {
         try {
-            console.log(process.env.JWT_SECRET);
-            return JWT.sign(
+           return JWT.sign(
                 {
                     data: user
                 },
                 process.env.JWT_SECRET,
                 {
                     algorithm: 'HS256',
-                    expiresIn: '1m'
+                    expiresIn: '360m'
                 }
             );
         } catch(error) {

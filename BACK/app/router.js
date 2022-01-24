@@ -8,12 +8,13 @@ const authentification = require ('./jsonWebToken');
 const router = Router();
 
 
-router.post('/login', authentification, userController.validLogin);
+router.post('/login', userController.validLogin);
 router.post('/signup', userController.validSignup);
 
-router.get('/user/:id', userController.getUserInfos);
-router.patch('/user/:id/save', userController.updateUser);
-router.delete('/user/:id', userController.deleteUser);
+// TODO : Mettre en place verifyToken sur le MW, et supprimer le ":id" des routes (car plus besoin), modifier en conséquence le model
+router.get('/user',authentification, userController.getUserInfos);
+router.patch('/user',authentification, userController.updateUser);
+router.delete('/user',authentification, userController.deleteUser);
 
 // router.get('/dashboard/:pseudo', dashboardController.getAllItems);
 // router.post('/dashboard', dashboardController.addOneItem);
