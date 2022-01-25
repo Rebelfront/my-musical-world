@@ -14,6 +14,8 @@ import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton } from '@mui/material';
 
+import './style.scss';
+
 const MobileMenu = () => {
 
   const opened = useSelector((state) => state.header.mobileMenuOpened);
