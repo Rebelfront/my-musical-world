@@ -2,7 +2,7 @@ import { SAVE_USER } from '../actions/user';
 
 const initialState = {
   isLogged: false,
-  email: '',
+  mail: '',
   lastname: '',
   firstname: '',
   pseudo: '',

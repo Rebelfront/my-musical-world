@@ -7,6 +7,7 @@ import { openSignUpModal } from 'src/actions/signup';
 import LoginModal from './LoginModal';
 import SignUpModal from './SignUpModal';
 import MobileMenu from './MobileMenu';
+import ProfileModal from './ProfileModal';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ const Header = () => {
       <LoginModal />
       <SignUpModal />
       <MobileMenu />
+      <ProfileModal 
+        open={true}
+      />
     </header>
   );
 };
