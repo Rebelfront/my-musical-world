@@ -12,7 +12,10 @@ module.exports = {
             const user = await instance.addUser();
             console.log('userconstroller', user);
 
-            const token = jwt.makeToken(user);
+            const token = jwt.makeToken(user.id);
+            // const token2 = jwt.makeToken(user);
+            // console.log('token', token);
+            // console.log('token2', token2);
 
             return response.setHeader('Authorization', 'Bearer ' + token).status(201).json(user);
 

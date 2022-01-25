@@ -1,5 +1,5 @@
 @host=http://localhost:3000
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Im1haWwiOiJ0cnVjQGdtYWlsLmNvbSIsImxhc3RuYW1lIjoibWlkZGxlIiwiZmlyc3RuYW1lIjoidHJ1YyIsInBzZXVkbyI6InRydWMuZHUubHVuZGkiLCJpZCI6MjF9LCJpYXQiOjE2NDMwNDAwNjYsImV4cCI6MTY0MzA2MTY2Nn0.C5zCeNxOI7mi93j-XXPFd1HXBe0OQw39wKT9aWJBNyo
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoyMiwibWFpbCI6InRydWNAZ21haWwuY29tIiwibGFzdG5hbWUiOiJtaWRkbGUiLCJmaXJzdG5hbWUiOiJ0cnVjIiwicHNldWRvIjoidHJ1Yy5kdS5sdW5kaSJ9LCJpYXQiOjE2NDMxMDA4MTksImV4cCI6MTY0MzEyMjQxOX0.uDFA86df2r22-srIc2TT9X7XBJ4AkHpDGyYZ2CaSyQM
 
 ### récupérer 1 User
 GET {{host}}/user
@@ -27,11 +27,11 @@ POST {{host}}/signup
 Content-Type: application/json
 
 {
-        "mail": "truc@gmail.com",
-        "lastname": "middle",
-        "firstname": "truc",
-        "pseudo": "truc.du.lundi",
-        "password": "pepper"
+        "mail": "bob@gmail.com",
+        "lastname": "dylan",
+        "firstname": "robert",
+        "pseudo": "blowing",
+        "password": "in2wind"
     }
 
 ###se connecter
@@ -43,7 +43,7 @@ Content-Type: application/json
         "lastname": "",
         "firstname": "",
         "pseudo": "",
-        "password": ""
+        "password": "peper"
     }
 
 ### supprimer son compte

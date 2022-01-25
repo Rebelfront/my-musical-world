@@ -39,11 +39,14 @@ class User {
                     return user;
                 } else {
                     console.log('password not found');
-                    return null;
+                    throw new Error('password not found');
+                   
                 }
             } else {
                 console.log(`No user found for mail ${mail}`);
-                return null;
+                throw new Error(`No user found for mail ${mail}`);
+               
+
             }
         } catch (error) {
             console.log(error);
@@ -126,7 +129,7 @@ class User {
 
             if (rows[0] === undefined) {
                 throw new Error(`il n'existe aucun compte avec cet id`);
-                
+
             } else {
 
                 await client.query('DELETE FROM "USER" WHERE id=$1', [id]);
