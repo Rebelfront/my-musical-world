@@ -8,8 +8,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-import { RiGithubFill as GithubIcon } from '@react-icons/all-files/ri/RiGithubFill';
-import { RiLinkedinBoxFill as LinkedinIcon } from '@react-icons/all-files/ri/RiLinkedinBoxFill';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const CardAbout = ({ dev }) => (
   <div className="cardAbout">
@@ -35,8 +35,8 @@ const CardAbout = ({ dev }) => (
         </Typography>
       </CardContent>
       <CardActions>
-        <a aria-label="github-link" href={dev.githubLink} target="_blank" rel="noreferrer"><GithubIcon size="2.5rem" /></a>
-        <a aria-label="linkedin-link" href={dev.linkedinLink} target="_blank" rel="noreferrer"><LinkedinIcon size="2.5rem" /></a>
+        <a aria-label="github-link" href={dev.githubLink} target="_blank" rel="noreferrer"><GitHubIcon fontSize="large" /></a>
+        <a aria-label="linkedin-link" href={dev.linkedinLink} target="_blank" rel="noreferrer"><LinkedInIcon fontSize="large" /></a>
       </CardActions>
     </Card>
   </div>
