@@ -45,7 +45,7 @@ const authenticationMW = (store) => (next) => (action) => {
       break;
     case USER_LOGOUT: {
       next(action);
-      localStorage.setItem('token', '');
+      localStorage.removeItem('token');
     }
     default:
       next(action);
