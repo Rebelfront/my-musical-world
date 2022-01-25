@@ -27,11 +27,11 @@ POST {{host}}/signup
 Content-Type: application/json
 
 {
-        "mail": "bob@gmail.com",
-        "lastname": "dylan",
-        "firstname": "robert",
-        "pseudo": "blowing",
-        "password": "in2wind"
+        "mail": "VD@gmail.com",
+        "lastname": "boby ",
+        "firstname": "val",
+        "pseudo": "vaal",
+        "password": "lustucru"
     }
 
 ###se connecter

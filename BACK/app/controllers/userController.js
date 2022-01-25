@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const jwt = require('../services/jwt');
+const bcrypt = require('bcrypt');
+
 
 module.exports = {
 
@@ -10,7 +12,7 @@ module.exports = {
         try {
             const instance = new User(request.body);
             const user = await instance.addUser();
-            console.log('userconstroller', user);
+            console.log('userconstroller', user.id);
 
             const token = jwt.makeToken(user.id);
             // const token2 = jwt.makeToken(user);
@@ -33,8 +35,12 @@ module.exports = {
             const mail = request.body.mail;
             const password = request.body.password;
             const user = await User.findByMail(mail, password);
+            const isPwdValid = await bcrypt.compare(password, user.password)
+            if (isPwdValid === false) {
+                throw 
 
-            const token = jwt.makeToken(user);
+            }
+            const token = jwt.makeToken(user.id);
 
             return response.setHeader('Authorization', 'Bearer ' + token).status(200).json(user);
 
@@ -109,7 +115,7 @@ module.exports = {
 
 }
 
-/**
+
 validLogin: async (request, response) => {
     try {
         //checker si un user existe bien en BDD avec l'email qui a été saisi
@@ -158,4 +164,3 @@ validLogin: async (request, response) => {
         response.status(500).send(error.message);
     }
 },
-*/
