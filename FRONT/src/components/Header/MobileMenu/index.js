@@ -12,7 +12,7 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
-import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
+import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Accordion, AccordionDetails, AccordionSummary, IconButton, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -101,7 +101,7 @@ const MobileMenu = () => {
   return (
     <div className="mobile-menu">
         <Button onClick={handleMenuToggle}>
-          <GiHamburgerMenu />
+          <MenuIcon />
         </Button>
         <Drawer
           anchor="right"
