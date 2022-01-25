@@ -1,10 +1,9 @@
-export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
-export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+export const CHANGE_INPUT = 'CHANGE_INPUT';
 
-export const increment = () => ({
-  type: INCREMENT_COUNTER,
-});
-
-export const decrement = () => ({
-  type: DECREMENT_COUNTER,
+export const changeInput = (value, name) => ({
+  type: CHANGE_INPUT,
+  payload: {
+    value,
+    name,
+  },
 });

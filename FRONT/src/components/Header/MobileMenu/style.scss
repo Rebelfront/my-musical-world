@@ -1,0 +1,8 @@
+@import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+
+.mobile-menu {
+  @include mq-desktop {
+    display: none;
+  }
+}
