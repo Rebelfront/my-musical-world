@@ -43,6 +43,7 @@ const MobileMenu = () => {
 
   const handleLogout = () => {
     const action = userLogout();
+    dispatch(action);
   };
 
   const list = () => (

@@ -1,10 +1,10 @@
 //abstracts
-@use './abstracts/vars';
-@use './abstracts/mixins';
+@import './abstracts/vars';
+@import './abstracts/mixins';
 
 //vendors
-@use './vendors/normalize';
+@import './vendors/normalize';
 
 //base
-@use './base/global';
-@use './base/utils';
+@import './base/global';
+@import './base/utils';

@@ -27,8 +27,10 @@ const Header = () => {
       <h1 className="header__title">My musical world</h1>
       {!isLogged && (
         <>
-          <button type="button" onClick={handleOpenLoginModal}>Se connecter</button>
-          <button type="button" onClick={handleOpenSignUpModal}>S'inscrire</button>
+          <div className="hidden-mobile">
+            <button type="button" onClick={handleOpenLoginModal}>Se connecter</button>
+            <button type="button" onClick={handleOpenSignUpModal}>S'inscrire</button>
+          </div>
           <LoginModal />
           <SignUpModal />
         </>

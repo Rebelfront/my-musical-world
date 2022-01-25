@@ -2,10 +2,11 @@ import { SAVE_USER, USER_LOGOUT } from 'src/actions/user';
 
 const initialState = {
   isLogged: false,
-  email: '',
+  mail: '',
   lastname: '',
   firstname: '',
   pseudo: '',
+  id: null,
 };
 
 const user = (state = initialState, action = {}) => {
@@ -20,9 +21,11 @@ const user = (state = initialState, action = {}) => {
       return {
         ...state,
         isLogged: false,
-        email: '',
+        mail: '',
         lastname: '',
         firstname: '',
+        pseudo: '',
+        id: null,
       }
     default:
       return state;
