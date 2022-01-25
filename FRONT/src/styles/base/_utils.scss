@@ -1,5 +1,7 @@
-.hidden {
-  display: none;
+.hidden-mobile {
+  @include mq-mobile {
+    display: none;
+  }
 }
 
 .color-white {
