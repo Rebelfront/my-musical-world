@@ -32,6 +32,7 @@
     "react/no-unescaped-entities": "off",
     "react/jsx-props-no-spreading": "off",
     "react/state-in-constructor": "off",
+    "react/function-component-definition": "off",
     "func-names": "off",
     "object-shorthand": "off",
     "react/jsx-uses-react": "off",
