@@ -4,6 +4,8 @@ import { openLoginModal } from 'src/actions/login';
 import { openSignUpModal } from 'src/actions/signup';
 import { userLogout } from 'src/actions/user';
 
+import { NavLink } from "react-router-dom";
+
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -91,15 +93,15 @@ const MobileMenu = () => {
         </List>
       )}
       <Divider />
-      <a href="#">A propos</a>
+      <NavLink to="about">A propos</NavLink>
       <br />
       <br />
-      <a href="#">Mentions légales</a>
+      <NavLink to="legal">Mentions légales</NavLink>
     </Box>
   );
 
   return (
-    <div className="mobile-menu">
+    <nav className="mobile-menu">
         <Button onClick={handleMenuToggle}>
           <MenuIcon />
         </Button>
@@ -113,7 +115,7 @@ const MobileMenu = () => {
           </IconButton>
           {list()}
         </Drawer>
-    </div>
+    </nav>
   );
 }
 
