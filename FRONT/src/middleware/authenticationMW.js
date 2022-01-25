@@ -2,6 +2,7 @@ import axios from 'axios';
 import { SUBMIT_LOGIN } from 'src/actions/login';
 import { SUBMIT_SIGNUP } from 'src/actions/signup';
 import { saveUser } from 'src/actions/user';
+import { USER_LOGOUT } from '../actions/user';
 
 const authenticationMW = (store) => (next) => (action) => {
   const rootAPIUrl = process.env.ROOT_API_URL;
@@ -42,6 +43,10 @@ const authenticationMW = (store) => (next) => (action) => {
         .catch((err) => console.log(err));
     }
       break;
+    case USER_LOGOUT: {
+      next(action);
+      localStorage.setItem('token', '');
+    }
     default:
       next(action);
   }

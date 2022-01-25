@@ -1,4 +1,4 @@
-import { SAVE_USER } from '../actions/user';
+import { SAVE_USER, USER_LOGOUT } from 'src/actions/user';
 
 const initialState = {
   isLogged: false,
@@ -6,7 +6,6 @@ const initialState = {
   lastname: '',
   firstname: '',
   pseudo: '',
-  password: '',
 };
 
 const user = (state = initialState, action = {}) => {
@@ -17,6 +16,14 @@ const user = (state = initialState, action = {}) => {
         ...action.payload,
         isLogged: true,
       };
+    case USER_LOGOUT:
+      return {
+        ...state,
+        isLogged: false,
+        email: '',
+        lastname: '',
+        firstname: '',
+      }
     default:
       return state;
   }
