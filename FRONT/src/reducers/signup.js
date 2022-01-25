@@ -5,7 +5,7 @@ const initialState = {
   modalOpened: false,
   lastname: '',
   firstname: '',
-  email: '',
+  mail: '',
   pseudo: '',
   password: '',
   passwordConfirm: '',

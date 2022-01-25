@@ -18,7 +18,7 @@ const SignUpModal = () => {
     modalOpened,
     lastname,
     firstname,
-    email,
+    mail,
     pseudo,
     password,
     passwordConfirm,
@@ -76,14 +76,14 @@ const SignUpModal = () => {
             />
             <TextField
               margin="dense"
-              name="email"
+              name="mail"
               id="email"
               label="Email"
               type="email"
               fullWidth
               variant="standard"
               placeholder="Entrez votre email"
-              value={email}
+              value={mail}
               onChange={handleChangeInput}
             />
             <TextField

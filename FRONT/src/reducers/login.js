@@ -3,7 +3,7 @@ import { CHANGE_INPUT } from '../actions';
 
 const initialState = {
   modalOpened: false,
-  email: 'bouclierman@herocorp.io',
+  mail: 'bouclierman@herocorp.io',
   password: 'jennifer',
 };
 

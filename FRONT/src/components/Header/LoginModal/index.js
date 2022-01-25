@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 
 const LoginModal = () => {
   const dispatch = useDispatch();
-  const { modalOpened, email, password } = useSelector((state) => state.login);
+  const { modalOpened, mail, password } = useSelector((state) => state.login);
   const handleClose = () => {
     const action = closeLoginModal();
     dispatch(action);
@@ -44,14 +44,14 @@ const LoginModal = () => {
             <TextField
               autoFocus
               margin="dense"
-              name="email"
+              name="mail"
               id="email"
               label="Email"
               type="email"
               fullWidth
               variant="standard"
               placeholder="Entrez votre email"
-              value={email}
+              value={mail}
               onChange={handleChangeInput}
             />
             <TextField

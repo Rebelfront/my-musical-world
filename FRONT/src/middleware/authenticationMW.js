@@ -8,32 +8,26 @@ const authenticationMW = (store) => (next) => (action) => {
   switch (action.type) {
     case SUBMIT_LOGIN: {
       // double destructuration
-      const { login: { email, password } } = store.getState();
+      const { login: { mail, password } } = store.getState();
 
       axios.post(`${rootAPIUrl}/login`, {
-        email,
+        mail,
         password,
       })
         .then((res) => {
           console.log(res.data);
-          localStorage.setItem('token', res.data.token);
-          const fakeUser = {
-            email: 'marty@oclock.io',
-            lastname: 'MacFly',
-            firstname: 'Marty',
-            pseudo: 'Doc',
-          };
-          const actionSaveUser = saveUser(fakeUser);
+          localStorage.setItem('token', res.headers.authorization);
+          const actionSaveUser = saveUser(res.data);
           store.dispatch(actionSaveUser);
         })
         .catch((err) => console.log(err));
     }
       break;
     case SUBMIT_SIGNUP: {
-      const { signup: { email, pseudo, firstname, lastname, password } } = store.getState();
+      const { signup: { mail, pseudo, firstname, lastname, password } } = store.getState();
 
       axios.post(`${rootAPIUrl}/signup`, {
-        email,
+        mail,
         pseudo,
         firstname,
         lastname,
@@ -41,14 +35,8 @@ const authenticationMW = (store) => (next) => (action) => {
       })
         .then((res) => {
           console.log(res.data);
-          localStorage.setItem('token', res.data.token);
-          const fakeUser = {
-            email: 'marty@oclock.io',
-            lastname: 'MacFly',
-            firstname: 'Marty',
-            pseudo: 'Doc',
-          };
-          const actionSaveUser = saveUser(fakeUser);
+          localStorage.setItem('token', res.headers.authorization);
+          const actionSaveUser = saveUser(res.data);
           store.dispatch(actionSaveUser);
         })
         .catch((err) => console.log(err));
