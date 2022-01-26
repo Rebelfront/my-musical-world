@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { submitModifiedProfile } from 'src/actions/profile';
 import { toggleProfileModal } from 'src/actions/header';
+import { deleteUser } from 'src/actions/user';
 import { useState } from 'react';
 
 import Button from '@mui/material/Button';
@@ -40,7 +41,10 @@ const ProfileModal = () => {
     const action = toggleProfileModal();
     dispatch(action);
   };
-
+  const handleDeleteUser = () => {
+    const action = deleteUser();
+    dispatch(action);
+  };
   return (
     <div>
       <Dialog open={opened} onClose={handleProfileModalToggle}>
@@ -135,6 +139,14 @@ const ProfileModal = () => {
                 }}
               >
                 Enregistrer
+              </Button>
+              <Button
+                onClick={() => {
+                  handleProfileModalToggle();
+                  handleDeleteUser();
+                }}
+              >
+                Supprimer le compte
               </Button>
             </DialogActions>
           </Box>
