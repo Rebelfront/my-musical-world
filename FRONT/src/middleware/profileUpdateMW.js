@@ -6,8 +6,16 @@ const profileUpdateMW = (store) => (next) => (action) => {
   const rootAPIUrl = process.env.ROOT_API_URL;
   switch (action.type) {
     case SUBMIT_MODIFIED_PROFILE: {
-
-      axios.post(`${rootAPIUrl}/user`, action.payload)
+      const token = localStorage.getItem('token');
+      axios({
+        method: 'patch',
+        url: `${rootAPIUrl}/user`,
+        headers: {
+          // Je mets mon token dans le header "Authorization"
+          Authorization: token,
+        },
+        data: action.payload,
+      })
         .then((res) => {
           console.log(res.data);
           const actionSaveUser = saveUser(res.data);

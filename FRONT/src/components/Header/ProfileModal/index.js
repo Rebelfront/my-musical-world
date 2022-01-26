@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { submitModifiedProfile } from 'src/actions/profile';
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { toggleProfileModal } from 'src/actions/header';
+import { useEffect, useState } from 'react';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -13,17 +13,19 @@ import CloseIcon from '@mui/icons-material/Close';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 
-const ProfileModal = ({open}) => {
+const ProfileModal = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const [modifiedUser, setModifiedUser] = useState(user);
+  const opened = useSelector((state) => state.header.profileModalOpened);
+  const [modifiedUser, setModifiedUser] = useState({});
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [modalOpened, setModalOpened] = useState(open);
-  const handleClose = () => {
-    setModalOpened(false);
-  };
+  const [password, setPassword] = useState('');
+  useEffect(() => {
+    setModifiedUser(user);
+  },[user]);
   const handleChangeInput = (event) => {
     if (event.target.name === 'passwordConfirm') return setPasswordConfirm(event.target.value);
+    if (event.target.name === 'password') setPassword(event.target.value);
     const tempModifiedUser = {
       ...modifiedUser,
       [event.target.name]: event.target.value,
@@ -35,10 +37,14 @@ const ProfileModal = ({open}) => {
     const action = submitModifiedProfile(modifiedUser);
     dispatch(action);
   };
+  const handleProfileModalToggle = () => {
+    const action = toggleProfileModal();
+    dispatch(action);
+  };
 
   return (
     <div>
-      <Dialog open={modalOpened} onClose={handleClose}>
+      <Dialog open={opened} onClose={handleProfileModalToggle}>
         <DialogTitle>Mon profil</DialogTitle>
         <DialogContent>
           <Box
@@ -107,7 +113,7 @@ const ProfileModal = ({open}) => {
               fullWidth
               variant="standard"
               placeholder="Entrez votre mot de passe"
-              value={modifiedUser.password}
+              value={password}
               onChange={handleChangeInput}
             />
             <TextField
@@ -125,7 +131,7 @@ const ProfileModal = ({open}) => {
             <DialogActions>
               <Button
                 onClick={() => {
-                  handleClose();
+                  handleProfileModalToggle();
                   handleSubmit();
                 }}
               >
@@ -136,7 +142,7 @@ const ProfileModal = ({open}) => {
         </DialogContent>
         <IconButton
           aria-label="close"
-          onClick={handleClose}
+          onClick={handleProfileModalToggle}
           sx={{
             position: 'absolute',
             right: 8,
@@ -149,10 +155,6 @@ const ProfileModal = ({open}) => {
       </Dialog>
     </div>
   );
-};
-
-ProfileModal.propTypes = {
-  open: PropTypes.bool.isRequired,
 };
 
 export default ProfileModal;

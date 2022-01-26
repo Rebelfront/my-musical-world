@@ -3,6 +3,7 @@ import './style.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { openLoginModal } from 'src/actions/login';
 import { openSignUpModal } from 'src/actions/signup';
+import { toggleProfileModal } from 'src/actions/header';
 
 import LoginModal from './LoginModal';
 import SignUpModal from './SignUpModal';
@@ -21,7 +22,10 @@ const Header = () => {
     const action = openSignUpModal();
     dispatch(action);
   };
-
+  const handleOpenProfileModal = () => {
+    const action = toggleProfileModal();
+    dispatch(action);
+  };
   return (
     <header className="header">
       {/* <h1 className="header__title">My musical w<img src={logo} className="header-logo" alt="Logo My Musical World" />rld</h1> */}
@@ -36,10 +40,9 @@ const Header = () => {
           <SignUpModal />
         </>
       )}
+      <button type="button" onClick={handleOpenProfileModal}>Modale Profile</button>
       <MobileMenu />
-      <ProfileModal 
-        open={true}
-      />
+      <ProfileModal />
     </header>
   );
 };
