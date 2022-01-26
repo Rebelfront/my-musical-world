@@ -1,5 +1,17 @@
+@import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+@import 'src/styles/abstracts/functions';
+
 .footer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  @include mq-mobile {
+    display: none;
+  }
+
+  @include mq-desktop {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    border-top: 1px solid $grey;
+  }
 }
