@@ -1,6 +1,6 @@
-const Artist = require('../models/Artist');
-const Album = require('../models/Album');
-const Track = require('../models/Track');
+// const Artist = require('../models/Artist');
+// const Album = require('../models/Album');
+// const Track = require('../models/Track');
 
 
 
@@ -22,7 +22,7 @@ module.exports = {
         if (type == artist) {
             const artist = await Artist.findOne(id);
         response.json(artist);
-        } else if {
+        } else if (type == album){
 
         }
         

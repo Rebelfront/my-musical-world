@@ -1,0 +1,54 @@
+@host=http://localhost:3200
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxNywiaWF0IjoxNjQzMTkyMzMxLCJleHAiOjE2NDMyMTM5MzF9.gF0rLuNYF2o98vPxKfRPhjzVrwOkIUcpTY4vGMPS2Fs
+
+
+### récupérer 1 User
+GET {{host}}/user
+Authorization:{{token}}
+Content-Type: application/json
+
+
+### ajouter un user
+POST {{host}}/signup
+Content-Type: application/json
+
+{
+    "mail": "zigg@gmail.com",
+    "lastname": "Bowie",
+    "firstname": "David",
+    "pseudo": "starman",
+    "password":"ziggy"
+     }
+
+###se connecter
+POST {{host}}/login
+Content-Type: application/json
+
+{
+        "mail": "zigg@gmail.com",
+        "lastname": "",
+        "firstname": "",
+        "pseudo": "",
+        "password": "ziggy"
+    }
+
+### update user
+PATCH {{host}}/user
+Authorization:{{token}}
+Content-Type: application/json
+
+{
+  "mail": "zigg@gmail.com",
+  "lastname": "Bowie",
+  "firstname": "Dave",
+  "pseudo": "jackB",
+  "password": "coca"
+}
+
+### supprimer son compte
+DELETE {{host}}/user
+Authorization:{{token}}
+Content-Type: application/json
+
+
+
