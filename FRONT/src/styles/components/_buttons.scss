@@ -1,0 +1,9 @@
+.button-green.button-green {
+  background-color: $green;
+  color: #ffffff;
+  text-transform: initial;
+}
+
+.button-green.button-green:hover {
+  background-color: darken($color: $green, $amount: 10);
+}

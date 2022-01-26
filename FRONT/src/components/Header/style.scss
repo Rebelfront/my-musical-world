@@ -1,5 +1,16 @@
+@import '../../styles/abstracts/vars';
+
+.header.header {
+  background-color: $dark-grey;
+}
+
 .header__brand {
   color: #ffffff;
   text-decoration: none;
   display: flex;
+}
+
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root:hover {
+  background-color: $green !important;
+  color: #ffffff;
 }

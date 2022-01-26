@@ -61,12 +61,12 @@ const MobileMenu = () => {
       {!isLogged ? (
         <List>
           <ListItem onClick={handleOpenLoginModal}>
-            <Button>
+            <Button sx={{margin: '0 auto' }} className="button-green">
               <ListItemText primary="Se connecter" />
             </Button>
           </ListItem>
           <ListItem onClick={handleOpenSignupModal}>
-            <Button>
+            <Button sx={{margin: '0 auto' }} className="button-green">
               <ListItemText primary="S'inscrire" />
             </Button>
           </ListItem>
@@ -86,11 +86,11 @@ const MobileMenu = () => {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Button onClick={handleOpenProfileModal}>
+                <Button className="button-green" onClick={handleOpenProfileModal}>
                   <ListItemText primary="Mon profil" />
                 </Button>
-                <a href="#">Ma bibliothèque</a>
-                <Button onClick={handleLogout}>
+                <NavLink to="/" className="button-green">Ma bibliothèque</NavLink>
+                <Button className="button-green" onClick={handleLogout}>
                   <ListItemText primary="Se déconnecter" />
                 </Button>
               </AccordionDetails>
@@ -99,10 +99,8 @@ const MobileMenu = () => {
         </List>
       )}
       <Divider />
-      <NavLink to="/about">A propos</NavLink>
-      <br />
-      <br />
-      <NavLink to="/legal">Mentions légales</NavLink>
+      <NavLink className="mobile-menu__link" to="/about">A propos &gt;</NavLink>
+      <NavLink className="mobile-menu__link" to="/legal">Mentions légales &gt;</NavLink>
     </Box>
   );
 

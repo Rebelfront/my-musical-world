@@ -1,4 +1,5 @@
 import './style.scss';
+import styles from '../../styles/_exports.module.scss';
 import logo from 'src/assets/logo.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -68,13 +69,14 @@ const Header = () => {
             <Box sx={{ ml: 'auto' }}>
               <div className="hidden-mobile">
                 <Button
-                  sx={{ backgroundColor: '#ffffff', color: '#343A40', mr: '10px' }}
+                  className="button-green"
                   onClick={handleOpenLoginModal}
+                  sx={{ mr: '10px'}}
                 >
                   Se connecter
                 </Button>
                 <Button
-                  sx={{ backgroundColor: '#ffffff', color: '#343A40' }}
+                  className="button-green"
                   onClick={handleOpenSignUpModal}
                 >
                   S'inscrire
@@ -95,7 +97,7 @@ const Header = () => {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                   >
-                    <Avatar sx={{ width: 32, height: 32 }}>{pseudo.slice(0, 1).toUpperCase()}</Avatar>
+                    <Avatar sx={{ width: 32, height: 32, backgroundColor: '#ffffff', color: styles['dark-grey'] }}>{pseudo.slice(0, 1).toUpperCase()}</Avatar>
                   </IconButton>
                 </Tooltip>
               </Box>
@@ -137,6 +139,7 @@ const Header = () => {
                 <MenuItem onClick={handleOpenProfileModal}>
                   <Avatar /> Mon profil
                 </MenuItem>
+                <Divider />
                 <MenuItem>
                   <ListItemIcon>
                     <AlbumIcon />

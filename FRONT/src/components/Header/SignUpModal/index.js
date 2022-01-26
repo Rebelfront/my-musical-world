@@ -128,6 +128,7 @@ const SignUpModal = () => {
                   handleClose();
                   handleSubmit();
                 }}
+                className="button-green"
               >
                 S'inscrire
               </Button>
