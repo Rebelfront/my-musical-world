@@ -7,7 +7,6 @@ const authenticationMW = (store) => (next) => (action) => {
   const rootAPIUrl = process.env.ROOT_API_URL;
   switch (action.type) {
     case USER_CHECK:
-      next(action);
       const token = localStorage.getItem('token');
       if (token) {
         axios({
