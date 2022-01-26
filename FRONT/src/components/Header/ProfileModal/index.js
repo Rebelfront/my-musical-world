@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { submitModifiedProfile } from 'src/actions/profile';
 import { toggleProfileModal } from 'src/actions/header';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -15,14 +15,13 @@ import Box from '@mui/material/Box';
 
 const ProfileModal = () => {
   const dispatch = useDispatch();
+
   const user = useSelector((state) => state.user);
   const opened = useSelector((state) => state.header.profileModalOpened);
-  const [modifiedUser, setModifiedUser] = useState({});
+  const [modifiedUser, setModifiedUser] = useState(user);
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [password, setPassword] = useState('');
-  useEffect(() => {
-    setModifiedUser(user);
-  }, [user]);
+
   const handleChangeInput = (event) => {
     if (event.target.name === 'passwordConfirm') return setPasswordConfirm(event.target.value);
     if (event.target.name === 'password') setPassword(event.target.value);

@@ -17,14 +17,13 @@ const authenticationMW = (store) => (next) => (action) => {
             Authorization: token,
           },
         })
-        .then((res) => {
-          console.log(res.data);
-          const userSaveAction = saveUser(res.data);
-          store.dispatch(userSaveAction);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
+          .then((res) => {
+            const userSaveAction = saveUser(res.data);
+            store.dispatch(userSaveAction);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
       break;
     case SUBMIT_LOGIN: {
@@ -36,7 +35,6 @@ const authenticationMW = (store) => (next) => (action) => {
         password,
       })
         .then((res) => {
-          console.log(res.data);
           localStorage.setItem('token', res.headers.authorization);
           const actionSaveUser = saveUser(res.data);
           store.dispatch(actionSaveUser);
@@ -45,7 +43,11 @@ const authenticationMW = (store) => (next) => (action) => {
     }
       break;
     case SUBMIT_SIGNUP: {
-      const { signup: { mail, pseudo, firstname, lastname, password } } = store.getState();
+      const {
+        signup: {
+          mail, pseudo, firstname, lastname, password,
+        },
+      } = store.getState();
 
       axios.post(`${rootAPIUrl}/signup`, {
         mail,
@@ -55,7 +57,6 @@ const authenticationMW = (store) => (next) => (action) => {
         password,
       })
         .then((res) => {
-          console.log(res.data);
           localStorage.setItem('token', res.headers.authorization);
           const actionSaveUser = saveUser(res.data);
           store.dispatch(actionSaveUser);
