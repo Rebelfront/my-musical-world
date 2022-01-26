@@ -2,6 +2,10 @@
 @import 'src/styles/abstracts/mixins';
 
 .mobile-menu {
+  @include mq-mobile {
+    margin-left: auto;
+  }
+
   @include mq-desktop {
     display: none;
   }
