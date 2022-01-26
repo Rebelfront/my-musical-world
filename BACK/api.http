@@ -1,6 +1,5 @@
 @host=http://localhost:3200
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxNywiaWF0IjoxNjQzMTkyMzMxLCJleHAiOjE2NDMyMTM5MzF9.gF0rLuNYF2o98vPxKfRPhjzVrwOkIUcpTY4vGMPS2Fs
-
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo1MywiaWF0IjoxNjQzMjAzNzQ2LCJleHAiOjE2NDMyMjUzNDZ9.WRbssLFUDCc0CRDLw30z7oTQqWbhOKowSJ0IQ_OCh64
 
 ### récupérer 1 User
 GET {{host}}/user
@@ -38,11 +37,11 @@ Authorization:{{token}}
 Content-Type: application/json
 
 {
-  "mail": "zigg@gmail.com",
+  "mail": "zigg@gmail.fr",
   "lastname": "Bowie",
-  "firstname": "Dave",
+  "firstname": "dave",
   "pseudo": "jackB",
-  "password": "coca"
+  "password": "blabla"
 }
 
 ### supprimer son compte

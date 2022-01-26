@@ -1,4 +1,4 @@
-const jwt = require('./services/jwt');
+const jwt = require('../services/jwt');
 
 module.exports = (request, response, next) => {
     try {
