@@ -1,0 +1,86 @@
+@import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+@import 'src/styles/abstracts/functions';
+
+.about__card {
+  box-sizing: border-box;
+
+  @include mq-mobile {
+    width: 350px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.card__image {
+  @include mq-mobile {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.card__wrapper {
+  @include mq-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.card__content {
+  @include mq-mobile {
+    padding: 10px !important;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.content__title {
+  @include mq-mobile {
+    font-size: rem(20px) !important;
+    margin: 0 !important;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.content__role p {
+  @include mq-mobile {
+    font-size: rem(16px);
+    margin: 0;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.card__icons {
+  @include mq-mobile {
+    padding: 0 !important;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
