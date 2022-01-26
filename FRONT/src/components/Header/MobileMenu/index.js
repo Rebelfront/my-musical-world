@@ -93,10 +93,10 @@ const MobileMenu = () => {
         </List>
       )}
       <Divider />
-      <NavLink to="about">A propos</NavLink>
+      <NavLink to="/about">A propos</NavLink>
       <br />
       <br />
-      <NavLink to="legal">Mentions légales</NavLink>
+      <NavLink to="/legal">Mentions légales</NavLink>
     </Box>
   );
 
