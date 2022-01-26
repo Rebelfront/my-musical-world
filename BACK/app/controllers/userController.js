@@ -72,17 +72,11 @@ module.exports = {
     // mise à jour d'un enregistrement dans la table USER
     updateUser: async (request, response) => {
         try {
+            const newPwd = request.body.password;
             const instance = new User(request.body);
+            // la fonction SQl update_user selectionne le user par son id :
             instance.id = request.userId;
-            const user = await instance.updateUser();
-            console.log('user.id', user.id);
-            console.log('instance.id', instance.id);
-            
-            console.log('request.body', request.body);
-            console.log('request.userId', request.userId);
-
-           
-
+            const user = await instance.updateUser(newPwd);
             return response.status(201).json(user);
 
         } catch (error) {
@@ -90,8 +84,6 @@ module.exports = {
             response.status(500).json(error.message);
         }
     },
-
-
 
     // Supprimer un user 
     deleteUser: async (request, response) => {

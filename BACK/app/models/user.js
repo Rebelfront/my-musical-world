@@ -34,7 +34,7 @@ class User {
 
         try {
             const { rows } = await client.query(`SELECT * FROM "USER" WHERE mail=$1`, [mail]);
-            // Vérification : existe-t-il un user qui a ce mail ?
+   
             if (rows[0]) {
                 const isPwdValid = await bcrypt.compare(password, rows[0].password);
 
@@ -66,16 +66,13 @@ class User {
 
     }
 
-
-    // TODO : vérification mail non existant
     // enregistrer un user en bdd
     async addUser(mail, password) {
 
         try {
 
             const checkUser = await client.query(`SELECT * FROM "USER" WHERE mail=$1`, [mail]);
-            // console.log('checkUser', checkUser.rows);
-
+        
             if (!checkUser.rows[0]) { 
                 const hashedPwd = await bcrypt.hash(password, 10);
 
@@ -96,7 +93,7 @@ class User {
                
 
         } catch (error) {
-            // De quelle erreur peut-il s'agir ? 
+    
             console.log(error);
             if (error.detail) {
                 throw new Error(error.detail);
@@ -106,27 +103,20 @@ class User {
 
     }
 
-    // async addUser() {
-    //     try {
-    //             const {rows} = await client.query('SELECT * FROM add_user($1)', [this])
-    //             this.id = rows[0].id;
-    //             console.log('model user', this);
-    //             return this;
-
-    //     } catch (error) {
-    //         if (error.detail) {
-    //             throw new Error(error.detail);
-    //         }
-    //         throw error;
-    //     }
-    // }
-
-    async updateUser() {
+    // TODO : const {rows} = await client.query('SELECT * FROM add_user($1)', [this])
+  
+    async updateUser(password) {
         try {
-           await client.query('SELECT * FROM update_user($1)', [this]);
+            if (password){
+                const hashedPwd = await bcrypt.hash(password, 10);
+                this.password = hashedPwd;
+            
+            }
+
+            await client.query('SELECT * FROM update_user($1)', [this]);
             delete this.password;
-            console.log('model this', this)
             return this;
+        
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);
@@ -138,15 +128,11 @@ class User {
 
 
     // supprimer un user de la bdd
-
     static async delete(id) {
-        // Y a-t-il besoin de rajouter une condition if avec message d'erreur si l'id demandé n'existe pas ?
+
         try {
 
             const { rows } = await client.query(`SELECT FROM "USER" WHERE id=$1`, [id]);
-            // Vérification : existe-t-il un user qui a ce mail ?
-            // console.log(rows[0]);
-
 
             if (rows[0] === undefined) {
                 throw new Error(`il n'existe aucun compte avec cet id`);
@@ -155,17 +141,6 @@ class User {
 
                 await client.query('DELETE FROM "USER" WHERE id=$1', [id]);
 
-
-                // if (password !== rows[0].password) {
-                //     console.log('password not the same');
-                //     throw new Error('password not the same')
-                //     // return null;
-                // }
-                // else {
-                //     // delete user.password 
-                //     await client.query('DELETE FROM "USER" WHERE id=$1', [id]);
-
-                // }
             }
         } catch (error) {
             if (error.detail) {
