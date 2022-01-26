@@ -1,4 +1,4 @@
-import { SAVE_USER, USER_LOGOUT } from 'src/actions/user';
+import { SAVE_USER, USER_LOGOUT, USER_RESET } from 'src/actions/user';
 
 const initialState = {
   isLogged: false,
@@ -26,6 +26,10 @@ const user = (state = initialState, action = {}) => {
         firstname: '',
         pseudo: '',
         id: null,
+      }
+    case USER_RESET:
+      return {
+        ...initialState,
       }
     default:
       return state;
