@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { openLoginModal } from 'src/actions/login';
 import { openSignUpModal } from 'src/actions/signup';
+import { toggleProfileModal } from 'src/actions/header';
 
 import LoginModal from './LoginModal';
 import SignUpModal from './SignUpModal';
 import MobileMenu from './MobileMenu';
+import ProfileModal from './ProfileModal';
 
 import { Link } from "react-router-dom";
 import { Box } from '@mui/system';
@@ -45,7 +47,10 @@ const Header = () => {
     const action = openSignUpModal();
     dispatch(action);
   };
-
+  const handleOpenProfileModal = () => {
+    const action = toggleProfileModal();
+    dispatch(action);
+  };
   return (
     <AppBar className="header" position="sticky">
       <Container maxWidth="xl">
@@ -143,6 +148,7 @@ const Header = () => {
                 Déconnexion
               </MenuItem>
             </Menu>
+            <ProfileModal />
           </>
         )}
         <MobileMenu />

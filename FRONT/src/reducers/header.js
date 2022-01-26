@@ -1,9 +1,10 @@
-import { TOGGLE_MOBILE_MENU } from "src/actions/header";
+import { TOGGLE_MOBILE_MENU, TOGGLE_PROFILE_MODAL } from "src/actions/header";
 import { SAVE_USER } from "src/actions/user";
 import { USER_LOGOUT } from "../actions/user";
 
 const initialState = {
   mobileMenuOpened: false,
+  profileModalOpened: false,
 };
 
 const header = (state = initialState, action= {}) => {
@@ -23,6 +24,11 @@ const header = (state = initialState, action= {}) => {
           ...state,
           mobileMenuOpened: false,
         };
+      case TOGGLE_PROFILE_MODAL:
+        return {
+          ...state, 
+          profileModalOpened: !state.profileModalOpened,
+        }
     default:
       return state;
   }
