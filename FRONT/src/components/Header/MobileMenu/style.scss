@@ -1,9 +1,11 @@
 @import 'src/styles/abstracts/vars';
 @import 'src/styles/abstracts/mixins';
+@import 'src/styles/abstracts/functions';
 
 .mobile-menu {
   @include mq-mobile {
     margin-left: auto;
+    //font-size: rem(37px);
   }
 
   @include mq-desktop {
