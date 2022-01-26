@@ -14,15 +14,22 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-   const action = checkUser();
-   dispatch(action);
+    const action = checkUser();
+    dispatch(action);
   }, []);
 
-  return(
+  return (
     <div className="app">
       <Header />
       <Routes>
-        <Route path="/" element={<div />} />
+        <Route
+          path="/"
+          element={(
+            <div className="app__main">
+              <p>Lorem</p>
+            </div>
+          )}
+        />
         <Route path="/about" element={<About />} />
         <Route path="/legal" element={<Legal />} />
       </Routes>
