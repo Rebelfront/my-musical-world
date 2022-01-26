@@ -1,5 +1,5 @@
 @host=http://localhost:3000
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoyMiwibWFpbCI6InRydWNAZ21haWwuY29tIiwibGFzdG5hbWUiOiJtaWRkbGUiLCJmaXJzdG5hbWUiOiJ0cnVjIiwicHNldWRvIjoidHJ1Yy5kdS5sdW5kaSJ9LCJpYXQiOjE2NDMxMDA4MTksImV4cCI6MTY0MzEyMjQxOX0.uDFA86df2r22-srIc2TT9X7XBJ4AkHpDGyYZ2CaSyQM
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxNCwiaWF0IjoxNjQzMTg1NjQ4LCJleHAiOjE2NDMyMDcyNDh9.J8FzeSmTrPtNpuVrxpBYD8N8tKLBHfpEf5TsaE2hfpo
 
 ### récupérer 1 User
 GET {{host}}/user
@@ -7,6 +7,29 @@ Authorization:{{token}}
 Content-Type: application/json
 
 
+### ajouter un user
+POST {{host}}/signup
+Content-Type: application/json
+
+{
+    "mail": "zigg@gmail.com",
+    "lastname": "Bowie",
+    "firstname": "David",
+    "pseudo": "starman",
+    "password":"ziggy"
+     }
+
+###se connecter
+POST {{host}}/login
+Content-Type: application/json
+
+{
+        "mail": "zigg@gmail.com",
+        "lastname": "",
+        "firstname": "",
+        "pseudo": "",
+        "password": "ziggy"
+    }
 
 ### update user
 PATCH {{host}}/user
@@ -14,37 +37,11 @@ Authorization:{{token}}
 Content-Type: application/json
 
 {
-  
-  "mail": "truc@gmail.com",
-  "lastname": "lucy",
-  "firstname": "insky",
-  "pseudo": "blabla.du.lundi",
-  "password":"mozza"
+  "mail": "zigg@gmail.com",
+  "lastname": "Bowie",
+  "firstname": "David",
+  "pseudo": "jackB"
 }
-
-### ajouter un user
-POST {{host}}/signup
-Content-Type: application/json
-
-{
-        "mail": "VD@gmail.com",
-        "lastname": "boby ",
-        "firstname": "val",
-        "pseudo": "vaal",
-        "password": "lustucru"
-    }
-
-###se connecter
-POST {{host}}/login
-Content-Type: application/json
-
-{
-        "mail": "truc@gmail.com",
-        "lastname": "",
-        "firstname": "",
-        "pseudo": "",
-        "password": "peper"
-    }
 
 ### supprimer son compte
 DELETE {{host}}/user

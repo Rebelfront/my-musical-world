@@ -1,5 +1,7 @@
 const { response } = require('express');
 const client = require('../database.js');
+const bcrypt = require('bcrypt');
+
 
 class User {
 
@@ -14,10 +16,11 @@ class User {
     // Récupérer un user par son id 
     static async findOne(id) {
         const { rows } = await client.query(`SELECT * FROM "USER" WHERE id=$1`, [id]);
+      
         // Vérification : existe-t-il un user qui a cet id ?
         if (rows[0]) {
             const user = new User(rows[0]);
-            delete user.password
+            delete user.password;
             return user;
         } else {
             console.log(`No user found for id ${id}`);
@@ -33,19 +36,23 @@ class User {
             const { rows } = await client.query(`SELECT * FROM "USER" WHERE mail=$1`, [mail]);
             // Vérification : existe-t-il un user qui a ce mail ?
             if (rows[0]) {
-                if (password === rows[0].password) {
+                const isPwdValid = await bcrypt.compare(password, rows[0].password);
+
+                if (isPwdValid === false) {
+
+                    console.log('password not good');
+                    throw new Error('password not good');
+
+                } else {
                     const user = new User(rows[0]);
                     delete user.password
+                    console.log('model validMail', user);
                     return user;
-                } else {
-                    console.log('password not found');
-                    throw new Error('password not found');
-                   
                 }
             } else {
                 console.log(`No user found for mail ${mail}`);
                 throw new Error(`No user found for mail ${mail}`);
-               
+
 
             }
         } catch (error) {
@@ -62,20 +69,31 @@ class User {
 
     // TODO : vérification mail non existant
     // enregistrer un user en bdd
-    async addUser() {
+    async addUser(mail, password) {
 
         try {
-            const { rows } = await client.query('INSERT INTO "USER"(mail, lastname, firstname, pseudo, "password") VALUES($1, $2, $3, $4, $5) RETURNING id',
-                [this.mail,
-                this.lastname,
-                this.firstname,
-                this.pseudo,
-                this.password]);
 
-            this.id = rows[0].id;
-            delete this.password;
-            return this;
+            const checkUser = await client.query(`SELECT * FROM "USER" WHERE mail=$1`, [mail]);
+            // console.log('checkUser', checkUser.rows);
 
+            if (!checkUser.rows[0]) { 
+                const hashedPwd = await bcrypt.hash(password, 10);
+
+                const { rows } = await client.query('INSERT INTO "USER"(mail, lastname, firstname, pseudo, "password") VALUES($1, $2, $3, $4, $5) RETURNING id',
+                     [this.mail,
+                     this.lastname,
+                     this.firstname,
+                     this.pseudo,
+                         hashedPwd]);
+ 
+                 this.id = rows[0].id;
+                 delete this.password;
+                 return this;
+            } else {
+                console.log('checkUser exist')
+                throw new Error('user already exists');
+            }
+               
 
         } catch (error) {
             // De quelle erreur peut-il s'agir ? 
@@ -105,7 +123,10 @@ class User {
 
     async updateUser() {
         try {
-            await client.query('SELECT * FROM update_user($1)', [this]);
+           await client.query('SELECT * FROM update_user($1)', [this]);
+            delete this.password;
+            console.log('model this', this)
+            return this;
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);

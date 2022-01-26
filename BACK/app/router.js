@@ -12,7 +12,7 @@ router.post('/login', userController.validLogin);
 router.post('/signup', userController.validSignup);
 
 // TODO : Mettre en place verifyToken sur le MW, et supprimer le ":id" des routes (car plus besoin), modifier en conséquence le model
-router.get('/user',authentification, userController.getUserInfos);
+router.get('/user', authentification, userController.getUserInfos);
 router.patch('/user',authentification, userController.updateUser);
 router.delete('/user',authentification, userController.deleteUser);
 
