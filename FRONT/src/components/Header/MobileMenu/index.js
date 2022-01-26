@@ -75,8 +75,8 @@ const MobileMenu = () => {
                 id="panel1a-header"
               >
                 <Typography>
-                  {pseudo}
                   <AccountCircleIcon />
+                  {pseudo}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -102,10 +102,18 @@ const MobileMenu = () => {
 
   return (
     <nav className="mobile-menu">
-        <Button onClick={handleMenuToggle}>
+        <Button 
+          onClick={handleMenuToggle}
+          sx={{color: '#ffffff', padding: 0}}
+        >
           <MenuIcon />
         </Button>
         <Drawer
+          sx={{
+            width: '70vw',
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: { width: '70vw', boxSizing: 'border-box' },
+          }}
           anchor="right"
           open={opened}
           onClose={handleMenuToggle}
