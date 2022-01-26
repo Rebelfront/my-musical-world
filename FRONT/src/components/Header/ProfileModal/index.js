@@ -22,7 +22,7 @@ const ProfileModal = () => {
   const [password, setPassword] = useState('');
   useEffect(() => {
     setModifiedUser(user);
-  },[user]);
+  }, [user]);
   const handleChangeInput = (event) => {
     if (event.target.name === 'passwordConfirm') return setPasswordConfirm(event.target.value);
     if (event.target.name === 'password') setPassword(event.target.value);
@@ -135,7 +135,7 @@ const ProfileModal = () => {
                   handleSubmit();
                 }}
               >
-                S'inscrire
+                Enregistrer
               </Button>
             </DialogActions>
           </Box>

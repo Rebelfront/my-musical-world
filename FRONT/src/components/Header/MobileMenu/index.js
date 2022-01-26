@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleMobileMenu } from 'src/actions/header';
+import { toggleMobileMenu, toggleProfileModal } from 'src/actions/header';
 import { openLoginModal } from 'src/actions/login';
 import { openSignUpModal } from 'src/actions/signup';
 import { userLogout } from 'src/actions/user';
 
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -16,14 +16,15 @@ import ListItemText from '@mui/material/ListItemText';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { Accordion, AccordionDetails, AccordionSummary, IconButton, Typography } from '@mui/material';
+import {
+  Accordion, AccordionDetails, AccordionSummary, IconButton, Typography,
+} from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import './style.scss';
 
 const MobileMenu = () => {
-
   const opened = useSelector((state) => state.header.mobileMenuOpened);
   const { isLogged, pseudo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -45,6 +46,11 @@ const MobileMenu = () => {
 
   const handleLogout = () => {
     const action = userLogout();
+    dispatch(action);
+  };
+
+  const handleOpenProfileModal = () => {
+    const action = toggleProfileModal();
     dispatch(action);
   };
 
@@ -80,13 +86,13 @@ const MobileMenu = () => {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-              <Button>
-                <ListItemText primary="Mon profil" />
-              </Button>
-              <a href="#">Ma bibliothèque</a>
-              <Button onClick={handleLogout}>
-                <ListItemText primary="Se déconnecter" />
-              </Button>
+                <Button onClick={handleOpenProfileModal}>
+                  <ListItemText primary="Mon profil" />
+                </Button>
+                <a href="#">Ma bibliothèque</a>
+                <Button onClick={handleLogout}>
+                  <ListItemText primary="Se déconnecter" />
+                </Button>
               </AccordionDetails>
             </Accordion>
           </ListItem>
@@ -102,29 +108,29 @@ const MobileMenu = () => {
 
   return (
     <nav className="mobile-menu">
-        <Button 
-          onClick={handleMenuToggle}
-          sx={{color: '#ffffff', padding: 0}}
-        >
-          <MenuIcon />
-        </Button>
-        <Drawer
-          sx={{
-            width: '70vw',
-            flexShrink: 0,
-            [`& .MuiDrawer-paper`]: { width: '70vw', boxSizing: 'border-box' },
-          }}
-          anchor="right"
-          open={opened}
-          onClose={handleMenuToggle}
-        >
-          <IconButton onClick={handleMenuToggle} sx={{mb: 2}}>
-            <CloseIcon />
-          </IconButton>
-          {list()}
-        </Drawer>
+      <Button
+        onClick={handleMenuToggle}
+        sx={{ color: '#ffffff', padding: 0 }}
+      >
+        <MenuIcon />
+      </Button>
+      <Drawer
+        sx={{
+          width: '70vw',
+          flexShrink: 0,
+          '& .MuiDrawer-paper': { width: '70vw', boxSizing: 'border-box' },
+        }}
+        anchor="right"
+        open={opened}
+        onClose={handleMenuToggle}
+      >
+        <IconButton onClick={handleMenuToggle} sx={{ mb: 2 }}>
+          <CloseIcon />
+        </IconButton>
+        {list()}
+      </Drawer>
     </nav>
   );
-}
+};
 
 export default MobileMenu;
