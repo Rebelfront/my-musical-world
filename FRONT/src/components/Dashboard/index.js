@@ -1,5 +1,5 @@
 import DashboardCard from "./DashboardCard";
-import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 import './style.scss';
@@ -14,20 +14,12 @@ const Dashboard = () => {
         </button>
       </aside>
       <main className="dashboard__content">
-        <Grid maxWidth="md" container spacing={2}>
-          <Grid item md={6} lg={3}>
-            <DashboardCard />
-          </Grid>
-          <Grid item md={6} lg={3}>
-            <DashboardCard />
-          </Grid>
-          <Grid item md={6} lg={3}>
-            <DashboardCard />
-          </Grid>
-          <Grid item md={6} lg={3}>
-            <DashboardCard />
-          </Grid>
-        </Grid>
+        <Container maxWidth="md">
+          <DashboardCard />
+          <DashboardCard />
+          <DashboardCard />
+          <DashboardCard />
+        </Container>
       </main>
     </ div>
   );

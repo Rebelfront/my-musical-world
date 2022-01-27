@@ -15,7 +15,7 @@
     box-sizing: border-box;
     width: 200px;
     background-color: #ffffff;
-    padding-top: 30px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px -1px;
   }
 }
 
@@ -29,7 +29,12 @@
   height: 55px;
   width: 55px;
   color: #ffffff;
-  margin: 0 auto;
+
+  @include mq-desktop {
+    position: sticky;
+    top: 50%;
+    transform: translateX(70px);
+  }
 }
 
 .dashboard__add-btn:hover {
