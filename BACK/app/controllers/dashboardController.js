@@ -21,8 +21,7 @@ module.exports = {
                 const instance = new Album (request.body);
 
                 const album = await instance.addAlbum(userId, itemId);
-            
-                // Que renvoyer au front ? 
+             
                 return response.json('Element ajouté', album);
 
             } else if (itemType === 'artist') {
@@ -30,7 +29,6 @@ module.exports = {
 
                 const artist = await instance.addArtist(userId, itemId);
             
-                // Que renvoyer au front ? 
                 return response.json('artiste ajouté', artist);
               
 
@@ -39,13 +37,9 @@ module.exports = {
 
                 const track = await instance.addTrack(userId, itemId);
             
-                // Que renvoyer au front ? 
-                // return response.json('Element ajouté');
                 return response.json('chanson ajoutée', track);
             }
             
-
-
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);
