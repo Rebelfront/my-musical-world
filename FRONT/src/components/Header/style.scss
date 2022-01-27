@@ -1,4 +1,6 @@
-@import '../../styles/abstracts/vars';
+@import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+@import 'src/styles/abstracts/functions';
 
 .header.header {
   background-color: $dark-grey;
@@ -8,6 +10,11 @@
   color: #ffffff;
   text-decoration: none;
   display: flex;
+  font-family: 'Monoton', cursive;
+
+  @include mq-mobile {
+    font-size: rem(24);
+  }
 }
 
 .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root:hover {

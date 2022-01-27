@@ -1,9 +1,19 @@
 .hidden-mobile {
   @include mq-mobile {
-    display: none;
+    display: none !important;
+  }
+}
+
+.hidden-desktop {
+  @include mq-desktop {
+    display: none !important;
   }
 }
 
 .align-middle {
-  vertical-align: middle;
+  vertical-align: middle !important;
+}
+
+.decoration-none {
+  text-decoration: none !important;
 }

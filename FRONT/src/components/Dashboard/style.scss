@@ -1,0 +1,45 @@
+@import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+
+.dashboard {
+  @include mq-desktop {
+    display: flex;
+  }
+}
+
+.dashboard__menu {
+  @include mq-mobile {
+    display: none;
+  }
+  @include mq-desktop {
+    box-sizing: border-box;
+    width: 200px;
+    background-color: #ffffff;
+    padding-top: 30px;
+  }
+}
+
+.dashboard__add-btn {
+  border-radius: 100%;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $blue;
+  height: 55px;
+  width: 55px;
+  color: #ffffff;
+  margin: 0 auto;
+}
+
+.dashboard__add-btn:hover {
+  background-color: darken($color: $blue, $amount: 10);
+  cursor: pointer;
+}
+
+.dashboard__content {
+  @include mq-desktop {
+    padding-top: 150px;
+    flex-grow: 1;
+  }
+}
