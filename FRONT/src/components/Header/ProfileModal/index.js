@@ -133,6 +133,7 @@ const ProfileModal = () => {
             />
             <DialogActions>
               <Button
+                className="button-green"
                 onClick={() => {
                   handleProfileModalToggle();
                   handleSubmit();
@@ -141,6 +142,7 @@ const ProfileModal = () => {
                 Enregistrer
               </Button>
               <Button
+                className="button-red"
                 onClick={() => {
                   handleProfileModalToggle();
                   handleDeleteUser();

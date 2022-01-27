@@ -5,10 +5,29 @@
 .mobile-menu {
   @include mq-mobile {
     margin-left: auto;
-    //font-size: rem(37px);
   }
 
   @include mq-desktop {
     display: none;
+  }
+}
+
+.mobile-menu__link {
+  @include mq-mobile {
+    display: block;
+    color: $dark-grey;
+    text-decoration: none;
+    margin-top: 30px;
+    padding-left: 16px;
+  }
+}
+
+.mobile-menu__link {
+  @include mq-mobile {
+    display: block;
+    color: $dark-grey;
+    text-decoration: none;
+    margin-top: 30px;
+    padding-left: 16px;
   }
 }

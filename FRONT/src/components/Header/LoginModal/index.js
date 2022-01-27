@@ -72,6 +72,7 @@ const LoginModal = () => {
                   handleClose();
                   handleSubmit();
                 }}
+                className="button-green"
               >
                 Se connecter
               </Button>
