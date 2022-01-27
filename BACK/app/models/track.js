@@ -8,43 +8,36 @@ class Track {
         }
     }
 
-    static async findAll() {
-        try {
-            const { rows } = await db.query('SELECT * FROM track');
-            return rows.map(row => new Track(row));
-        } catch (error) {
-            if (error.detail) {
-                throw new Error(error.detail);
-            }
-            throw error;
-        }
-    }
+    async addTrack(userId, itemId) {
 
-    static async findOne(id) {
         try {
-            const { rows } = await db.query('SELECT * FROM track WHERE id=$1', [id]);
-            if (rows[0]) {
-                return new Track(rows[0]);
-            }
-            return null;
-
-        } catch (error) {
-            if (error.detail) {
-                throw new Error(error.detail);
-            }
-            throw error;
-        }
-    }
-
-    async save() {
-        try {
-            if (this.id) {
-                await db.query('SELECT * FROM update_track()', [this]);
-            } else {
-                const { rows } = await db.query('SELECT * FROM add_track()', [this])
+            const checkTrack = await client.query ('SELECT * FROM "TRACK" WHERE id = $1', [itemId]);
+            if (!checkTrack) {
+                const {rows} = await client.query('INSERT INTO "TRACK" (name, genre, artist, year, album, url_image, api_id, url_sample) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id',
+                [this.name, this.genre, this.artist, this.year, this.album, this.url_image, this.api_id, this.url_sample]);
                 this.id = rows[0].id;
                 return this;
             }
+            // J'associe le track au user
+             const usersTrack = await client.query ('INSERT INTO USER_LIKES_TRACK (track_id, user_id) RETURNING id VALUES ($1, $2)', [itemId, userId])
+            return usersTrack;
+            
+        } catch (error) {
+    
+            console.log(error);
+            if (error.detail) {
+                throw new Error(error.detail);
+            }
+            throw new Error(error.message);
+        }
+
+    }
+
+
+    static async findAllByUser(id) {
+        try {
+            const { rows } = await db.query('SELECT tracks, artists, albums FROM userTracksAlbumsArtists WHERE id=$1');
+            return rows.map(row => new Track(row));
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);
@@ -55,7 +48,7 @@ class Track {
 
     async delete() {
         try {
-            await db.query('DELETE FROM track WHERE id=', [this.id]);
+            await db.query('DELETE FROM album WHERE id=$1', [this.id]);
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);
@@ -63,6 +56,7 @@ class Track {
             throw error;
         }
     }
+}
 }
 
 module.exports = Track;

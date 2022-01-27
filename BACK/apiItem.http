@@ -1,0 +1,27 @@
+@host=http://localhost:3200
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo1MywiaWF0IjoxNjQzMjAzNzQ2LCJleHAiOjE2NDMyMjUzNDZ9.WRbssLFUDCc0CRDLw30z7oTQqWbhOKowSJ0IQ_OCh64
+
+###se connecter
+POST {{host}}/login
+Content-Type: application/json
+
+{
+        "mail": "zigg@gmail.com",
+        "lastname": "",
+        "firstname": "",
+        "pseudo": "",
+        "password": "ziggy"
+    }
+
+
+###Ajouter un album à la bibli du user
+POST {{host}}/dashboard
+Authorization:{{token}}
+Content-Type: application/json
+{
+        "mail": "zigg@gmail.com",
+        "lastname": "",
+        "firstname": "",
+        "pseudo": "",
+        "password": "ziggy"
+    }
