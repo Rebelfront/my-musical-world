@@ -12,32 +12,35 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const CardAbout = ({ dev }) => (
-  <div className="cardAbout">
-    <Card className="about__card" sx={{ maxWidth: 250 }}>
+  <div>
+    <Card className="about__card">
       <CardMedia
+        className="card__image"
         component="img"
         height="200"
         image={dev.url_picture}
         alt={`photo de ${dev.firstname} ${dev.lastname}`}
       />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {dev.firstname}
-          {' '}
-          {dev.lastname}
-        </Typography>
-        <Typography component="div" variant="body2" color="text.secondary">
-          {
-            dev.roles.map((role) => (
-              <p key={role}>{role}</p>
-            ))
-          }
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <a aria-label="github-link" href={dev.githubLink} target="_blank" rel="noreferrer"><GitHubIcon fontSize="large" /></a>
-        <a aria-label="linkedin-link" href={dev.linkedinLink} target="_blank" rel="noreferrer"><LinkedInIcon fontSize="large" /></a>
-      </CardActions>
+      <div className="card__wrapper">
+        <CardContent className="card__content">
+          <Typography className="content__title" gutterBottom variant="h5" component="div">
+            {dev.firstname}
+            {' '}
+            {dev.lastname}
+          </Typography>
+          <Typography className="content__role" component="div" variant="body2" color="text.secondary">
+            {
+              dev.roles.map((role) => (
+                <p key={role}>{role}</p>
+              ))
+            }
+          </Typography>
+        </CardContent>
+        <CardActions className="card__icons">
+          <a aria-label="github-link" href={dev.githubLink} target="_blank" rel="noreferrer"><GitHubIcon fontSize="large" /></a>
+          <a aria-label="linkedin-link" href={dev.linkedinLink} target="_blank" rel="noreferrer"><LinkedInIcon fontSize="large" /></a>
+        </CardActions>
+      </div>
     </Card>
   </div>
 );
