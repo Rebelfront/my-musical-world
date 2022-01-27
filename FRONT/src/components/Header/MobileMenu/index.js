@@ -74,23 +74,25 @@ const MobileMenu = () => {
       ) : (
         <List>
           <ListItem>
-            <Accordion>
+            <Accordion sx={{ display: 'block', width: '100%' }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
                 <Typography>
-                  <AccountCircleIcon />
-                  {pseudo}
+                  <AccountCircleIcon className="align-middle" sx={{ mr: '10px' }} />
+                  <span className="align-middle">
+                    {pseudo.toUpperCase()}
+                  </span>
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                <Button className="button-green" onClick={handleOpenProfileModal}>
+              <AccordionDetails sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Button className="button-green" sx={{ display: 'block', mb: '10px'}} onClick={handleOpenProfileModal}>
                   <ListItemText primary="Mon profil" />
                 </Button>
-                <NavLink to="/" className="button-green">Ma bibliothèque</NavLink>
-                <Button className="button-green" onClick={handleLogout}>
+                <NavLink to="/">Ma bibliothèque</NavLink>
+                <Button sx={{ display: 'block', mt: '20px'}} className="button-red" onClick={handleLogout}>
                   <ListItemText primary="Se déconnecter" />
                 </Button>
               </AccordionDetails>
@@ -98,7 +100,6 @@ const MobileMenu = () => {
           </ListItem>
         </List>
       )}
-      <Divider />
       <NavLink className="mobile-menu__link" to="/about">A propos &gt;</NavLink>
       <NavLink className="mobile-menu__link" to="/legal">Mentions légales &gt;</NavLink>
     </Box>
@@ -116,7 +117,7 @@ const MobileMenu = () => {
         sx={{
           width: '70vw',
           flexShrink: 0,
-          '& .MuiDrawer-paper': { width: '70vw', boxSizing: 'border-box' },
+          '& .MuiDrawer-paper': { width: '70vw', maxWidth: '320px', boxSizing: 'border-box' },
         }}
         anchor="right"
         open={opened}
