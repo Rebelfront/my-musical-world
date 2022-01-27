@@ -15,13 +15,16 @@ Content-Type: application/json
 
 
 ###Ajouter un album à la bibli du user
-POST {{host}}/dashboard
-Authorization:{{token}}
+POST {{host}}/dashboard/61
+# Authorization:{{token}}
 Content-Type: application/json
+
 {
-        "mail": "zigg@gmail.com",
-        "lastname": "",
-        "firstname": "",
-        "pseudo": "",
-        "password": "ziggy"
+        "name": "piece of mind",
+        "genre": "metal",
+        "artist": "iron maiden",
+        "year": "1983",
+        "url_image": "eddie",
+        "api_id": 123,
+        "type": "album"
     }

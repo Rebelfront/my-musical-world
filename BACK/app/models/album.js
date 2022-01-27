@@ -41,6 +41,7 @@ class Album {
     async addAlbum(userId, itemId) {
 
         try {
+            
             const checkAlbum = await client.query(`SELECT * FROM "ALBUM" WHERE api_id=$1`, [itemId]);
 
             if (!checkAlbum.rows[0]) { 

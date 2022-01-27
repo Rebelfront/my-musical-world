@@ -1,13 +1,13 @@
-const Artist = require('../models/Artist');
-const Album = require('../models/Album');
-const Track = require('../models/Track');
-const CoreModel = require('../models/coreModels'); 
+const Artist = require('../models/artist');
+const Album = require('../models/album');
+const Track = require('../models/track');
+// const CoreModel = require('../models/coreModels'); 
 
 
 
 module.exports = {
 
-    AddOneItem : async (request, response) => {
+    addOneItem : async (request, response) => {
 // ajouter un album/artiste/chanson au dashboard
         try {
             // Je reçois la requête du front :
@@ -16,15 +16,20 @@ module.exports = {
             // J'identifie le user qui veut ajouter l'item dans son dashboard 
             const userId = request.userId;
             // Je vérifie si l'item existe en BDD  = à faire dans les models
+            delete request.body.type;
+
 
             if (itemType === 'album') {
-                const instance = new Album (request.body);
 
-                const album = await instance.addAlbum(userId, itemId);
+                console.log('yolo');
+                return response.json('dans album du controller');
+                // const instance = new Album (request.body);
+
+                // const album = await instance.addAlbum(userId, itemId);
              
-                return response.json('Element ajouté', album);
+                // return response.json('Element ajouté', album);
 
-            } else if (itemType === 'artist') {
+            } else if (itemType == 'artist') {
                 const instance = new Artist (request.body);
 
                 const artist = await instance.addArtist(userId, itemId);
@@ -32,7 +37,7 @@ module.exports = {
                 return response.json('artiste ajouté', artist);
               
 
-            } else if (itemType === 'track') {
+            } else if (itemType == 'track') {
                 const instance = new Track (request.body);
 
                 const track = await instance.addTrack(userId, itemId);
@@ -42,7 +47,7 @@ module.exports = {
             
         } catch (error) {
             console.log(error);
-            response.status(500).json(error.message);
+            response.status(500).json('erreur dans dashboardController');
             
         }
         
@@ -81,22 +86,7 @@ module.exports = {
         
     },
 
-    addOneItem: async (request, response) => {
-        try {
-            const instance = new Item(request.body).save();
-            if (phrase) {
-                //si la phrase existe on fait un insert, on créé une nouvelle phrase
-                return response.status(201).json(phrase);
-            }
-            //sinon on update la phrase existante
-            response.status(204).json('phrase ajoutée')
-
-        } catch (error) {
-            console.log(error);
-            response.status(500).json(error.message);
-        }
-
-    },
+   
 
     deleteOneItem: async (request, response) => {
         try {

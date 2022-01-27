@@ -7,6 +7,7 @@ const authentification = require ('./middlewares/jsonWebToken');
 
 const userSchema = require('./schemas/userSchema');
 const {validateBody} = require('./middlewares/Validation');
+const dashboardController = require('./controllers/dashboardController');
 
 const router = Router();
 
@@ -20,7 +21,8 @@ router.patch('/user',authentification, validateBody(userSchema), userController.
 router.delete('/user',authentification, userController.deleteUser);
 
 // router.get('/dashboard/:pseudo', dashboardController.getAllItems);
-// router.post('/dashboard', dashboardController.addOneItem);
+// router.get('/dashboard', authentification, dashboardController.getAllItems);
+router.post('/dashboard/:id', dashboardController.addOneItem);
 // router.delete('/dashboard/:type/:id', dashboardController.deleteOneItem);
 
 module.exports = router; 
