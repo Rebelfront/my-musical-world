@@ -9,6 +9,7 @@ import Footer from 'src/components/Footer';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { checkUser } from 'src/actions/user';
+import SharingModal from '../SharingModal';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const App = () => {
   return (
     <div className="app">
       <Header />
+      <SharingModal />
       <Routes>
         <Route
           path="/"
