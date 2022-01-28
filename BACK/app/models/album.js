@@ -23,10 +23,9 @@ class Album {
 
                 if(checkUserLikesAlbum.rows[0]) {
                     console.log('album deja liké');
-                    throw new Error('album déjà liké')
+                    throw new Error('album déjà liké');
                 } 
-                   
-                
+                                  
             } else {
 
                 const { rows } = await client.query('INSERT INTO ALBUM(name, genre, artist, year, url_image, api_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', [this.name, this.genre, this.artist, this.year, this.urlImage, this.apiId]);
@@ -45,7 +44,7 @@ class Album {
 
         } catch (error) {
 
-            console.log(error);
+            console.log('error du model');
             if (error.detail) {
                 throw new Error(error.detail);
             }

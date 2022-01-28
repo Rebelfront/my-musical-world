@@ -30,7 +30,7 @@ module.exports = {
                 console.log('Album controller', album);
 
              
-                return response.json('Element ajouté');
+                return response.json('Album ajouté');
 
             } else if (itemType === 'artist') {
                 const instance = new Artist (request.body);
@@ -49,8 +49,8 @@ module.exports = {
             }
             
         } catch (error) {
-            console.log(error);
-            response.status(500).json('erreur dans dashboardController');
+            console.log('error du controller');
+            response.status(500).json(error.message);
             
         }
         
