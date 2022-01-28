@@ -11,8 +11,8 @@ module.exports = {
 // ajouter un album/artiste/chanson au dashboard
         try {
             // Je reçois la requête du front :
-            const itemId = request.body.id; // vérifier quel identifiant unique on peut récupérer du body 
-            const itemType = request.body.type; // le nom d la table à cibler : album, track ou artist
+            const itemId = request.body.apiId; // vérifier quel identifiant unique on peut récupérer du body 
+            const itemType = request.params.type; // le nom d la table à cibler : album, track ou artist
             // J'identifie le user qui veut ajouter l'item dans son dashboard 
             const userId = request.userId;
             // Je vérifie si l'item existe en BDD  = à faire dans les models

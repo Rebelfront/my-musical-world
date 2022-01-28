@@ -22,7 +22,7 @@ router.delete('/user',authentification, userController.deleteUser);
 
 // router.get('/dashboard/:pseudo', dashboardController.getAllItems);
 // router.get('/dashboard', authentification, dashboardController.getAllItems);
-router.post('/dashboard/:id', dashboardController.addOneItem);
+router.post('/dashboard/:id/:type', dashboardController.addOneItem);
 // router.delete('/dashboard/:type/:id', dashboardController.deleteOneItem);
 
 module.exports = router; 
