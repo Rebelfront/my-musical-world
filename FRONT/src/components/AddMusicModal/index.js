@@ -1,5 +1,7 @@
+import './style.scss';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleAddMusicModal, submitAddMusic } from 'src/actions/addMusic';
+import { toggleAddMusicModal, submitSearchMusic } from 'src/actions/addMusic';
 import { changeInput } from 'src/actions';
 
 import Button from '@mui/material/Button';
@@ -33,15 +35,15 @@ const AddMusicModal = () => {
     dispatch(action);
   };
   const handleSubmit = () => {
-    const action = submitAddMusic();
+    const action = submitSearchMusic();
     dispatch(action);
   };
 
   return (
-    <div>
+    <div className="addmusic">
       <Dialog open={modalOpened} onClose={handleClose}>
         <DialogTitle>Ajouter un titre / album / artiste</DialogTitle>
-        <DialogContent>
+        <DialogContent className="addmusic__search">
           <Box
             component="form"
             sx={{
@@ -58,13 +60,14 @@ const AddMusicModal = () => {
               name="searchMusic"
               id="search"
               label="Recherche"
-              type="text"
+              type="search"
               fullWidth
               variant="standard"
               placeholder="Entrez votre recherche"
               value={searchMusic}
               onChange={handleChangeInput}
             />
+
             <FormControl sx={{ m: 1, width: 100 }}>
               <InputLabel id="demo-simple-select-label">Type</InputLabel>
               <Select

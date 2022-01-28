@@ -1,5 +1,8 @@
 import './style.scss';
 
+import { useDispatch } from 'react-redux';
+import { submitAddMusic } from 'src/actions/addMusic';
+
 import PropTypes from 'prop-types';
 
 import Card from '@mui/material/Card';
@@ -9,9 +12,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const CardResultsMusic = ({ music }) => {
-  const handleSubmit = () => {
-    // const action = submitAddMusic();
-    // dispatch(action);
+  const dispatch = useDispatch();
+  const handleSubmit = (event) => {
+    const action = submitAddMusic(Number(event.target.id));
+    dispatch(action);
   };
 
   return (
@@ -20,7 +24,7 @@ const CardResultsMusic = ({ music }) => {
         <CardMedia
           className="card__image"
           component="img"
-          height="50"
+          height="100"
           image={music.urlImage}
           alt={`photo de ${music.name}`}
         />
@@ -38,9 +42,16 @@ const CardResultsMusic = ({ music }) => {
               <br />
               {music.genre}
             </Typography>
-            <a href={music.urlSample} target="_blank" rel="noreferrer">Ecouter un extrait</a>
+            <button
+              type="button"
+              onClick={() => {
+                window.open(music.urlSample, music.name, `width=300,height=100,left=${(window.innerWidth / 2) - 150},top=${(window.innerHeight / 2)}`);
+              }}
+            >Ecouter un extrait
+            </button>
           </CardContent>
           <Button
+            id={music.apiId}
             onClick={handleSubmit}
             className="button-green"
           >

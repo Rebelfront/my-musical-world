@@ -14,7 +14,7 @@ const addMusic = (state = initialState, action = {}) => {
       return {
         ...state,
         modalOpened: !state.modalOpened,
-        searchMusic: '',
+        // searchMusic: '',
         resultsMusic: [],
       };
     case CHANGE_INPUT:

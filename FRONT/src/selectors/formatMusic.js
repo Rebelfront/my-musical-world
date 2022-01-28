@@ -13,7 +13,7 @@ export const formatTracks = async (tracks) => {
     let albumId;
 
     await axios.get(`${corsReverseProxy}/${deezerAPIUrl}/track/${trackId}`)
-      .then((res) => {
+      .then(async (res) => {
         trackFormated.name = res.data.title;
         trackFormated.artist = res.data.artist.name;
         trackFormated.year = Number(res.data.release_date.substring(0, 4));
@@ -23,7 +23,7 @@ export const formatTracks = async (tracks) => {
         trackFormated.urlSample = res.data.preview;
         albumId = res.data.album.id;
 
-        axios.get(`${corsReverseProxy}/${deezerAPIUrl}/album/${albumId}`)
+        await axios.get(`${corsReverseProxy}/${deezerAPIUrl}/album/${albumId}`)
           .then((res) => {
             trackFormated.genre = res.data.genres.data[0].name;
           })
