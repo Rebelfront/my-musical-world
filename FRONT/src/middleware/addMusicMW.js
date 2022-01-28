@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { SUBMIT_SEARCH } from 'src/actions/addMusic';
+import { SUBMIT_SEARCH, saveResultsMusic } from 'src/actions/addMusic';
+
+import { selectTypeMusic } from 'src/selectors/selectTypeMusic';
 
 const addMusicMW = (store) => (next) => (action) => {
   // url reverse proxy to allow cors deezer api
@@ -9,16 +11,15 @@ const addMusicMW = (store) => (next) => (action) => {
 
   switch (action.type) {
     case SUBMIT_SEARCH: {
-      console.log(action.payload.search);
-      const searchMusic = action.payload.search;
+      const { addMusic: { searchMusic, typeMusic } } = store.getState();
+      const typeMusicString = selectTypeMusic(typeMusic);
       axios({
         method: 'get',
-        url: `${corsReverseProxy}/${deezerAPIUrl}/search/track?q=${searchMusic}`,
+        url: `${corsReverseProxy}/${deezerAPIUrl}/search/${typeMusicString}?q=${searchMusic}&limit=10`,
       })
         .then((res) => {
-          // const actionSaveUser = saveUser(res.data);
-          // store.dispatch(actionSaveUser);
-          console.log(res.data);
+          const actionSaveResultsMusic = saveResultsMusic(res.data.data);
+          store.dispatch(actionSaveResultsMusic);
         })
         .catch((err) => console.log(err));
     }
