@@ -1,32 +1,44 @@
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const DashboardCard = () => {
+const DashboardCard = ({
+  name,
+  genre,
+  artist,
+  year,
+  urlImage,
+  type,
+  album
+}) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 200, mb: '20px' }}>
       <CardMedia
         component="img"
-        alt="green iguana"
-        height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
+        alt={name}
+        image={urlImage}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
+        {type !== "artist" && (
+          <Typography gutterBottom variant="h5" component="div">
+            {artist}
+          </Typography>
+        )}
+        <Typography sx={type !== "artist" ? { fontStyle: 'italic' } : {}} gutterBottom variant="h5" component="div">
+          {type === "artist" ? name :`"${name}"`} {year && type === "album" && `(${year})`}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
+        {type === "track" && (
+          <Typography variant="body2" color="text.secondary">
+            Album: {`"${album}" (${year})`}
+          </Typography>
+        )}
+        {genre && (
+          <Typography variant="body2" color="text.secondary">
+            Genre: {genre}
+          </Typography>
+        )}
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   );
 };
