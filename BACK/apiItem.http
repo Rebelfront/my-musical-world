@@ -1,5 +1,5 @@
 @host=http://localhost:3200
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo1MywiaWF0IjoxNjQzMjAzNzQ2LCJleHAiOjE2NDMyMjUzNDZ9.WRbssLFUDCc0CRDLw30z7oTQqWbhOKowSJ0IQ_OCh64
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo2MSwiaWF0IjoxNjQzMzU5Njc3LCJleHAiOjE2NDMzODEyNzd9.eHq3hZUfjt-4pDbr4pwnMpuae-lhcP-oFWEuil9oXJ8
 
 ###se connecter
 POST {{host}}/login
@@ -15,16 +15,16 @@ Content-Type: application/json
 
 
 ###Ajouter un album à la bibli du user
-POST {{host}}/dashboard/61
+POST {{host}}/dashboard/61/album
 # Authorization:{{token}}
 Content-Type: application/json
 
 {
-        "name": "piece of mind",
-        "genre": "metal",
-        "artist": "iron maiden",
-        "year": "1983",
-        "url_image": "eddie",
-        "api_id": 123,
-        "type": "album"
+        "name": "strut",
+        "genre": "rock",
+        "artist": "Lenny kravitz",
+        "year": "2014",
+        "urlImage": "lenny",
+        "apiId": 35
+        
     }

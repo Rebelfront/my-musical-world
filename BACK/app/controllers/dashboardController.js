@@ -14,22 +14,25 @@ module.exports = {
             const itemId = request.body.apiId; // vérifier quel identifiant unique on peut récupérer du body 
             const itemType = request.params.type; // le nom d la table à cibler : album, track ou artist
             // J'identifie le user qui veut ajouter l'item dans son dashboard 
-            const userId = request.userId;
+            // const userId = request.userId;
+            const userId = request.params.id;
             // Je vérifie si l'item existe en BDD  = à faire dans les models
             delete request.body.type;
 
 
             if (itemType === 'album') {
 
-                console.log('yolo');
-                return response.json('dans album du controller');
-                // const instance = new Album (request.body);
+                // console.log('yolo');
+                console.log('dans album du controller');
+                const instance = new Album (request.body);
+                // console.log('instanceAlbum', instance);
+                const album = await instance.addAlbum(userId, itemId);
+                console.log('Album controller', album);
 
-                // const album = await instance.addAlbum(userId, itemId);
              
-                // return response.json('Element ajouté', album);
+                return response.json('Element ajouté');
 
-            } else if (itemType == 'artist') {
+            } else if (itemType === 'artist') {
                 const instance = new Artist (request.body);
 
                 const artist = await instance.addArtist(userId, itemId);
@@ -37,7 +40,7 @@ module.exports = {
                 return response.json('artiste ajouté', artist);
               
 
-            } else if (itemType == 'track') {
+            } else if (itemType === 'track') {
                 const instance = new Track (request.body);
 
                 const track = await instance.addTrack(userId, itemId);
