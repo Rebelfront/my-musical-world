@@ -14,8 +14,8 @@ const Homepage = () => {
   }
   return (
     <div className="homepage">
-        <h2>My Musical World</h2>
-        <img class="homepage__logo"
+        <h2 className="homepage__title">My Musical World</h2>
+        <img className="homepage__logo"
         src= {homepageLogo}
         alt="Disque"></img>
         <p className='homepage__text'> Lorem ipsum dolor sit amet. Eos amet consequatur et nihil consectetur est aliquam iure. Aut nostrum iusto et exercitationem odio qui rerum velit et voluptas corrupti a consequatur consequatur? Id harum veritatis est repellendus galisum cum quidem expedita et quia asperiores sit autem rerum.
