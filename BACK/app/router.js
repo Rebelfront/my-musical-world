@@ -23,6 +23,6 @@ router.delete('/user',authentification, userController.deleteUser);
 // router.get('/dashboard/:pseudo', dashboardController.getAllItems);
 // router.get('/dashboard', authentification, dashboardController.getAllItems);
 router.post('/dashboard/:type',authentification, dashboardController.addOneItem);
-// router.delete('/dashboard/:type/:id', dashboardController.deleteOneItem);
+router.delete('/dashboard/:type', authentification, dashboardController.deleteOneItem);
 
 module.exports = router; 

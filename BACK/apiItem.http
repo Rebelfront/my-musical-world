@@ -1,5 +1,5 @@
 @host=http://localhost:3200
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo2MSwiaWF0IjoxNjQzMzY2OTcyLCJleHAiOjE2NDMzODg1NzJ9.VpKqrVzDxXkizf9DJqXp8HXpGqGgBF87ALg2y-37Lbs
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo2MSwiaWF0IjoxNjQzMzgyMzA2LCJleHAiOjE2NDM0MDM5MDZ9.UykV6piVBgiuhlBMvhmYyx7zApJt580TGZI2MAtwsxs
 
 ###se connecter
 POST {{host}}/login
@@ -20,12 +20,12 @@ Authorization:{{token}}
 Content-Type: application/json
 
 {
-        "name": "Purple Rain",
+        "name": "abbey road",
         "genre": "rock",
-        "artist": "Prince",
-        "year": "1984",
-        "urlImage": "Princ",
-        "apiId": 568
+        "artist": "beatles",
+        "year": "1969",
+        "urlImage": "balbal",
+        "apiId": 1
         
     }
 
@@ -35,14 +35,60 @@ Authorization:{{token}}
 Content-Type: application/json
 
 {
-        "name": "Neil Young",
-        "urlImage": "N.Y.",
-        "apiId": 1562
+        "name": "le pere fouettard",
+        "urlImage": "ouilouilou",
+        "apiId": 2312
         
     }
 
 ###Ajouter une chanson à la bibli du user
 POST {{host}}/dashboard/track
+Authorization:{{token}}
+Content-Type: application/json
+
+{
+        "name": "Lay lady lay",
+        "genre": "folk",
+        "artist": "Bob Dylan",
+        "year": "1969",
+        "album": "Nashville Skyline",
+        "urlImage": "Bob",
+        "apiId": 56987,
+        "urlSample": "the link"
+        
+    }
+
+### Supprimer un album de sa discothèque
+DELETE  {{host}}/dashboard/album
+Authorization:{{token}}
+Content-Type: application/json
+
+{
+        "name": "abbey road",
+        "genre": "rock",
+        "artist": "beatles",
+        "year": "1969",
+        "urlImage": "balbal",
+        "apiId": 1
+        
+    }
+
+### Supprimer un artiste de sa discothèque
+DELETE  {{host}}/dashboard/artist
+Authorization:{{token}}
+Content-Type: application/json
+
+{
+        "name": "le pere fouettard",
+        "urlImage": "ouilouilou",
+        "apiId": 2312
+        
+    }
+
+
+
+### Supprimer une chanson de sa discothèque
+DELETE  {{host}}/dashboard/track
 Authorization:{{token}}
 Content-Type: application/json
 

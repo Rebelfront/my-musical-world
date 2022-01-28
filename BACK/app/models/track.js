@@ -16,9 +16,9 @@ class Track {
             //console.log(checkTrack.rows[0]);
 
             if (checkTrack.rows[0]) {
-                this.id = checkTrack.rows[0].id;
+                //this.id = checkTrack.rows[0].id;
                 //console.log(checkTrack.rows[0].id);
-                const checkUserLikesTrack = await client.query(`SELECT * FROM USER_LIKES_TRACK WHERE (track_id, user_id)=($1, $2);`, [this.id, userId]);
+                const checkUserLikesTrack = await client.query(`SELECT * FROM USER_LIKES_TRACK WHERE (api_id, user_id)=($1, $2);`, [itemId, userId]);
 
                 if(checkUserLikesTrack.rows[0]) {
                     console.log('chanson deja likée');
@@ -35,17 +35,17 @@ class Track {
                         this.year, 
                         this.album, 
                         this.urlImage, 
-                        this.apiId, 
+                        itemId, 
                         this.urlSample]);
 
-                this.id = rows[0].id;
+                // this.id = rows[0].id;
                 itemId = this.apiId;
 
             }
 
             // console.log('this', this);
 
-            await client.query('INSERT INTO USER_LIKES_TRACK (track_id, user_id) VALUES ($1, $2)', [this.id, userId]);
+            await client.query('INSERT INTO USER_LIKES_TRACK (api_id, user_id) VALUES ($1, $2)', [itemId, userId]);
             console.log('Chanson ajoutée à votre bibliotheque')
             return this;
 
@@ -61,9 +61,15 @@ class Track {
 
     }
 
-    async delete() {
+    static async delete(userId, itemId) {
+
         try {
-            await client.query('DELETE FROM USER_LIKES_TRACK WHERE id=$1', [userId]);
+            await client.query('DELETE FROM USER_LIKES_TRACK WHERE (api_id, user_id)=($1, $2)', [itemId, userId]);
+
+            const track = await client.query('SELECT * FROM TRACK WHERE api_id=$1', [itemId]);
+            const trackName = track.rows[0].name;
+            return trackName;
+
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);

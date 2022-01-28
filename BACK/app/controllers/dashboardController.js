@@ -38,7 +38,7 @@ module.exports = {
                 const instance = new Artist(request.body);
                 const artist = await instance.addArtist(userId, itemId);
                 //    console.log('Artist controller', artist);
-                return response.json('Album ajouté');
+                return response.json(`Artiste ${artist.name} ajouté`);
 
 
 
@@ -71,25 +71,27 @@ module.exports = {
             const userId = request.userId;
 
             if (itemType === 'album') {
+              
 
 
-                const album = await Album.delete(userId, itemId);
+               const album = await Album.delete(userId, itemId);
 
-                response.json(`l'album ${album.name}`);
+                response.json(`l'album ${album} a été supprimé de votre discothèque`);
+                // response.json(`l'album est supprmé`);
 
             } else if (itemType === 'artist') {
-                const artist = await Artist.delete(userId, itemId);
 
-                response.json(`l'album ${artist.name}`);
+                const artist = await Artist.delete(userId, itemId);
+                response.json(`l'artiste ${artist} a été supprimé de votre discothèque`);
 
             } else if (itemType === 'track') {
-                const track = await Track.delete(userId, itemId);
 
-                response.json(`l'album ${track.name}`);
+                const track = await Track.delete(userId, itemId);
+                response.json(`la chanson ${track} a été supprimé de votre discothèque`);
 
             }
 
-        } catch {
+        } catch (error) {
             console.log('error du controller');
             response.status(500).json(error.message);
         }
@@ -121,16 +123,6 @@ module.exports = {
 
 
 
-    deleteOneItem: async (request, response) => {
-        try {
-            const id = parseInt(request.params.id, 10);
-            const type = request.params.type;
-            await Item.delete(+request.params.id);
-            response.status(204).json('item supprimé');
-        } catch (error) {
-            console.log(error);
-            response.status(500).json(error.message);
-        }
-    }
+
 
 }

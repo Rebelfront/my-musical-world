@@ -19,7 +19,7 @@ class Album {
             if (checkAlbum.rows[0]) {
                 this.id = checkAlbum.rows[0].id;
                 console.log(checkAlbum.rows[0].id);
-                const checkUserLikesAlbum = await client.query(`SELECT * FROM USER_LIKES_ALBUM WHERE (album_id, user_id)=($1, $2);`, [this.id, userId]);
+                const checkUserLikesAlbum = await client.query(`SELECT * FROM USER_LIKES_ALBUM WHERE (api_id, user_id)=($1, $2);`, [itemId, userId]);
 
                 if(checkUserLikesAlbum.rows[0]) {
                     console.log('album deja liké');
@@ -28,16 +28,16 @@ class Album {
                                   
             } else {
 
-                const { rows } = await client.query('INSERT INTO ALBUM(name, genre, artist, year, url_image, api_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', [this.name, this.genre, this.artist, this.year, this.urlImage, this.apiId]);
+                const { rows } = await client.query('INSERT INTO ALBUM(name, genre, artist, year, url_image, api_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', [this.name, this.genre, this.artist, this.year, this.urlImage, itemId]);
 
                 //this.id = rows[0].id;
                 itemId = this.apiId;
 
             }
 
-            console.log('this', this);
+            // console.log('this', this);
 
-            await client.query('INSERT INTO USER_LIKES_ALBUM (api_id, user_id) VALUES ($1, $2)', [this.apiId, userId]);
+            await client.query('INSERT INTO USER_LIKES_ALBUM (api_id, user_id) VALUES ($1, $2)', [itemId, userId]);
             console.log('album ajouté à votre bibliotheque')
             return this;
 
@@ -65,9 +65,15 @@ class Album {
     //     }
     // }
 
-    async delete(userId, itemId) {
+    static async delete(userId, itemId) {
+
         try {
             await client.query('DELETE FROM USER_LIKES_ALBUM WHERE (api_id, user_id)=($1, $2)', [itemId, userId]);
+
+            const album = await client.query('SELECT * FROM ALBUM WHERE api_id=$1', [itemId]);
+            const albumName = album.rows[0].name;
+            return albumName;
+
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);
