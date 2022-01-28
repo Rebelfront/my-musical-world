@@ -1,6 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { changeInput } from 'src/actions';
-import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
 import Button from '@mui/material/Button';
@@ -14,13 +12,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 
 const SharingModal = () => {
-  //const location = useLocation();
-  const location = '/dashboard'
-  console.log(location);
+  const location = window.location.href;
+  const { pseudo } = useSelector((state) => state.user);
   const [isCopied, setIsCopied] = useState(false);
   const [isOpened, setIsOpened] = useState(true);
 
-  const url = location;
+  const url = `${location}shared-space/${pseudo}`;
   const handleClose = () => {
     setIsOpened(false);
   };
