@@ -63,7 +63,7 @@ class Track {
 
     async delete() {
         try {
-            await db.query('DELETE FROM album WHERE id=$1', [this.id]);
+            await client.query('DELETE FROM USER_LIKES_TRACK WHERE id=$1', [userId]);
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);
