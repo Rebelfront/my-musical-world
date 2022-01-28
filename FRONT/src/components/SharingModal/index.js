@@ -44,12 +44,12 @@ const SharingModal = () => {
   return (
     <div>
       <Dialog open={isOpened} onClose={handleClose}>
-        <DialogTitle>Partager ma bibliothèque musicale</DialogTitle>
+        <DialogTitle sx={{ padding: '30px' }}>Partager ma bibliothèque musicale</DialogTitle>
         <DialogContent>
           <Box
             component="form"
             sx={{
-              '& .MuiTextField-root': { m: 1, width: '25ch' },
+              '& .MuiTextField-root': { m: 1, width: '40ch' },
             }}
             noValidate
             autoComplete="off"
