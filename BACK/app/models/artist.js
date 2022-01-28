@@ -1,4 +1,4 @@
-const db = require('../database');
+const client = require('../database');
 
 class Artist {
 
@@ -8,49 +8,48 @@ class Artist {
         }
     }
 
-    static async findAll() {
-        try {
-            const { rows } = await db.query('SELECT * FROM artist');
-            return rows.map(row => new Artist(row));
-        } catch (error) {
-            if (error.detail) {
-                throw new Error(error.detail);
-            }
-            throw error;
-        }
-    }
+    async addArtist(userId, itemId) {
 
-    static async findOne(id) {
         try {
-            const { rows } = await db.query('SELECT * FROM artist WHERE id=', [id]);
-            if (rows[0]) {
-                return new Artist(rows[0]);
-            }
-            return null;
 
-        } catch (error) {
-            if (error.detail) {
-                throw new Error(error.detail);
-            }
-            throw error;
-        }
-    }
+            const checkArtist = await client.query(`SELECT * FROM ARTIST WHERE api_id=$1`, [itemId]);
+            console.log(checkArtist.rows[0]);
 
-    async save() {
-        try {
-            if (this.id) {
-                await db.query('SELECT * FROM update_artist()', [this]);
+            if (checkArtist.rows[0]) {
+                this.id = checkArtist.rows[0].id;
+                console.log(checkArtist.rows[0].id);
+                const checkUserLikesArtist = await client.query(`SELECT * FROM USER_LIKES_ARTIST WHERE (artist_id, user_id)=($1, $2);`, [this.id, userId]);
+
+                if(checkUserLikesArtist.rows[0]) {
+                    // console.log('artiste deja liké');
+                    throw new Error('artiste déjà liké');
+                } 
+                                  
             } else {
-                const { rows } = await db.query('SELECT * FROM add_artist()', [this])
+
+                const { rows } = await client.query('INSERT INTO ARTIST(name, url_image, api_id) VALUES($1, $2, $3) RETURNING id', [this.name,this.urlImage, this.apiId]);
+
                 this.id = rows[0].id;
-                return this;
+                itemId = this.apiId;
+
             }
+
+            // console.log('this', this);
+
+            await client.query('INSERT INTO USER_LIKES_ARTIST (artist_id, user_id) VALUES ($1, $2)', [this.id, userId]);
+            console.log('artiste ajouté à votre bibliotheque')
+            return this;
+
+
         } catch (error) {
+
+            console.log('error du model');
             if (error.detail) {
                 throw new Error(error.detail);
             }
-            throw error;
+            throw new Error(error.message);
         }
+
     }
 
     async delete() {

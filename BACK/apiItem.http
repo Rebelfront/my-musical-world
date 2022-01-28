@@ -1,5 +1,5 @@
 @host=http://localhost:3200
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo2MSwiaWF0IjoxNjQzMzU5Njc3LCJleHAiOjE2NDMzODEyNzd9.eHq3hZUfjt-4pDbr4pwnMpuae-lhcP-oFWEuil9oXJ8
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo2MSwiaWF0IjoxNjQzMzY2OTcyLCJleHAiOjE2NDMzODg1NzJ9.VpKqrVzDxXkizf9DJqXp8HXpGqGgBF87ALg2y-37Lbs
 
 ###se connecter
 POST {{host}}/login
@@ -15,16 +15,45 @@ Content-Type: application/json
 
 
 ###Ajouter un album à la bibli du user
-POST {{host}}/dashboard/61/album
-# Authorization:{{token}}
+POST {{host}}/dashboard/album
+Authorization:{{token}}
 Content-Type: application/json
 
 {
-        "name": "strut",
+        "name": "Purple Rain",
         "genre": "rock",
-        "artist": "Lenny kravitz",
-        "year": "2014",
-        "urlImage": "lenny",
-        "apiId": 35
+        "artist": "Prince",
+        "year": "1984",
+        "urlImage": "Princ",
+        "apiId": 568
+        
+    }
+
+###Ajouter un artiste à la bibli du user
+POST {{host}}/dashboard/artist
+Authorization:{{token}}
+Content-Type: application/json
+
+{
+        "name": "Neil Young",
+        "urlImage": "N.Y.",
+        "apiId": 1562
+        
+    }
+
+###Ajouter une chanson à la bibli du user
+POST {{host}}/dashboard/track
+Authorization:{{token}}
+Content-Type: application/json
+
+{
+        "name": "Lay lady lay",
+        "genre": "folk",
+        "artist": "Bob Dylan",
+        "year": "1969",
+        "album": "Nashville Skyline",
+        "urlImage": "Bob",
+        "apiId": 56987,
+        "urlSample": "the link"
         
     }

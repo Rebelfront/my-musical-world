@@ -1,6 +1,7 @@
 const Artist = require('../models/artist');
 const Album = require('../models/album');
 const Track = require('../models/track');
+
 // const CoreModel = require('../models/coreModels'); 
 
 
@@ -14,10 +15,9 @@ module.exports = {
             const itemId = request.body.apiId; // vérifier quel identifiant unique on peut récupérer du body 
             const itemType = request.params.type; // le nom d la table à cibler : album, track ou artist
             // J'identifie le user qui veut ajouter l'item dans son dashboard 
-            // const userId = request.userId;
-            const userId = request.params.id;
+            const userId = request.userId;
+            // const userId = request.params.id;
             // Je vérifie si l'item existe en BDD  = à faire dans les models
-            delete request.body.type;
 
 
             if (itemType === 'album') {
@@ -33,19 +33,22 @@ module.exports = {
                 return response.json('Album ajouté');
 
             } else if (itemType === 'artist') {
-                const instance = new Artist (request.body);
+               // console.log('yolo');
+               console.log('dans artist du controller');
+               const instance = new Artist (request.body);
+               const artist = await instance.addArtist(userId, itemId);
+            //    console.log('Artist controller', artist);
+            return response.json('Album ajouté');
 
-                const artist = await instance.addArtist(userId, itemId);
-            
-                return response.json('artiste ajouté', artist);
               
 
             } else if (itemType === 'track') {
                 const instance = new Track (request.body);
 
                 const track = await instance.addTrack(userId, itemId);
+                return response.json(`Chanson ${track.name} ajouté`);
+
             
-                return response.json('chanson ajoutée', track);
             }
             
         } catch (error) {
