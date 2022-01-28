@@ -3,62 +3,76 @@ import './style.scss';
 import PropTypes from 'prop-types';
 
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+const CardResultsMusic = ({ music }) => {
+  const handleSubmit = () => {
+    // const action = submitAddMusic();
+    // dispatch(action);
+  };
 
-const CardAbout = ({ dev }) => (
-  <div>
-    <Card className="about__card">
-      <CardMedia
-        className="card__image"
-        component="img"
-        height="200"
-        image={dev.url_picture}
-        alt={`photo de ${dev.firstname} ${dev.lastname}`}
-      />
-      <div className="card__wrapper">
-        <CardContent className="card__content">
-          <Typography className="content__title" gutterBottom variant="h5" component="div">
-            {dev.firstname}
-            {' '}
-            {dev.lastname}
-          </Typography>
-          <Typography className="content__role" component="div" variant="body2" color="text.secondary">
-            {
-              dev.roles.map((role) => (
-                <p key={role}>{role}</p>
-              ))
-            }
-          </Typography>
-        </CardContent>
-        <CardActions className="card__icons">
-          <a aria-label="github-link" href={dev.githubLink} target="_blank" rel="noreferrer"><GitHubIcon fontSize="large" /></a>
-          <a aria-label="linkedin-link" href={dev.linkedinLink} target="_blank" rel="noreferrer"><LinkedInIcon fontSize="large" /></a>
-        </CardActions>
-      </div>
-    </Card>
-  </div>
-);
+  return (
+    <div>
+      <Card className="result__card">
+        <CardMedia
+          className="card__image"
+          component="img"
+          height="50"
+          image={music.urlImage}
+          alt={`photo de ${music.name}`}
+        />
+        <div className="card__wrapper">
+          <CardContent className="card__content">
+            <Typography className="content__title" gutterBottom variant="h5" component="div">
+              {music.name}
+            </Typography>
+            <Typography className="content__infos" component="div" variant="body2" color="text.secondary">
+              {music.artist}
+              <br />
+              {music.album}
+              <br />
+              {music.year}
+              <br />
+              {music.genre}
+            </Typography>
+            <a href={music.urlSample} target="_blank" rel="noreferrer">Ecouter un extrait</a>
+          </CardContent>
+          <Button
+            onClick={handleSubmit}
+            className="button-green"
+          >
+            Ajouter
+          </Button>
+        </div>
+      </Card>
+    </div>
+  );
+};
 
-CardAbout.propTypes = {
-  dev: PropTypes.shape({
-    firstname: PropTypes.string.isRequired,
-    lastname: PropTypes.string.isRequired,
-    url_picture: PropTypes.string.isRequired,
-    roles: PropTypes.arrayOf(PropTypes.string).isRequired,
-    githubLink: PropTypes.string,
-    linkedinLink: PropTypes.string,
+CardResultsMusic.propTypes = {
+  music: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    artist: PropTypes.string,
+    year: PropTypes.number,
+    album: PropTypes.string,
+    urlImage: PropTypes.string.isRequired,
+    apiId: PropTypes.number.isRequired,
+    urlSample: PropTypes.string,
+    genre: PropTypes.string,
   }).isRequired,
 };
 
-CardAbout.defaultPropTypes = {
-  githubLink: '',
-  linkedinLink: '',
+CardResultsMusic.defaultPropTypes = {
+  music: {
+    artist: 'Artiste non trouvé',
+    year: 'Année non trouvé',
+    album: 'Album non trouvé',
+    urlSample: 'Extrait non trouvé',
+    genre: 'Genre non trouvé',
+  },
 };
 
-export default CardAbout;
+export default CardResultsMusic;

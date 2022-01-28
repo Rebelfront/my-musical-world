@@ -15,7 +15,5 @@ export const submitAddMusic = (search) => ({
 
 export const saveResultsMusic = (results) => ({
   type: SAVE_RESULTS_MUSIC,
-  payload: {
-    results,
-  },
+  payload: results,
 });

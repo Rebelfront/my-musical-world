@@ -5,7 +5,7 @@ const initialState = {
   modalOpened: false,
   searchMusic: '',
   typeMusic: 1, // 1 - Titre, 2 - Album, 3 - Artiste
-  resultsMusic: '',
+  resultsMusic: [],
 };
 
 const addMusic = (state = initialState, action = {}) => {
@@ -15,6 +15,7 @@ const addMusic = (state = initialState, action = {}) => {
         ...state,
         modalOpened: !state.modalOpened,
         searchMusic: '',
+        resultsMusic: [],
       };
     case CHANGE_INPUT:
       return {
@@ -25,7 +26,7 @@ const addMusic = (state = initialState, action = {}) => {
       return {
         ...state,
         searchMusic: '',
-        resultsMusic: action.payload.results,
+        resultsMusic: action.payload,
       };
     default:
       return state;

@@ -20,7 +20,9 @@ import CardResultsMusic from 'src/components/AddMusicModal/CardResultsMusic';
 
 const AddMusicModal = () => {
   const dispatch = useDispatch();
-  const { modalOpened, searchMusic, typeMusic } = useSelector((state) => state.addMusic);
+  const {
+    modalOpened, searchMusic, typeMusic, resultsMusic,
+  } = useSelector((state) => state.addMusic);
 
   const handleClose = () => {
     const action = toggleAddMusicModal();
@@ -80,9 +82,7 @@ const AddMusicModal = () => {
             </FormControl>
             <DialogActions>
               <Button
-                onClick={() => {
-                  handleSubmit();
-                }}
+                onClick={handleSubmit}
                 className="button-green"
               >
                 Rechercher
@@ -102,16 +102,16 @@ const AddMusicModal = () => {
         >
           <CloseIcon />
         </IconButton>
-        {/* <div className="about__cards">
+        <div className="result__cards">
           {
-            devs.map((dev) => (
+            resultsMusic.map((music) => (
               <CardResultsMusic
-                key={dev.lastname}
-                dev={dev}
+                key={music.apiId}
+                music={music}
               />
             ))
           }
-        </div> */}
+        </div>
       </Dialog>
     </div>
   );
