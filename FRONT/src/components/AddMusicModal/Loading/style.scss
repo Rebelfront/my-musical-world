@@ -1,4 +1,32 @@
 @import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+@import 'src/styles/abstracts/functions';
+
+.loading {
+  margin: 20px auto;
+  transform: translate(0%, 0%);
+  color: $blue;
+  animation: fade .75s infinite alternate;
+  &::after {
+    content: "";
+    height: 30%;
+    width: 100%;
+    background-color: $blue;
+    opacity: .3;
+    position: absolute;
+    top: 70%;
+    left: 0;
+    animation: load 1.5s infinite;
+  }
+
+  @include mq-mobile {
+    font-size: rem(20px);
+  }
+
+  @include mq-desktop {
+    font-size: rem(32px);
+  }
+}
 
 @keyframes fade {
   0% {
@@ -24,25 +52,5 @@
   100% {
     transform: scaleX(0);
     transform-origin: 100% 0;
-  }
-}
-
-.loading {
-  margin: 10px auto;
-  transform: translate(0%, 0%);
-  color: $blue;
-  font-size: 2em;
-  animation: fade .75s infinite alternate;
-
-  &::after {
-    content: "";
-    height: 30%;
-    width: 100%;
-    background-color: $blue;
-    opacity: .3;
-    position: absolute;
-    top: 70%;
-    left: 0;
-    animation: load 1.5s infinite;
   }
 }

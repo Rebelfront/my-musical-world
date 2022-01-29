@@ -42,8 +42,8 @@ const AddMusicModal = () => {
 
   return (
     <div className="addmusic">
-      <Dialog open={modalOpened} onClose={handleClose}>
-        <DialogTitle>Ajouter un titre / album / artiste</DialogTitle>
+      <Dialog className="addmusic__modal" open={modalOpened} onClose={handleClose}>
+        <DialogTitle className="addmusic__title">Ajouter un titre / album / artiste</DialogTitle>
         <DialogContent className="addmusic__search">
           <Box
             component="form"
@@ -56,6 +56,7 @@ const AddMusicModal = () => {
             autoComplete="off"
           >
             <TextField
+              className="search__input"
               autoFocus
               margin="dense"
               name="searchMusic"
@@ -68,30 +69,31 @@ const AddMusicModal = () => {
               value={searchMusic}
               onChange={handleChangeInput}
             />
-
-            <FormControl sx={{ m: 1, width: 100 }}>
-              <InputLabel id="demo-simple-select-label">Type</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                label="Type"
-                name="typeMusic"
-                id="demo-simple-select"
-                value={typeMusic}
-                onChange={handleChangeInput}
-              >
-                <MenuItem value={1}>Titre</MenuItem>
-                <MenuItem value={2}>Album</MenuItem>
-                <MenuItem value={3}>Artiste</MenuItem>
-              </Select>
-            </FormControl>
-            <DialogActions>
-              <Button
-                onClick={handleSubmit}
-                className="button-green"
-              >
-                Rechercher
-              </Button>
-            </DialogActions>
+            <div className="search__wrapper">
+              <FormControl className="search__type" sx={{ m: 1, width: 100 }}>
+                <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  label="Type"
+                  name="typeMusic"
+                  id="demo-simple-select"
+                  value={typeMusic}
+                  onChange={handleChangeInput}
+                >
+                  <MenuItem value={1}>Titre</MenuItem>
+                  <MenuItem value={2}>Album</MenuItem>
+                  <MenuItem value={3}>Artiste</MenuItem>
+                </Select>
+              </FormControl>
+              <DialogActions>
+                <Button
+                  onClick={handleSubmit}
+                  className="button-green"
+                >
+                  Rechercher
+                </Button>
+              </DialogActions>
+            </div>
           </Box>
         </DialogContent>
         <IconButton

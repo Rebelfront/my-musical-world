@@ -1,3 +1,112 @@
+@import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+@import 'src/styles/abstracts/functions';
+
 .result__card {
   display: flex;
+
+  @include mq-mobile {
+    padding: 10px;
+    height: 110px;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.result__card .card__image.card__image {
+
+  @include mq-mobile {
+    width: 70px;
+    height: 70px;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.result__card .card__wrapper {
+
+  @include mq-mobile {
+    position: relative;
+    width: 100%;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.result__card .card__content {
+
+  @include mq-mobile {
+    // display: flex;
+    // flex-direction: column;
+    padding: 0;
+    text-align: center;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.result__card .content__title {
+
+  @include mq-mobile {
+    font-size: rem(18px);
+    margin: 0;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.result__card .content__infos p {
+
+  @include mq-mobile {
+    font-size: rem(12px);
+    margin: 0;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.result__card .content__button {
+  background-color: $blue;
+  color: #ffffff;
+  text-transform: initial;
+  text-decoration: none;
+  margin-top: 5px;
+  padding: 0 5px;
+
+  @include mq-mobile {
+    
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.result__card .content__button:hover {
+  background-color: darken($color: $blue, $amount: 10);
+}
+
+.result__card .card__button.card__button {
+
+  @include mq-mobile {
+    position: absolute;
+    top: 75px;
+    left: -66px;
+  }
+
+  @include mq-desktop {
+    
+  }
 }

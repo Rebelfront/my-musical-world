@@ -35,26 +35,25 @@ const CardResultsMusic = ({ music }) => {
               {music.name}
             </Typography>
             <Typography className="content__infos" component="div" variant="body2" color="text.secondary">
-              <p>{music.artist}</p>
               <p>{music.album}</p>
-              <p>{music.year}</p>
-              <p>{music.genre}</p>
+              <p>{music.artist}</p>
+              <p>{music.year} / {music.genre}</p>
             </Typography>
             {/* typeMusic: 1 - Titre, 2 - Album, 3 - Artiste */}
             {(typeMusic === 1) && (
-              <button
-                type="button"
+              <Button
+                className="content__button"
                 onClick={() => {
                   window.open(music.urlSample, music.name, `width=300,height=100,left=${(window.innerWidth / 2) - 150},top=${(window.innerHeight / 2)}`);
                 }}
               >Ecouter un extrait
-              </button>
+              </Button>
             )}
           </CardContent>
           <Button
             id={music.apiId}
             onClick={handleSubmit}
-            className="button-green"
+            className="card__button button-green"
           >
             Ajouter
           </Button>
