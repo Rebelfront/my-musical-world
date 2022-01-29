@@ -1,6 +1,6 @@
 import './style.scss';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { submitAddMusic } from 'src/actions/addMusic';
 
 import PropTypes from 'prop-types';
@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 
 const CardResultsMusic = ({ music }) => {
   const dispatch = useDispatch();
+  const { typeMusic } = useSelector((state) => state.addMusic);
   const handleSubmit = (event) => {
     const action = submitAddMusic(Number(event.target.id));
     dispatch(action);
@@ -34,21 +35,23 @@ const CardResultsMusic = ({ music }) => {
               {music.name}
             </Typography>
             <Typography className="content__infos" component="div" variant="body2" color="text.secondary">
-              {music.artist}
-              <br />
-              {music.album}
-              <br />
-              {music.year}
-              <br />
-              {music.genre}
+              <p>{music.artist}</p>
+              {/* typeMusic: 1 - Titre, 2 - Album, 3 - Artiste */}
+              {(typeMusic === 1) && (
+                <p>{music.album}</p>
+              )}
+              <p>{music.year}</p>
+              <p>{music.genre}</p>
             </Typography>
-            <button
-              type="button"
-              onClick={() => {
-                window.open(music.urlSample, music.name, `width=300,height=100,left=${(window.innerWidth / 2) - 150},top=${(window.innerHeight / 2)}`);
-              }}
-            >Ecouter un extrait
-            </button>
+            {(typeMusic === 1) && (
+              <button
+                type="button"
+                onClick={() => {
+                  window.open(music.urlSample, music.name, `width=300,height=100,left=${(window.innerWidth / 2) - 150},top=${(window.innerHeight / 2)}`);
+                }}
+              >Ecouter un extrait
+              </button>
+            )}
           </CardContent>
           <Button
             id={music.apiId}

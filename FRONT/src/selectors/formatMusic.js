@@ -35,3 +35,24 @@ export const formatTracks = async (tracks) => {
 
   return tracksFormated;
 };
+
+export const formatAlbums = async (albums) => {
+  const albumsFormated = await Promise.all(albums.map(async (album) => {
+    const albumId = album.id;
+    const albumFormated = {};
+
+    await axios.get(`${corsReverseProxy}/${deezerAPIUrl}/album/${albumId}`)
+      .then((res) => {
+        albumFormated.name = res.data.title;
+        albumFormated.artist = res.data.artist.name;
+        albumFormated.year = Number(res.data.release_date.substring(0, 4));
+        albumFormated.urlImage = res.data.cover;
+        albumFormated.apiId = res.data.id;
+        albumFormated.genre = res.data.genres.data[0].name;
+      })
+      .catch((err) => console.log(err));
+    return albumFormated;
+  }));
+
+  return albumsFormated;
+};

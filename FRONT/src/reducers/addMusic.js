@@ -4,7 +4,7 @@ import { CHANGE_INPUT } from '../actions';
 const initialState = {
   modalOpened: false,
   loading: false,
-  searchMusic: 'shallow',
+  searchMusic: '',
   typeMusic: 1, // 1 - Titre, 2 - Album, 3 - Artiste
   resultsMusic: [],
 };

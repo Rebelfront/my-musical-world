@@ -2,7 +2,7 @@ import axios from 'axios';
 import { SUBMIT_SEARCH_MUSIC, saveResultsMusic, SUBMIT_ADD_MUSIC } from 'src/actions/addMusic';
 
 import { selectTypeMusic } from 'src/selectors/selectTypeMusic';
-import { formatTracks } from 'src/selectors/formatMusic';
+import { formatTracks, formatAlbums } from 'src/selectors/formatMusic';
 import { findOneResultMusic } from 'src/selectors/findOneResultMusic';
 
 const addMusicMW = (store) => (next) => (action) => {
@@ -22,7 +22,20 @@ const addMusicMW = (store) => (next) => (action) => {
         url: `${corsReverseProxy}/${deezerAPIUrl}/search/${typeMusicString}?q=${searchMusic}&limit=4`,
       })
         .then(async (res) => {
-          const resultsMusicFormated = await formatTracks(res.data.data);
+          let resultsMusicFormated;
+          switch (typeMusicString) {
+            case 'track':
+              resultsMusicFormated = await formatTracks(res.data.data);
+              break;
+            case 'album':
+              resultsMusicFormated = await formatAlbums(res.data.data);
+              break;
+            // case 'artist':
+            //   resultsMusicFormated = await formatArtist(res.data.data);
+            //   break;
+            default:
+              break;
+          }
           const actionSaveResultsMusic = saveResultsMusic(resultsMusicFormated);
           store.dispatch(actionSaveResultsMusic);
         })
