@@ -28,6 +28,7 @@ const addMusicMW = (store) => (next) => (action) => {
         })
         .catch((err) => console.log(err));
     }
+      next(action);
       break;
     case SUBMIT_ADD_MUSIC: {
       const { addMusic: { resultsMusic, typeMusic } } = store.getState();

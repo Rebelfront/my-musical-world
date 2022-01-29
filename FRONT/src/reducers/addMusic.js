@@ -1,9 +1,10 @@
-import { TOGGLE_ADD_MUSIC_MODAL, SAVE_RESULTS_MUSIC } from '../actions/addMusic';
+import { TOGGLE_ADD_MUSIC_MODAL, SAVE_RESULTS_MUSIC, SUBMIT_SEARCH_MUSIC } from '../actions/addMusic';
 import { CHANGE_INPUT } from '../actions';
 
 const initialState = {
   modalOpened: false,
-  searchMusic: '',
+  loading: false,
+  searchMusic: 'shallow',
   typeMusic: 1, // 1 - Titre, 2 - Album, 3 - Artiste
   resultsMusic: [],
 };
@@ -22,11 +23,17 @@ const addMusic = (state = initialState, action = {}) => {
         ...state,
         [action.payload.name]: action.payload.value,
       };
+    case SUBMIT_SEARCH_MUSIC:
+      return {
+        ...state,
+        loading: true,
+      };
     case SAVE_RESULTS_MUSIC:
       return {
         ...state,
         searchMusic: '',
         resultsMusic: action.payload,
+        loading: false,
       };
     default:
       return state;

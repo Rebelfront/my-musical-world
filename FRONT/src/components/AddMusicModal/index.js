@@ -19,11 +19,12 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 import CardResultsMusic from 'src/components/AddMusicModal/CardResultsMusic';
+import Loading from 'src/components/AddMusicModal/Loading';
 
 const AddMusicModal = () => {
   const dispatch = useDispatch();
   const {
-    modalOpened, searchMusic, typeMusic, resultsMusic,
+    modalOpened, loading, searchMusic, typeMusic, resultsMusic,
   } = useSelector((state) => state.addMusic);
 
   const handleClose = () => {
@@ -106,14 +107,16 @@ const AddMusicModal = () => {
           <CloseIcon />
         </IconButton>
         <div className="result__cards">
-          {
+          {loading ? (
+            <Loading />
+          ) : (
             resultsMusic.map((music) => (
               <CardResultsMusic
                 key={music.apiId}
                 music={music}
               />
             ))
-          }
+          )}
         </div>
       </Dialog>
     </div>
