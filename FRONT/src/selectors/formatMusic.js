@@ -32,7 +32,6 @@ export const formatTracks = async (tracks) => {
       .catch((err) => console.log(err));
     return trackFormated;
   }));
-
   return tracksFormated;
 };
 
@@ -53,6 +52,17 @@ export const formatAlbums = async (albums) => {
       .catch((err) => console.log(err));
     return albumFormated;
   }));
-
   return albumsFormated;
+};
+
+export const formatArtists = (artists) => {
+  const artistsFormated = artists.map((artist) => {
+    const artistFormated = {
+      name: artist.name,
+      urlImage: artist.picture,
+      apiId: artist.id,
+    };
+    return artistFormated;
+  });
+  return artistsFormated;
 };

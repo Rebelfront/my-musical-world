@@ -36,13 +36,11 @@ const CardResultsMusic = ({ music }) => {
             </Typography>
             <Typography className="content__infos" component="div" variant="body2" color="text.secondary">
               <p>{music.artist}</p>
-              {/* typeMusic: 1 - Titre, 2 - Album, 3 - Artiste */}
-              {(typeMusic === 1) && (
-                <p>{music.album}</p>
-              )}
+              <p>{music.album}</p>
               <p>{music.year}</p>
               <p>{music.genre}</p>
             </Typography>
+            {/* typeMusic: 1 - Titre, 2 - Album, 3 - Artiste */}
             {(typeMusic === 1) && (
               <button
                 type="button"

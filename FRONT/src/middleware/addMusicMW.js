@@ -2,7 +2,7 @@ import axios from 'axios';
 import { SUBMIT_SEARCH_MUSIC, saveResultsMusic, SUBMIT_ADD_MUSIC } from 'src/actions/addMusic';
 
 import { selectTypeMusic } from 'src/selectors/selectTypeMusic';
-import { formatTracks, formatAlbums } from 'src/selectors/formatMusic';
+import { formatTracks, formatAlbums, formatArtists } from 'src/selectors/formatMusic';
 import { findOneResultMusic } from 'src/selectors/findOneResultMusic';
 
 const addMusicMW = (store) => (next) => (action) => {
@@ -30,9 +30,9 @@ const addMusicMW = (store) => (next) => (action) => {
             case 'album':
               resultsMusicFormated = await formatAlbums(res.data.data);
               break;
-            // case 'artist':
-            //   resultsMusicFormated = await formatArtist(res.data.data);
-            //   break;
+            case 'artist':
+              resultsMusicFormated = formatArtists(res.data.data);
+              break;
             default:
               break;
           }
