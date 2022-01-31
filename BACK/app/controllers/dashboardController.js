@@ -1,6 +1,8 @@
 const Artist = require('../models/artist');
 const Album = require('../models/album');
 const Track = require('../models/track');
+const User = require('../models/user');
+const Music = require('../models/music');
 
 // const CoreModel = require('../models/coreModels'); 
 
@@ -60,18 +62,29 @@ module.exports = {
     getUserItems: async (request, response) => {
         
         try {
+            if (request.userId){
             const id = request.userId;
             const user = await User.findOne(id);
-        
+            console.log(user); 
+            const music  = await Music.getMusic(user.pseudo);    
+            response.json(music);
 
+            } else {
+                const pseudo = request.params.pseudo;
+                const music  = await Music.getMusic(pseudo);    
+                response.json(music);
+
+                    }
             
-            response.json(user);
+            
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);
         }
 
     },
+
+    
 
 
     getAllItems: async (_, response) => {
