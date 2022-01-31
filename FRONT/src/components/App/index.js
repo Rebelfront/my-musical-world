@@ -10,6 +10,7 @@ import Homepage from 'src/components/Homepage';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from 'src/actions/user';
+import Dashboard from '../Dashboard';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,15 +22,18 @@ const App = () => {
 
   return (
     <div className="app">
+      <div className="app__main">
       <Header />
       <Routes>
         <Route
           path="/"
           element={<Homepage />}
         />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="/legal" element={<Legal />} />
       </Routes>
+      </div>
       <Footer />
     </div>
   );
