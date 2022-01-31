@@ -9,6 +9,7 @@ import Footer from 'src/components/Footer';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { checkUser } from 'src/actions/user';
+import Dashboard from '../Dashboard';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,19 +21,20 @@ const App = () => {
 
   return (
     <div className="app">
+      <div className="app__main">
       <Header />
       <Routes>
         <Route
           path="/"
           element={(
-            <div className="app__main">
-              <p>Lorem</p>
-            </div>
+            <p>Lorem</p>
           )}
         />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="/legal" element={<Legal />} />
       </Routes>
+      </div>
       <Footer />
     </div>
   );
