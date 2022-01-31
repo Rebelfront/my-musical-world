@@ -2,6 +2,9 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Button, CardActions } from '@mui/material';
+import { useDispatch } from 'react-redux';
 
 const DashboardCard = ({
   name,
@@ -10,8 +13,17 @@ const DashboardCard = ({
   year,
   urlImage,
   type,
-  album
+  album,
+  apiId,
 }) => {
+
+  const dispatch = useDispatch();
+
+  const handleCardDelete = (apiId) => {
+    const action = deleteDashboardItem(apiId);
+    dispatch(action);
+  };
+
   return (
     <Card sx={{ mb: '20px' }}>
       <CardMedia
@@ -39,6 +51,14 @@ const DashboardCard = ({
           </Typography>
         )}
       </CardContent>
+      <CardActions>
+        <Button onClick={() => {
+          handleCardDelete(apiId);
+        }} 
+        size="small">
+          <DeleteIcon />
+        </Button>
+      </CardActions>
     </Card>
   );
 };
