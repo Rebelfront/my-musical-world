@@ -11,6 +11,9 @@ import { toggleAddMusicModal } from 'src/actions/addMusic';
 
 import DashboardCard from 'src/components/Dashboard/DashboardCard';
 import AddMusicModal from 'src/components/AddMusicModal';
+import SharingModal from 'src/components/Dashboard/SharingModal';
+
+import { toggleSharingModal } from 'src/actions/dashboard';
 
 import './style.scss';
 
@@ -22,6 +25,11 @@ const Dashboard = () => {
     dispatch(action);
   };
 
+  const handleToggleSharingModal = () => {
+    const action = toggleSharingModal();
+    dispatch(action);
+  };
+
   return (
     <div className="dashboard">
       <aside className="dashboard__menu">
@@ -30,7 +38,7 @@ const Dashboard = () => {
           <span>+</span>
           <MusicNoteIcon sx={{ color: '#ffffff' }} fontSize="large" />
         </button>
-        <button className="dashboard__share" type="button">
+        <button className="dashboard__share" type="button" onClick={handleToggleSharingModal}>
           <ShareIcon />
         </button>
       </aside>
@@ -59,6 +67,7 @@ const Dashboard = () => {
         </Container>
       </main>
       <AddMusicModal />
+      <SharingModal />
     </div>
   );
 };
