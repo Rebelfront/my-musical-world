@@ -19,8 +19,8 @@ const DashboardCard = ({
 
   const dispatch = useDispatch();
 
-  const handleCardDelete = (apiId) => {
-    const action = deleteDashboardItem(apiId);
+  const handleCardDelete = (apiId, type) => {
+    const action = deleteDashboardItem(apiId, type);
     dispatch(action);
   };
 
@@ -53,7 +53,7 @@ const DashboardCard = ({
       </CardContent>
       <CardActions>
         <Button onClick={() => {
-          handleCardDelete(apiId);
+          handleCardDelete(apiId, type);
         }} 
         size="small">
           <DeleteIcon />

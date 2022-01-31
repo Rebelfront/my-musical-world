@@ -4,12 +4,13 @@ import { saveDashboardData } from "src/actions/dashboard";
 import { DELETE_DASHBOARD_ITEM } from "src/actions/dashboard";
 
 const dashboardMW = (store) => (next) => (action) => {
+  const rootAPIUrl = process.env.ROOT_API_URL;
   switch (action.type) {
     case GET_DASHBOARD_DATA:
       const token = localStorage.getItem('token');
       axios({
         method: 'post',
-        url: '',
+        url: `${rootAPIUrl}/dashboard/`,
         headers: {
           Authorization: token,
         }
@@ -28,11 +29,11 @@ const dashboardMW = (store) => (next) => (action) => {
       const token = localStorage.getItem('token');
       axios({
         method: 'delete',
-        url: '',
+        url: `${rootAPIUrl}/dashboard/${action.payload.type}`,
         headers: {
           Authorization: token,
         },
-        data: action.payload
+        data: action.payload.apiId
       })
       .then((res) => {
         const action = saveDashboardData(res.data);

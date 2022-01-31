@@ -16,7 +16,10 @@ export const saveDashboardData = (payload) => ({
   payload,
 });
 
-export const deleteDashboardItem = (payload) => ({
+export const deleteDashboardItem = (apiId, type) => ({
   type: DELETE_DASHBOARD_ITEM,
-  payload,
+  payload: {
+    apiId,
+    type,
+  },
 });

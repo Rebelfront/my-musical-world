@@ -78,11 +78,11 @@ const Dashboard = () => {
                   </Box>
                 </Box>
               )}
+              <button onClick={handleToggleSharingModal} className="hidden-desktop" type="button">Partager</button>
             </>
           ) : (
             <p>Pas encore de musique ajoutée</p>
           )}
-          <button onClick={handleToggleSharingModal} className="hidden-desktop" type="button">Partager</button>
           <button onClick={handleOpenAddMusicModal} className="hidden-desktop" type="button">Ajouter</button>
         </Container>
       </main>
