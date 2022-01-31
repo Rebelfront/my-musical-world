@@ -1,4 +1,5 @@
 import { TOGGLE_SHARING_MODAL } from "src/actions/dashboard";
+import { SAVE_DASHBOARD_DATA } from "src/actions/dashboard";
 
 const initialState = {
   artists: [],
@@ -13,6 +14,13 @@ const dashboard = (state = initialState, action = {}) => {
       return {
         ...state,
         sharingModalOpened: !state.sharingModalOpened
+      };
+    case SAVE_DASHBOARD_DATA:
+      return {
+        ...state,
+        artists: action.payload.artists,
+        albums: action.payload.albums,
+        tracks: action.payload.tracks,
       };
     default:
       return state;

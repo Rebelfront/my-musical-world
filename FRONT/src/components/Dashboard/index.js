@@ -16,6 +16,8 @@ import SharingModal from 'src/components/Dashboard/SharingModal';
 import { toggleSharingModal } from 'src/actions/dashboard';
 
 import './style.scss';
+import { useEffect } from 'react';
+import { getDashboardData } from 'src/actions/dashboard';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -29,6 +31,11 @@ const Dashboard = () => {
     const action = toggleSharingModal();
     dispatch(action);
   };
+
+  useEffect(() => {
+    const action = getDashboardData();
+    dispatch(action);
+  }, []);
 
   return (
     <div className="dashboard">
