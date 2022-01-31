@@ -12,7 +12,7 @@ const dashboard = (state = initialState, action = {}) => {
     case TOGGLE_SHARING_MODAL:
       return {
         ...state,
-        sharingModalOpened: !sharingModalOpened
+        sharingModalOpened: !state.sharingModalOpened
       };
     default:
       return state;

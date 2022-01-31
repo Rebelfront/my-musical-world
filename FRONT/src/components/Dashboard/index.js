@@ -62,8 +62,8 @@ const Dashboard = () => {
               {datas.tracks.map((track) => <DashboardCard type="track" key={track.apiId} {...track} />)}
             </Box>
           </Box>
-          <button className="hidden-desktop" type="button">Partager</button>
-          <button className="hidden-desktop" type="button">Ajouter</button>
+          <button onClick={handleToggleSharingModal} className="hidden-desktop" type="button">Partager</button>
+          <button onClick={handleOpenAddMusicModal} className="hidden-desktop" type="button">Ajouter</button>
         </Container>
       </main>
       <AddMusicModal />
