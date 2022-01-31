@@ -6,10 +6,12 @@ import Header from 'src/components/Header';
 import About from 'src/components/About';
 import Legal from 'src/components/Legal';
 import Footer from 'src/components/Footer';
+import Homepage from 'src/components/Homepage';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from 'src/actions/user';
 import SharingModal from '../SharingModal';
+import Dashboard from '../Dashboard';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,20 +23,19 @@ const App = () => {
 
   return (
     <div className="app">
+      <div className="app__main">
       <Header />
       <SharingModal />
       <Routes>
         <Route
           path="/"
-          element={(
-            <div className="app__main">
-              <p>Lorem</p>
-            </div>
-          )}
+          element={<Homepage />}
         />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="/legal" element={<Legal />} />
       </Routes>
+      </div>
       <Footer />
     </div>
   );

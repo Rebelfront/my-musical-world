@@ -91,7 +91,7 @@ const MobileMenu = () => {
                 <Button className="button-green" sx={{ display: 'block', mb: '10px'}} onClick={handleOpenProfileModal}>
                   <ListItemText primary="Mon profil" />
                 </Button>
-                <NavLink to="/">Ma bibliothèque</NavLink>
+                <NavLink to="/dashboard">Ma bibliothèque</NavLink>
                 <Button sx={{ display: 'block', mt: '20px'}} className="button-red" onClick={handleLogout}>
                   <ListItemText primary="Se déconnecter" />
                 </Button>
@@ -114,6 +114,7 @@ const MobileMenu = () => {
         <MenuIcon />
       </Button>
       <Drawer
+        className="hidden-desktop"
         sx={{
           width: '70vw',
           flexShrink: 0,
