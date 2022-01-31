@@ -1,4 +1,4 @@
-const db = require('../database');
+const client = require('../database');
 
 class Track {
 
@@ -8,54 +8,68 @@ class Track {
         }
     }
 
-    static async findAll() {
-        try {
-            const { rows } = await db.query('SELECT * FROM track');
-            return rows.map(row => new Track(row));
-        } catch (error) {
-            if (error.detail) {
-                throw new Error(error.detail);
-            }
-            throw error;
-        }
-    }
+    async addTrack (userId, itemId) {
 
-    static async findOne(id) {
         try {
-            const { rows } = await db.query('SELECT * FROM track WHERE id=$1', [id]);
-            if (rows[0]) {
-                return new Track(rows[0]);
-            }
-            return null;
 
-        } catch (error) {
-            if (error.detail) {
-                throw new Error(error.detail);
-            }
-            throw error;
-        }
-    }
+            const checkTrack = await client.query(`SELECT * FROM TRACK WHERE api_id=$1`, [itemId]);
+            //console.log(checkTrack.rows[0]);
 
-    async save() {
-        try {
-            if (this.id) {
-                await db.query('SELECT * FROM update_track()', [this]);
+            if (checkTrack.rows[0]) {
+                //this.id = checkTrack.rows[0].id;
+                //console.log(checkTrack.rows[0].id);
+                const checkUserLikesTrack = await client.query(`SELECT * FROM USER_LIKES_TRACK WHERE (api_id, user_id)=($1, $2);`, [itemId, userId]);
+
+                if(checkUserLikesTrack.rows[0]) {
+                    console.log('chanson deja likée');
+                    throw new Error('chanson déjà likée');
+                } 
+                                  
             } else {
-                const { rows } = await db.query('SELECT * FROM add_track()', [this])
-                this.id = rows[0].id;
-                return this;
+
+                const { rows } = await client.query(
+                    'INSERT INTO TRACK(name, genre, artist, year, album, url_image, api_id, url_sample) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id', 
+                    [this.name, 
+                        this.genre, 
+                        this.artist, 
+                        this.year, 
+                        this.album, 
+                        this.urlImage, 
+                        itemId, 
+                        this.urlSample]);
+
+                // this.id = rows[0].id;
+                itemId = this.apiId;
+
             }
+
+            // console.log('this', this);
+
+            await client.query('INSERT INTO USER_LIKES_TRACK (api_id, user_id) VALUES ($1, $2)', [itemId, userId]);
+            console.log('Chanson ajoutée à votre bibliotheque')
+            return this;
+
+
         } catch (error) {
+
+            console.log('error du model');
             if (error.detail) {
                 throw new Error(error.detail);
             }
-            throw error;
+            throw new Error(error.message);
         }
+
     }
 
-    async delete() {
+    static async delete(userId, itemId) {
+
         try {
-            await db.query('DELETE FROM track WHERE id=', [this.id]);
+            await client.query('DELETE FROM USER_LIKES_TRACK WHERE (api_id, user_id)=($1, $2)', [itemId, userId]);
+
+            const track = await client.query('SELECT * FROM TRACK WHERE api_id=$1', [itemId]);
+            const trackName = track.rows[0].name;
+            return trackName;
+
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);
@@ -64,5 +78,6 @@ class Track {
         }
     }
 }
+
 
 module.exports = Track;

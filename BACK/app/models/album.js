@@ -1,4 +1,4 @@
-const db = require('../database');
+const client = require('../database');
 
 class Album {
 
@@ -8,54 +8,72 @@ class Album {
         }
     }
 
-    static async findAll() {
-        try {
-            const { rows } = await db.query('SELECT * FROM album');
-            return rows.map(row => new Album(row));
-        } catch (error) {
-            if (error.detail) {
-                throw new Error(error.detail);
-            }
-            throw error;
-        }
-    }
 
-    static async findOne(id) {
-        try {
-            const { rows } = await db.query('SELECT * FROM album WHERE id=$1', [id]);
-            if (rows[0]) {
-                return new Album(rows[0]);
-            }
-            return null;
+    async addAlbum(userId, itemId) {
 
-        } catch (error) {
-            if (error.detail) {
-                throw new Error(error.detail);
-            }
-            throw error;
-        }
-    }
-
-    async save() {
         try {
-            if (this.id) {
-                await db.query('SELECT * FROM update_album()', [this]);
+
+            const checkAlbum = await client.query(`SELECT * FROM ALBUM WHERE api_id=$1`, [itemId]);
+            console.log(checkAlbum.rows[0]);
+
+            if (checkAlbum.rows[0]) {
+                this.id = checkAlbum.rows[0].id;
+                console.log(checkAlbum.rows[0].id);
+                const checkUserLikesAlbum = await client.query(`SELECT * FROM USER_LIKES_ALBUM WHERE (api_id, user_id)=($1, $2);`, [itemId, userId]);
+
+                if(checkUserLikesAlbum.rows[0]) {
+                    console.log('album deja liké');
+                    throw new Error('album déjà liké');
+                } 
+                                  
             } else {
-                const { rows } = await db.query('SELECT * FROM add_album()', [this])
-                this.id = rows[0].id;
-                return this;
+
+                const { rows } = await client.query('INSERT INTO ALBUM(name, genre, artist, year, url_image, api_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', [this.name, this.genre, this.artist, this.year, this.urlImage, itemId]);
+
+                //this.id = rows[0].id;
+                itemId = this.apiId;
+
             }
+
+            // console.log('this', this);
+
+            await client.query('INSERT INTO USER_LIKES_ALBUM (api_id, user_id) VALUES ($1, $2)', [itemId, userId]);
+            console.log('album ajouté à votre bibliotheque')
+            return this;
+
+
         } catch (error) {
+
+            console.log('error du model');
             if (error.detail) {
                 throw new Error(error.detail);
             }
-            throw error;
+            throw new Error(error.message);
         }
+
     }
 
-    async delete() {
+    // static async findAllByUser(id) {
+    //     try {
+    //         const { rows } = await db.query('SELECT tracks, artists, albums FROM userTracksAlbumsArtists WHERE id=$1');
+    //         return rows.map(row => new Track(row));
+    //     } catch (error) {
+    //         if (error.detail) {
+    //             throw new Error(error.detail);
+    //         }
+    //         throw error;
+    //     }
+    // }
+
+    static async delete(userId, itemId) {
+
         try {
-            await db.query('DELETE FROM album WHERE id=$1', [this.id]);
+            await client.query('DELETE FROM USER_LIKES_ALBUM WHERE (api_id, user_id)=($1, $2)', [itemId, userId]);
+
+            const album = await client.query('SELECT * FROM ALBUM WHERE api_id=$1', [itemId]);
+            const albumName = album.rows[0].name;
+            return albumName;
+
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);

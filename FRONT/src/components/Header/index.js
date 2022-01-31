@@ -63,7 +63,7 @@ const Header = () => {
             component="h1"
             sx={{ mr: 2, display: 'flex', fontSize: '1.8rem' }}
           >
-            <Link className="header__brand" to="/">My Musical W<Avatar alt="site logo" src={logo} />rld</Link>
+            <Link className="header__brand" to="/">My Musical World</Link>
           </Typography>
           {!isLogged ? (
             <Box sx={{ ml: 'auto' }}>
@@ -144,7 +144,7 @@ const Header = () => {
                   <ListItemIcon>
                     <AlbumIcon />
                   </ListItemIcon>
-                  Ma bibliothèque
+                  <Link className="decoration-none" to="/dashboard">Ma bibliothèque</Link>
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleUserLogout}>

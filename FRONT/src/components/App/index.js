@@ -7,9 +7,12 @@ import AddMusicModal from 'src/components/AddMusicModal';
 import About from 'src/components/About';
 import Legal from 'src/components/Legal';
 import Footer from 'src/components/Footer';
+import Homepage from 'src/components/Homepage';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from 'src/actions/user';
+import SharingModal from '../SharingModal';
+import Dashboard from '../Dashboard';
 
 import { toggleAddMusicModal } from 'src/actions/addMusic';
 
@@ -25,24 +28,25 @@ const App = () => {
     const action = toggleAddMusicModal();
     dispatch(action);
   };
+  
+  // <button type="button" onClick={handleOpenAddMusicModal}>+ music</button>
+  // <AddMusicModal />
 
   return (
     <div className="app">
+      <div className="app__main">
       <Header />
+      <SharingModal />
       <Routes>
         <Route
           path="/"
-          element={(
-            <div className="app__main">
-              <p>Lorem</p>
-              <button type="button" onClick={handleOpenAddMusicModal}>+ music</button>
-              <AddMusicModal />
-            </div>
-          )}
+          element={<Homepage />}
         />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="/legal" element={<Legal />} />
       </Routes>
+      </div>
       <Footer />
     </div>
   );
