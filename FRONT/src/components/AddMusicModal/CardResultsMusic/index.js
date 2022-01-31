@@ -22,25 +22,32 @@ const CardResultsMusic = ({ music }) => {
   return (
     <div>
       <Card className="result__card">
-        <CardMedia
-          className="card__image"
-          component="img"
-          height="100"
-          image={music.urlImage}
-          alt={`photo de ${music.name}`}
-        />
-        <div className="card__wrapper">
+        <div className="card__left">
+          <CardMedia
+            className="card__image"
+            component="img"
+            height="150"
+            image={music.urlImage}
+            alt={`photo de ${music.name}`}
+          />
+        </div>
+        <div className="card__right">
           <CardContent className="card__content">
             <Typography className="content__title" gutterBottom variant="h5" component="div">
               {music.name}
             </Typography>
-            <Typography className="content__infos" component="div" variant="body2" color="text.secondary">
-              <p>{music.album}</p>
-              <p>{music.artist}</p>
-              <p>{music.year} / {music.genre}</p>
-            </Typography>
-            {/* typeMusic: 1 - Titre, 2 - Album, 3 - Artiste */}
-            {(typeMusic === 1) && (
+            {(typeMusic === 1 || typeMusic === 2) && (
+              <Typography className="content__infos" component="div" variant="body2" color="text.secondary">
+                <p>{music.album}</p>
+                {(typeMusic === 1) && (
+                  <p>{music.artist}</p>
+                )}
+                <p>{music.year} / {music.genre}</p>
+              </Typography>
+            )}
+            <div className="card__buttons">
+              {/* typeMusic: 1 - Titre, 2 - Album, 3 - Artiste */}
+              {(typeMusic === 1) && (
               <Button
                 className="content__button"
                 onClick={() => {
@@ -48,15 +55,16 @@ const CardResultsMusic = ({ music }) => {
                 }}
               >Ecouter un extrait
               </Button>
-            )}
+              )}
+              <Button
+                id={music.apiId}
+                onClick={handleSubmit}
+                className="button-green"
+              >
+                Ajouter
+              </Button>
+            </div>
           </CardContent>
-          <Button
-            id={music.apiId}
-            onClick={handleSubmit}
-            className="card__button button-green"
-          >
-            Ajouter
-          </Button>
         </div>
       </Card>
     </div>

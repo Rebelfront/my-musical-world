@@ -6,13 +6,14 @@
 
 .addmusic__modal .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   width: 100%;
+  margin: 15px;
 }
 
 .addmusic__search.addmusic__search {
   overflow-y: unset;
 
   @include mq-mobile {
-    padding-bottom: 10px;
+
   }
 
   @include mq-desktop {
@@ -79,15 +80,21 @@
   }
 }
 
+.result__loading {
+  background-color: $grey;
+  padding: 10px;
+  display: flex;
+}
+
 .result__cards {
   display: flex;
   flex-wrap: wrap;
   background-color: $grey;
+  padding: 10px;
 
   @include mq-mobile {
    flex-direction: column;
    gap: 10px;
-   padding: 10px;
   }
 
   @include mq-desktop {
