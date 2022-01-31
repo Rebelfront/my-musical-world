@@ -20,8 +20,8 @@ router.get('/user', authentification, userController.getUserInfos);
 router.patch('/user',authentification, validateBody(userSchema), userController.updateUser);
 router.delete('/user',authentification, userController.deleteUser);
 
-// router.get('/dashboard/:pseudo', dashboardController.getAllItems);
-// router.get('/dashboard', authentification, dashboardController.getAllItems);
+router.get('/dashboard/:pseudo', dashboardController.getUserItems);
+router.get('/dashboard', authentification, dashboardController.getUserItems);
 router.post('/dashboard/:type',authentification, dashboardController.addOneItem);
 router.delete('/dashboard/:type', authentification, dashboardController.deleteOneItem);
 
