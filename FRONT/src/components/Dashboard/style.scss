@@ -18,6 +18,10 @@
     width: 200px;
     background-color: #ffffff;
     padding-top: 20px;
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -26,7 +30,6 @@
     font-size: rem(17);
     text-align: center;
     text-decoration: underline;
-    position: sticky;
     top: 10%;
   }
 }
@@ -41,17 +44,19 @@
   height: 55px;
   width: 55px;
   color: #ffffff;
-
-  @include mq-desktop {
-    position: sticky;
-    top: 50%;
-    transform: translateX(70px);
-  }
 }
 
 .dashboard__add-btn:hover {
   background-color: darken($color: $blue, $amount: 10);
   cursor: pointer;
+}
+
+.dashboard__share {
+  @include mq-desktop {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
 }
 
 .dashboard__content {

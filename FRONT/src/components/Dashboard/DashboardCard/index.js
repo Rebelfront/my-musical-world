@@ -13,7 +13,7 @@ const DashboardCard = ({
   album
 }) => {
   return (
-    <Card sx={{ maxWidth: 200, mb: '20px' }}>
+    <Card sx={{ mb: '20px' }}>
       <CardMedia
         component="img"
         alt={name}
