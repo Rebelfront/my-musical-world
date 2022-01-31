@@ -3,6 +3,7 @@ import './style.scss';
 import { Routes, Route } from 'react-router-dom';
 
 import Header from 'src/components/Header';
+import AddMusicModal from 'src/components/AddMusicModal';
 import About from 'src/components/About';
 import Legal from 'src/components/Legal';
 import Footer from 'src/components/Footer';
@@ -13,6 +14,8 @@ import { checkUser } from 'src/actions/user';
 import SharingModal from '../SharingModal';
 import Dashboard from '../Dashboard';
 
+import { toggleAddMusicModal } from 'src/actions/addMusic';
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -20,6 +23,14 @@ const App = () => {
     const action = checkUser();
     dispatch(action);
   }, []);
+
+  const handleOpenAddMusicModal = () => {
+    const action = toggleAddMusicModal();
+    dispatch(action);
+  };
+  
+  // <button type="button" onClick={handleOpenAddMusicModal}>+ music</button>
+  // <AddMusicModal />
 
   return (
     <div className="app">

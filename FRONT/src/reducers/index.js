@@ -4,10 +4,12 @@ import login from './login';
 import signup from './signup';
 import user from './user';
 import header from './header';
+import addMusic from './addMusic';
 
 export default combineReducers({
   login,
   signup,
   user,
   header,
+  addMusic,
 });

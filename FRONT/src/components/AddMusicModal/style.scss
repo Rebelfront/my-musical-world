@@ -1,0 +1,97 @@
+@import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+@import 'src/styles/abstracts/functions';
+
+// box-sizing: border-box;
+
+.addmusic__modal .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  width: 100%;
+}
+
+.addmusic__search.addmusic__search {
+  overflow-y: unset;
+
+  @include mq-mobile {
+    padding-bottom: 10px;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.addmusic__title.addmusic__title {
+
+  @include mq-mobile {
+    padding-bottom: 0;
+    font-size: rem(16px);
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.addmusic__search .css-13r4j3i {
+  display: flex;
+
+  @include mq-mobile {
+    flex-direction: column;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.search__input {
+  @include mq-mobile {
+    width: calc(100% - 15px) !important;
+    margin-bottom: 20px !important;
+  }
+
+  @include mq-desktop {
+    width: 100% !important;
+  }
+}
+
+.search__wrapper {
+  display: flex;
+
+  @include mq-mobile {
+    justify-content: space-around;
+  }
+
+  @include mq-desktop {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+}
+
+.search__type.search__type {
+  @include mq-mobile {
+    width: calc(45%);
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.result__cards {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: $grey;
+
+  @include mq-mobile {
+   flex-direction: column;
+   gap: 10px;
+   padding: 10px;
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
