@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import datas from 'src/datas/dashboard.json';
-
 import Container from '@mui/material/Container';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import ShareIcon from '@mui/icons-material/Share';
@@ -13,11 +11,10 @@ import DashboardCard from 'src/components/Dashboard/DashboardCard';
 import AddMusicModal from 'src/components/AddMusicModal';
 import SharingModal from 'src/components/Dashboard/SharingModal';
 
-import { toggleSharingModal } from 'src/actions/dashboard';
+import { toggleSharingModal, getDashboardData } from 'src/actions/dashboard';
 
 import './style.scss';
 import { useEffect } from 'react';
-import { getDashboardData } from 'src/actions/dashboard';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
