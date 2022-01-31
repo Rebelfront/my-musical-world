@@ -1,5 +1,5 @@
 @host=http://localhost:3200
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo1MywiaWF0IjoxNjQzMjAzNzQ2LCJleHAiOjE2NDMyMjUzNDZ9.WRbssLFUDCc0CRDLw30z7oTQqWbhOKowSJ0IQ_OCh64
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo2MSwiaWF0IjoxNjQzMjk4OTU4LCJleHAiOjE2NDMzMjA1NTh9.FvOD6n6o06apkxB8G59fEDNcnWM0PQI5pNZ5qe1OJ5E
 
 ### récupérer 1 User
 GET {{host}}/user
