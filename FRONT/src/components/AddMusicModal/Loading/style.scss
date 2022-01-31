@@ -20,11 +20,11 @@
   }
 
   @include mq-mobile {
-    font-size: rem(20px);
+    font-size: rem(20);
   }
 
   @include mq-desktop {
-    font-size: rem(32px);
+    font-size: rem(32);
   }
 }
 

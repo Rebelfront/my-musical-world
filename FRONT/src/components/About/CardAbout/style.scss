@@ -60,24 +60,24 @@
 
 .about__card .content__title {
   @include mq-mobile {
-    font-size: rem(20px) !important;
+    font-size: rem(20) !important;
     margin: 0 !important;
   }
 
   @include mq-desktop {
-    font-size: rem(22px) !important;
+    font-size: rem(22) !important;
     font-weight: bold !important;
   }
 }
 
 .about__card .content__role p {
   @include mq-mobile {
-    font-size: rem(16px);
+    font-size: rem(16);
     margin: 0;
   }
 
   @include mq-desktop {
-    font-size: rem(18px);
+    font-size: rem(18);
   }
 }
 

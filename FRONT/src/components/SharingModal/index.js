@@ -15,7 +15,7 @@ const SharingModal = () => {
   const location = window.location.href;
   const { pseudo } = useSelector((state) => state.user);
   const [isCopied, setIsCopied] = useState(false);
-  const [isOpened, setIsOpened] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
 
   const url = `${location}shared-space/${pseudo}`;
   const handleClose = () => {
@@ -24,9 +24,8 @@ const SharingModal = () => {
   async function copyTextToClipboard(text) {
     if ('clipboard' in navigator) {
       return await navigator.clipboard.writeText(text);
-    } else {
-      return document.execCommand('copy', true, text);
     }
+    return document.execCommand('copy', true, text);
   }
   const handleCopyClick = () => {
     copyTextToClipboard(url)
@@ -39,8 +38,8 @@ const SharingModal = () => {
       .catch((err) => {
         console.log(err);
       });
-  }
- 
+  };
+
   return (
     <div>
       <Dialog open={isOpened} onClose={handleClose}>
