@@ -10,6 +10,7 @@ import Homepage from 'src/components/Homepage';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from 'src/actions/user';
+import SharingModal from '../SharingModal';
 import Dashboard from '../Dashboard';
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
     <div className="app">
       <div className="app__main">
       <Header />
+      <SharingModal />
       <Routes>
         <Route
           path="/"
