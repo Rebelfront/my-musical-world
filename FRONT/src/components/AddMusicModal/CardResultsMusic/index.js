@@ -74,7 +74,7 @@ CardResultsMusic.propTypes = {
   music: PropTypes.shape({
     name: PropTypes.string.isRequired,
     artist: PropTypes.string,
-    year: PropTypes.number,
+    year: PropTypes.number || PropTypes.string,
     album: PropTypes.string,
     urlImage: PropTypes.string.isRequired,
     apiId: PropTypes.number.isRequired,

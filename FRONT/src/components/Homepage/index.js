@@ -27,6 +27,7 @@ const Homepage = () => {
         {!isLogged && (
         <DialogActions>
             <Button
+                sx={{ mb: '60px' }}
                 onClick={() => {
                 handleSignupOpen();
                 }}
