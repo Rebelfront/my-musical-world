@@ -1,3 +1,5 @@
+import './style.scss';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 
@@ -13,7 +15,7 @@ import Box from '@mui/material/Box';
 import { toggleSharingModal } from 'src/actions/dashboard';
 
 const SharingModal = () => {
-  const location = window.location.href;
+  const location = window.location.href.replace('dashboard', '');
 
   const { pseudo } = useSelector((state) => state.user);
   const { sharingModalOpened } = useSelector((state) => state.dashboard);
@@ -48,8 +50,8 @@ const SharingModal = () => {
   };
 
   return (
-    <Dialog open={sharingModalOpened} onClose={handleModalClose}>
-      <DialogTitle sx={{ padding: '30px' }}>Partager ma bibliothèque musicale</DialogTitle>
+    <Dialog className="sharing-modal" open={sharingModalOpened} onClose={handleModalClose}>
+      <DialogTitle className="sharing-modal__title">Partager ma bibliothèque musicale</DialogTitle>
       <DialogContent>
         <Box
           component="form"
@@ -60,7 +62,7 @@ const SharingModal = () => {
           autoComplete="off"
         >
           <TextField
-            autoFocus
+            className="sharing-modal__input"
             margin="dense"
             name="url"
             id="url"
