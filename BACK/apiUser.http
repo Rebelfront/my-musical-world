@@ -24,11 +24,11 @@ POST {{host}}/login
 Content-Type: application/json
 
 {
-        "mail": "zigg@gmail.com",
+        "mail": "valentin.deschins@gmail.com",
         "lastname": "",
         "firstname": "",
         "pseudo": "",
-        "password": "ziggy"
+        "password": "Valentin"
     }
 
 ### update user

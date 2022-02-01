@@ -2,8 +2,27 @@ const { response } = require('express');
 const client = require('../database.js');
 const bcrypt = require('bcrypt');
 
+/**
+ * An entity representing a user of the website
+ * @typedef {Object} User
+ * @property {Number} id
+ * @property {String} mail
+ * @property {String} lastname
+ * @property {String} firstname
+ * @property {String} pseudo
+ * @property {String} password
+ */
 
+/**
+ * A model representing a user of the website
+ * @class User
+ */
 class User {
+
+     /**
+     * The User constructor
+     * @param {Object} obj a litteral object with properties copied into the instance
+     */
 
     constructor(obj = {}) {
         for (const propName in obj) {
@@ -11,9 +30,11 @@ class User {
         }
     }
 
-    // Récupérer tous les users : pas besoin d'une méthode findAll pour la table user pour l'instant
-
-    // Récupérer un user par son id 
+    /**
+     * Fetches a single user infos from the database
+     * @param {number} id 
+     * @returns 
+     */
     static async findOne(id) {
         const { rows } = await client.query(`SELECT * FROM "USER" WHERE id=$1`, [id]);
       
@@ -29,7 +50,12 @@ class User {
 
     }
 
-    //TODO : récupérer un user par son email 
+   /**
+    * 
+    * @param {*} mail 
+    * @param {*} password 
+    * @returns 
+    */
     static async findByMail(mail, password) {
 
         try {
@@ -103,7 +129,6 @@ class User {
 
     }
 
-    // TODO : const {rows} = await client.query('SELECT * FROM add_user($1)', [this])
   
     async updateUser(password) {
         try {

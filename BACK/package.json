@@ -1,7 +1,7 @@
 {
   "name": "projet-04-my-musical-world",
   "version": "1.0.0",
-  "description": "",
+  "description": "à faire : -les fonctions sql add_track/album/artist et update",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

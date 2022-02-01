@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const expressJSDocSwagger = require('express-jsdoc-swagger');
 const router = require('./app/router');
+const app = express();
 
 const options = {
   info: {
@@ -37,22 +38,26 @@ const options = {
   swaggerUiOptions: {},
 };
 
-const app = express();
+const firstFunction = expressJSDocSwagger(app);
+
+firstFunction(options);
+
+
 
 const port = process.env.PORT || 5050;
 
-/**
- * GET /api/v1
- * @summary This is the summary of the endpoint
- * @return {object} 200 - success response
- */
- app.get('/api/v1', (req, res) => res.json({
-  success: true,
-}));
+// /**
+//  * GET /api/v1
+//  * @summary This is the summary of the endpoint
+//  * @return {object} 200 - success response
+//  */
+//  app.get('/api/v1', (req, res) => res.json({
+//   success: true,
+// }));
 
 // On passe l'app express en paramètre, puis on ré-exécute cette fonction
 // en passant l'objet de config en argument
-expressJSDocSwagger(app)(options);
+
 
 app.use((request, response, next) => {
   console.log('passé par là')
