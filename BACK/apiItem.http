@@ -1,16 +1,17 @@
 @host=http://localhost:3200
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoyLCJpYXQiOjE2NDM2NDE3ODUsImV4cCI6MTY0MzY2MzM4NX0.2RzAEQUbcLHAgeG8TFgJTyup7mmneMJhA9tFeShjUHg
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo2LCJpYXQiOjE2NDM3MTExMjYsImV4cCI6MTY0MzczMjcyNn0.TkjA-R08ZW8aLrOHgoaFp2di8HfSCG49lXBJL-DFyDA
+Content-Type: application/json; charset=utf-8
 
 ###se connecter
 POST {{host}}/login
 Content-Type: application/json
 
 {
-        "mail": "valentin.deschins@gmail.com",
+        "mail": "delaunayherve@gmail.com",
         "lastname": "",
         "firstname": "",
         "pseudo": "",
-        "password": "Valentin"
+        "password": "12345"
     }
 
 
@@ -93,18 +94,13 @@ Authorization:{{token}}
 Content-Type: application/json
 
 {
-        "name": "Lay lady lay",
-        "genre": "folk",
-        "artist": "Bob Dylan",
-        "year": "1969",
-        "album": "Nashville Skyline",
-        "urlImage": "Bob",
-        "apiId": 56987,
-        "urlSample": "the link"
+        
+        "apiId": 1634770822
+
         
     }
 
 ### Récupérer la musique d'un utilisateur
-GET {{host}}/dashboard/claire
+GET {{host}}/dashboard
 Authorization:{{token}}
 Content-Type: application/json

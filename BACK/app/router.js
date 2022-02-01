@@ -11,7 +11,14 @@ const dashboardController = require('./controllers/dashboardController');
 
 const router = Router();
 
+/**
+ * POST /login
+ * @summary 
+ */
 router.post('/login', userController.validLogin);
+
+/**
+ */
 router.post('/signup', validateBody(userSchema), userController.validSignup);
 
 

@@ -69,6 +69,8 @@ class Track {
             const track = await client.query('SELECT * FROM TRACK WHERE api_id=$1', [itemId]);
             const trackName = track.rows[0].name;
             return trackName;
+            // console.log('track.rows[0].name', track.rows[0].name);
+
 
         } catch (error) {
             if (error.detail) {
