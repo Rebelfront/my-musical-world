@@ -1,3 +1,4 @@
+import { deleteDashboardItem } from 'src/actions/dashboard';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -11,16 +12,15 @@ const DashboardCard = ({
   genre,
   artist,
   year,
-  urlImage,
+  url_image,
   type,
   album,
-  apiId,
+  api_id,
 }) => {
-
   const dispatch = useDispatch();
 
-  const handleCardDelete = (apiId, type) => {
-    const action = deleteDashboardItem(apiId, type);
+  const handleCardDelete = (api_id, type) => {
+    const action = deleteDashboardItem(api_id, type);
     dispatch(action);
   };
 
@@ -29,18 +29,18 @@ const DashboardCard = ({
       <CardMedia
         component="img"
         alt={name}
-        image={urlImage}
+        image={url_image}
       />
       <CardContent>
-        {type !== "artist" && (
+        {type !== 'artist' && (
           <Typography gutterBottom variant="h5" component="div">
             {artist}
           </Typography>
         )}
-        <Typography sx={type !== "artist" ? { fontStyle: 'italic' } : {}} gutterBottom variant="h5" component="div">
-          {type === "artist" ? name :`"${name}"`} {year && type === "album" && `(${year})`}
+        <Typography sx={type !== 'artist' ? { fontStyle: 'italic' } : {}} gutterBottom variant="h5" component="div">
+          {type === 'artist' ? name : `"${name}"`} {year && type === 'album' && `(${year})`}
         </Typography>
-        {type === "track" && (
+        {type === 'track' && (
           <Typography variant="body2" color="text.secondary">
             Album: {`"${album}" (${year})`}
           </Typography>
@@ -52,10 +52,12 @@ const DashboardCard = ({
         )}
       </CardContent>
       <CardActions>
-        <Button onClick={() => {
-          handleCardDelete(apiId, type);
-        }} 
-        size="small">
+        <Button
+          onClick={() => {
+            handleCardDelete(api_id, type);
+          }}
+          size="small"
+        >
           <DeleteIcon />
         </Button>
       </CardActions>

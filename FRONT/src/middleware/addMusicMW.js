@@ -61,6 +61,7 @@ const addMusicMW = (store) => (next) => (action) => {
         })
         .catch((err) => console.log(err));
     }
+      next(action);
       break;
     default:
       next(action);

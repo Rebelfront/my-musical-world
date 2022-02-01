@@ -18,7 +18,9 @@ import { useEffect } from 'react';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const { artists, albums, tracks } = useSelector((state) => state.dashboard);
+  const {
+    artists, albums, tracks, dashboardChanged,
+  } = useSelector((state) => state.dashboard);
 
   const handleOpenAddMusicModal = () => {
     const action = toggleAddMusicModal();
@@ -33,7 +35,7 @@ const Dashboard = () => {
   useEffect(() => {
     const action = getDashboardData();
     dispatch(action);
-  }, []);
+  }, [dashboardChanged]);
 
   return (
     <div className="dashboard">
@@ -51,27 +53,27 @@ const Dashboard = () => {
         <Container maxWidth="md">
           { artists || albums || tracks ? (
             <>
-              {artists && (
+              {artists[0] && (
                 <Box sx={{ mb: '10px' }}>
                   <h3 className="txt-underlined txt-uppercase">Artistes</h3>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                    {artists.map((artist) => <DashboardCard type="artist" key={artist.apiId} {...artist} />)}
+                    {artists.map((artist) => <DashboardCard type="artist" key={artist.api_id} {...artist} />)}
                   </Box>
                 </Box>
               )}
-              {albums && (
+              {albums[0] && (
                 <Box sx={{ mb: '10px' }}>
                   <h3 className="txt-underlined txt-uppercase">Albums</h3>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                    {albums.map((album) => <DashboardCard type="album" key={album.apiId} {...album} />)}
+                    {albums.map((album) => <DashboardCard type="album" key={album.api_id} {...album} />)}
                   </Box>
                 </Box>
               )}
-              {tracks && (
+              {tracks[0] && (
                 <Box>
                   <h3 className="txt-underlined txt-uppercase">Titres</h3>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                    {tracks.map((track) => <DashboardCard type="track" key={track.apiId} {...track} />)}
+                    {tracks.map((track) => <DashboardCard type="track" key={track.api_id} {...track} />)}
                   </Box>
                 </Box>
               )}
