@@ -4,53 +4,36 @@
 
 .result__card {
   display: flex;
-
-  @include mq-mobile {
-    padding: 10px;
-    height: 110px;
-  }
+  align-items: center;
 
   @include mq-desktop {
-    
+    width: 435px;
+
   }
 }
 
 .result__card .card__image.card__image {
+  padding: 10px 0 10px 10px;
 
   @include mq-mobile {
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
+    
   }
 
   @include mq-desktop {
-    
+    width: 150px;
+    height: 150px;
   }
 }
 
-.result__card .card__wrapper {
-
-  @include mq-mobile {
-    position: relative;
-    width: 100%;
-  }
-
-  @include mq-desktop {
-    
-  }
+.result__card .card__right {
+  width: 100%;
+  padding: 10px;
 }
 
 .result__card .card__content {
-
-  @include mq-mobile {
-    // display: flex;
-    // flex-direction: column;
-    padding: 0;
-    text-align: center;
-  }
-
-  @include mq-desktop {
-    
-  }
+  text-align: center;
 }
 
 .result__card .content__title {
@@ -60,21 +43,24 @@
     margin: 0;
   }
 
-  @include mq-desktop {
-    
-  }
 }
 
 .result__card .content__infos p {
+  margin: 0;
 
   @include mq-mobile {
     font-size: rem(12);
-    margin: 0;
   }
 
   @include mq-desktop {
-    
+    font-size: rem(16);
   }
+}
+
+.result__card .card__buttons{
+  display: flex;
+  gap: 5px;
+  justify-content: space-around;
 }
 
 .result__card .content__button {
@@ -84,29 +70,17 @@
   text-decoration: none;
   margin-top: 5px;
   padding: 0 5px;
-
-  @include mq-mobile {
-    
-  }
-
-  @include mq-desktop {
-    
-  }
 }
 
 .result__card .content__button:hover {
   background-color: darken($color: $blue, $amount: 10);
 }
 
-.result__card .card__button.card__button {
+.result__card .button-green {
+  margin-top: 5px;
+  padding: 0 5px;
+}
 
-  @include mq-mobile {
-    position: absolute;
-    top: 75px;
-    left: -66px;
-  }
-
-  @include mq-desktop {
-    
-  }
+.css-46bh2p-MuiCardContent-root:last-child.css-46bh2p-MuiCardContent-root:last-child {
+  padding: 0;
 }
