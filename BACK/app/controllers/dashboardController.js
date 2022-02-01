@@ -8,9 +8,11 @@ module.exports = {
 
 
     getAllItems: async (_, response) => {
-        const tracks = await Track.findAll();
-        const albums = await Album.findAll();
-        const artists = await Artist.findAll();
+        const id = request.userId;
+
+        const tracks = await Track.findAll(id);
+        const albums = await Album.findAll(id);
+        const artists = await Artist.findAll(id);
         const items = {tracks, albums, artists};
         //je ne sais pas si c'est possible de renvoyer la réponse comme ça
         response.json(items);
