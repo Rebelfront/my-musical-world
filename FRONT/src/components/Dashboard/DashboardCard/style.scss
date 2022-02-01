@@ -1,0 +1,9 @@
+@import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+
+.dashboard-card {
+  @include mq-desktop {
+    margin-right: 30px;
+    width: 300px;
+  }
+}

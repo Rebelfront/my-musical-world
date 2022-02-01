@@ -8,6 +8,8 @@ import { Button, CardActions } from '@mui/material';
 
 import PropTypes from 'prop-types';
 
+import './style.scss';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 const DashboardCard = ({
@@ -30,10 +32,11 @@ const DashboardCard = ({
   };
 
   return (
-    <Card sx={{ mb: '20px' }}>
+    <Card className="dashboard-card" sx={{ mb: '20px' }}>
       <CardMedia
         component="img"
         alt={name}
+        height={140}
         image={url_image}
       />
       <CardContent>

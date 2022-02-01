@@ -14,9 +14,9 @@
     display: none;
   }
   @include mq-desktop {
+    background-color: #000000;
     box-sizing: border-box;
-    width: 200px;
-    background-color: #ffffff;
+    width: 250px;
     padding-top: 20px;
     top: 50px;
     display: flex;
@@ -29,9 +29,17 @@
   @include mq-desktop {
     font-size: rem(17);
     text-align: center;
-    text-decoration: underline;
     top: 10%;
   }
+}
+
+.dashboard__cat-title, .dashboard__title {
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.dashboard__cat-title {
+  font-size: rem(25);
 }
 
 .dashboard__add-btn {
@@ -41,8 +49,8 @@
   align-items: center;
   justify-content: center;
   background-color: $blue;
-  height: 55px;
-  width: 55px;
+  height: 70px;
+  width: 70px;
   color: #ffffff;
 }
 
@@ -51,15 +59,25 @@
   cursor: pointer;
 }
 
+.dashboard__add-label {
+  @include mq-desktop {
+    font-size: rem(30);
+  }
+}
+
 .dashboard__share {
   @include mq-desktop {
     border: none;
     background-color: transparent;
     cursor: pointer;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
   }
 }
 
 .dashboard__content {
+  background-color: $dark-grey-2;
   @include mq-desktop {
     padding-top: 150px;
     flex-grow: 1;

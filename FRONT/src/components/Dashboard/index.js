@@ -44,15 +44,16 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <aside className="dashboard__menu">
-        <h2 className="dashboard__title">{isLogged ? 'Mon dashboard' : `Dashboard de ${pseudo}`}</h2>
+        <h2 className="dashboard__title">{isLogged ? 'Ma bibliothèque' : `Bibliothèque de ${pseudo}`}</h2>
         {isLogged && (
           <>
             <button className="dashboard__add-btn" type="button" onClick={handleOpenAddMusicModal}>
-              <span>+</span>
-              <MusicNoteIcon sx={{ color: '#ffffff' }} fontSize="large" />
+              <span className="dashboard__add-label">+</span>
+              <MusicNoteIcon sx={{ color: '#ffffff', width: '50px', height: '50px' }} fontSize="large" />
             </button>
             <button className="dashboard__share" type="button" onClick={handleToggleSharingModal}>
-              <ShareIcon />
+              <ShareIcon sx={{ width: '50px', height: '50px' }} />
+              <span>Partager</span>
             </button>
           </>
         )}
@@ -63,24 +64,24 @@ const Dashboard = () => {
             <>
               {artists[0] && (
                 <Box sx={{ mb: '10px' }}>
-                  <h3 className="txt-underlined txt-uppercase">Artistes</h3>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                  <h3 className="dashboard__cat-title">Artistes</h3>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                     {artists.map((artist) => <DashboardCard type="artist" key={artist.api_id} {...artist} />)}
                   </Box>
                 </Box>
               )}
               {albums[0] && (
                 <Box sx={{ mb: '10px' }}>
-                  <h3 className="txt-underlined txt-uppercase">Albums</h3>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                  <h3 className="dashboard__cat-title">Albums</h3>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                     {albums.map((album) => <DashboardCard type="album" key={album.api_id} {...album} />)}
                   </Box>
                 </Box>
               )}
               {tracks[0] && (
                 <Box>
-                  <h3 className="txt-underlined txt-uppercase">Titres</h3>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                  <h3 className="dashboard__cat-title">Titres</h3>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                     {tracks.map((track) => <DashboardCard type="track" key={track.api_id} {...track} />)}
                   </Box>
                 </Box>
