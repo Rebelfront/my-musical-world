@@ -6,6 +6,7 @@ import rootReducer from 'src/reducers';
 // import logMiddleware from '../middleware/logMiddleware';
 import authenticationMW from 'src/middleware/authenticationMW';
 import profileUpdateMW from 'src/middleware/profileUpdateMW';
+import addMusicMW from 'src/middleware/addMusicMW';
 
 // == Enhancers
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -15,6 +16,7 @@ const enhancers = composeEnhancers(
     // logMiddleware,
     authenticationMW,
     profileUpdateMW,
+    addMusicMW,
   ),
 );
 

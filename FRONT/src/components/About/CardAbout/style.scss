@@ -20,7 +20,7 @@
   }
 }
 
-.card__image {
+.about__card .card__image {
   @include mq-mobile {
     max-width: 120px;
     max-height: 120px;
@@ -32,7 +32,7 @@
   }
 }
 
-.card__wrapper {
+.about__card .card__wrapper {
   @include mq-mobile {
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@
   }
 }
 
-.card__content {
+.about__card .card__content {
   @include mq-mobile {
     padding: 10px !important;
   }
@@ -58,30 +58,30 @@
   }
 }
 
-.content__title {
+.about__card .content__title {
   @include mq-mobile {
-    font-size: rem(20px) !important;
+    font-size: rem(20) !important;
     margin: 0 !important;
   }
 
   @include mq-desktop {
-    font-size: rem(22px) !important;
+    font-size: rem(22) !important;
     font-weight: bold !important;
   }
 }
 
-.content__role p {
+.about__card .content__role p {
   @include mq-mobile {
-    font-size: rem(16px);
+    font-size: rem(16);
     margin: 0;
   }
 
   @include mq-desktop {
-    font-size: rem(18px);
+    font-size: rem(18);
   }
 }
 
-.card__icons {
+.about__card .card__icons {
   @include mq-mobile {
     padding: 0 !important;
   }

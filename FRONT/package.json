@@ -3,6 +3,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --config config/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
+    "bd": "yarn build && cd dist && surge --domain mymusicalworld.surge.sh --project /Users/herve/Desktop/Apothéose/projet-04-my-musical-world/FRONT/dist/",
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint --fix src/**/*.js",
     "clean": "rm -rf dist",

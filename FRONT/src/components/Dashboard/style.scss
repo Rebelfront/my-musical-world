@@ -1,0 +1,67 @@
+@import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+@import 'src/styles/abstracts/functions';
+
+.dashboard {
+  @include mq-desktop {
+    display: flex;
+    flex-grow: 1;
+  }
+}
+
+.dashboard__menu {
+  @include mq-mobile {
+    display: none;
+  }
+  @include mq-desktop {
+    box-sizing: border-box;
+    width: 200px;
+    background-color: #ffffff;
+    padding-top: 20px;
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.dashboard__title {
+  @include mq-desktop {
+    font-size: rem(17);
+    text-align: center;
+    text-decoration: underline;
+    top: 10%;
+  }
+}
+
+.dashboard__add-btn {
+  border-radius: 100%;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $blue;
+  height: 55px;
+  width: 55px;
+  color: #ffffff;
+}
+
+.dashboard__add-btn:hover {
+  background-color: darken($color: $blue, $amount: 10);
+  cursor: pointer;
+}
+
+.dashboard__share {
+  @include mq-desktop {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
+
+.dashboard__content {
+  @include mq-desktop {
+    padding-top: 150px;
+    flex-grow: 1;
+  }
+}
