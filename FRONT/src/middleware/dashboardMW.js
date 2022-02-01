@@ -30,7 +30,9 @@ const dashboardMW = (store) => (next) => (action) => {
         headers: {
           Authorization: token,
         },
-        data: action.payload.apiId,
+        data: {
+          apiId: action.payload.apiId,
+        },
       })
         .catch((err) => {
           console.log(err);
