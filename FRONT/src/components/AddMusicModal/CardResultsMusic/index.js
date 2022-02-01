@@ -26,7 +26,6 @@ const CardResultsMusic = ({ music }) => {
           <CardMedia
             className="card__image"
             component="img"
-            height="150"
             image={music.urlImage}
             alt={`photo de ${music.name}`}
           />
