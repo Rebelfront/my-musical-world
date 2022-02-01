@@ -38,9 +38,9 @@ const options = {
   swaggerUiOptions: {},
 };
 
-const firstFunction = expressJSDocSwagger(app);
+const firstFunction = expressJSDocSwagger(app)(options);
 
-firstFunction(options);
+// firstFunction(options);
 
 
 

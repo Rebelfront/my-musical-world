@@ -31,7 +31,7 @@ module.exports = {
                 // console.log('instanceAlbum', instance);
                 const album = await instance.addAlbum(userId, itemId);
                 console.log('Album controller', album);
-                return response.json('Album ajouté');
+                return response.json(`Album ${album} ajouté`);
 
             } else if (itemType === 'artist') {
                 // console.log('yolo');
