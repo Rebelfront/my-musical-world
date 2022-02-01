@@ -3,6 +3,7 @@ import { TOGGLE_SHARING_MODAL, SAVE_DASHBOARD_DATA, DELETE_DASHBOARD_ITEM } from
 import { SUBMIT_ADD_MUSIC } from 'src/actions/addMusic';
 
 const initialState = {
+  pseudo: '',
   artists: [],
   albums: [],
   tracks: [],
@@ -20,9 +21,11 @@ const dashboard = (state = initialState, action = {}) => {
     case SAVE_DASHBOARD_DATA:
       return {
         ...state,
-        artists: action.payload.artists,
-        albums: action.payload.albums,
-        tracks: action.payload.tracks,
+        // pseudo: action.payload.pseudo,
+        // artists: action.payload.artists,
+        // albums: action.payload.albums,
+        // tracks: action.payload.tracks,
+        ...action.payload,
         dashboardChanged: false,
       };
     case SUBMIT_ADD_MUSIC:

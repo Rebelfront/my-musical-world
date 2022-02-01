@@ -7,8 +7,9 @@ export const toggleSharingModal = () => ({
   type: TOGGLE_SHARING_MODAL,
 });
 
-export const getDashboardData = () => ({
+export const getDashboardData = (payload) => ({
   type: GET_DASHBOARD_DATA,
+  payload,
 });
 
 export const saveDashboardData = (payload) => ({

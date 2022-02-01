@@ -30,6 +30,7 @@ const App = () => {
             element={<Homepage />}
           />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/shared-space/:pseudoSharedSpace" element={<Dashboard />} />
           <Route path="/about" element={<About />} />
           <Route path="/legal" element={<Legal />} />
         </Routes>

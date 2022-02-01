@@ -5,7 +5,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, CardActions } from '@mui/material';
-import { useDispatch } from 'react-redux';
+
+import PropTypes from 'prop-types';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 const DashboardCard = ({
   name,
@@ -18,6 +21,8 @@ const DashboardCard = ({
   api_id,
 }) => {
   const dispatch = useDispatch();
+
+  const { isLogged } = useSelector((state) => state.user);
 
   const handleCardDelete = (api_id, type) => {
     const action = deleteDashboardItem(api_id, type);
@@ -52,17 +57,31 @@ const DashboardCard = ({
         )}
       </CardContent>
       <CardActions>
-        <Button
-          onClick={() => {
-            handleCardDelete(api_id, type);
-          }}
-          size="small"
-        >
-          <DeleteIcon />
-        </Button>
+        {isLogged && (
+          <Button
+            onClick={() => {
+              handleCardDelete(api_id, type);
+            }}
+            size="small"
+          >
+            <DeleteIcon />
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
+};
+
+DashboardCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  artist: PropTypes.string,
+  year: PropTypes.number,
+  album: PropTypes.string,
+  url_image: PropTypes.string.isRequired,
+  api_id: PropTypes.number.isRequired,
+  url_sample: PropTypes.string,
+  genre: PropTypes.string,
+  type: PropTypes.string.isRequired,
 };
 
 export default DashboardCard;

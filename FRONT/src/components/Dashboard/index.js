@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Container from '@mui/material/Container';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
@@ -6,20 +8,22 @@ import ShareIcon from '@mui/icons-material/Share';
 import { Box } from '@mui/material';
 
 import { toggleAddMusicModal } from 'src/actions/addMusic';
+import { toggleSharingModal, getDashboardData } from 'src/actions/dashboard';
 
 import DashboardCard from 'src/components/Dashboard/DashboardCard';
 import AddMusicModal from 'src/components/AddMusicModal';
 import SharingModal from 'src/components/Dashboard/SharingModal';
 
-import { toggleSharingModal, getDashboardData } from 'src/actions/dashboard';
-
 import './style.scss';
-import { useEffect } from 'react';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+
+  const { pseudoSharedSpace } = useParams();
+
+  const { isLogged } = useSelector((state) => state.user);
   const {
-    artists, albums, tracks, dashboardChanged,
+    pseudo, artists, albums, tracks, dashboardChanged,
   } = useSelector((state) => state.dashboard);
 
   const handleOpenAddMusicModal = () => {
@@ -33,21 +37,25 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    const action = getDashboardData();
+    const action = getDashboardData(pseudoSharedSpace);
     dispatch(action);
-  }, [dashboardChanged]);
+  }, [dashboardChanged, pseudoSharedSpace]);
 
   return (
     <div className="dashboard">
       <aside className="dashboard__menu">
-        <h2 className="dashboard__title">Mon dashboard</h2>
-        <button className="dashboard__add-btn" type="button" onClick={handleOpenAddMusicModal}>
-          <span>+</span>
-          <MusicNoteIcon sx={{ color: '#ffffff' }} fontSize="large" />
-        </button>
-        <button className="dashboard__share" type="button" onClick={handleToggleSharingModal}>
-          <ShareIcon />
-        </button>
+        <h2 className="dashboard__title">{isLogged ? 'Mon dashboard' : `Dashboard de ${pseudo}`}</h2>
+        {isLogged && (
+          <>
+            <button className="dashboard__add-btn" type="button" onClick={handleOpenAddMusicModal}>
+              <span>+</span>
+              <MusicNoteIcon sx={{ color: '#ffffff' }} fontSize="large" />
+            </button>
+            <button className="dashboard__share" type="button" onClick={handleToggleSharingModal}>
+              <ShareIcon />
+            </button>
+          </>
+        )}
       </aside>
       <main className="dashboard__content">
         <Container maxWidth="md">

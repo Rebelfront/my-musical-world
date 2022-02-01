@@ -6,21 +6,35 @@ const dashboardMW = (store) => (next) => (action) => {
   const token = localStorage.getItem('token');
   switch (action.type) {
     case GET_DASHBOARD_DATA:
-      axios({
-        method: 'get',
-        url: `${rootAPIUrl}/dashboard/`,
-        headers: {
-          Authorization: token,
-        },
-      })
-        .then((res) => {
-          const actionDashboardSave = saveDashboardData(res.data);
-          store.dispatch(actionDashboardSave);
+      if (!action.payload) {
+        axios({
+          method: 'get',
+          url: `${rootAPIUrl}/dashboard/`,
+          headers: {
+            Authorization: token,
+          },
         })
-        .catch((err) => {
-          console.log(err);
-        });
-
+          .then((res) => {
+            const actionDashboardSave = saveDashboardData(res.data);
+            store.dispatch(actionDashboardSave);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      else {
+        axios({
+          method: 'get',
+          url: `${rootAPIUrl}/dashboard/${action.payload}`,
+        })
+          .then((res) => {
+            const actionDashboardSave = saveDashboardData(res.data);
+            store.dispatch(actionDashboardSave);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
       break;
 
     case DELETE_DASHBOARD_ITEM:
