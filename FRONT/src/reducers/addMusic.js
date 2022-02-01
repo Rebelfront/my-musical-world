@@ -24,6 +24,7 @@ const addMusic = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.payload.name]: action.payload.value,
+        resultsMusic: [],
       };
     case SUBMIT_SEARCH_MUSIC:
       return {

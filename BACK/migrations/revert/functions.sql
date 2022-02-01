@@ -2,8 +2,8 @@
 
 BEGIN;
 
-DROP FUNCTION add_user(json);
+DROP FUNCTION add_user(json) CASCADE;
 
-DROP FUNCTION update_user(json);
+DROP FUNCTION update_user(json) CASCADE;
 
 COMMIT;

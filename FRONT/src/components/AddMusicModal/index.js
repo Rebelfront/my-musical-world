@@ -108,18 +108,21 @@ const AddMusicModal = () => {
         >
           <CloseIcon />
         </IconButton>
-        <div className="result__cards">
-          {loading ? (
+        {loading && (
+          <div className="result__loading">
             <Loading />
-          ) : (
-            resultsMusic.map((music) => (
+          </div>
+        )}
+        {(resultsMusic.length !== 0) && (
+          <div className="result__cards">
+            {resultsMusic.map((music) => (
               <CardResultsMusic
                 key={music.apiId}
                 music={music}
               />
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </Dialog>
     </div>
   );
