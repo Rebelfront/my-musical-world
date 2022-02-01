@@ -26,11 +26,11 @@ const user = (state = initialState, action = {}) => {
         firstname: '',
         pseudo: '',
         id: null,
-      }
+      };
     case USER_RESET:
       return {
         ...initialState,
-      }
+      };
     default:
       return state;
   }
