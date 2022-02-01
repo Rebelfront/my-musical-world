@@ -21,7 +21,7 @@
 
 }
 
-.addmusic__search .css-13r4j3i {
+.addmusic__modal .css-13r4j3i {
   display: flex;
 
   @include mq-mobile {
@@ -30,18 +30,18 @@
 
 }
 
-.search__input {
+.addmusic__modal .search__input.search__input {
   @include mq-mobile {
-    width: calc(100% - 15px) !important;
-    margin-bottom: 20px !important;
+    width: calc(100% - 15px);
+    margin-bottom: 20px;
   }
 
   @include mq-desktop {
-    width: 100% !important;
+    width: 100%;
   }
 }
 
-.search__wrapper {
+.addmusic__modal .search__wrapper {
   display: flex;
   justify-content: space-around;
 
@@ -51,7 +51,7 @@
   }
 }
 
-.search__type.search__type {
+.addmusic__modal .search__type.search__type {
   
   @include mq-mobile {
     width: calc(45%);
@@ -59,13 +59,13 @@
 
 }
 
-.result__loading {
+.addmusic__modal .result__loading {
   background-color: $grey;
   padding: 10px;
   display: flex;
 }
 
-.result__cards {
+.addmusic__modal .result__cards {
   display: flex;
   flex-wrap: wrap;
   background-color: $grey;
