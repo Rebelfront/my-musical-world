@@ -5,10 +5,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, CardActions } from '@mui/material';
+import PlayCircleFilledOutlinedIcon from '@mui/icons-material/PlayCircleFilledOutlined';
 
 import PropTypes from 'prop-types';
 
 import './style.scss';
+import style from 'src/styles/_exports.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,6 +23,7 @@ const DashboardCard = ({
   type,
   album,
   api_id,
+  url_sample,
 }) => {
   const dispatch = useDispatch();
 
@@ -36,16 +39,16 @@ const DashboardCard = ({
       <CardMedia
         component="img"
         alt={name}
-        height={140}
+        height="auto"
         image={url_image}
       />
-      <CardContent>
+      <CardContent sx={{ textAlign: 'center' }}>
         {type !== 'artist' && (
           <Typography gutterBottom variant="h5" component="div">
             {artist}
           </Typography>
         )}
-        <Typography sx={type !== 'artist' ? { fontStyle: 'italic' } : {}} gutterBottom variant="h5" component="div">
+        <Typography sx={type !== 'artist' ? { fontStyle: 'italic', fontSize: '20px' } : {}} gutterBottom variant="h5" component="div">
           {type === 'artist' ? name : `"${name}"`} {year && type === 'album' && `(${year})`}
         </Typography>
         {type === 'track' && (
@@ -59,15 +62,25 @@ const DashboardCard = ({
           </Typography>
         )}
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
         {isLogged && (
           <Button
             onClick={() => {
               handleCardDelete(api_id, type);
             }}
             size="small"
+            sx={{ color: style.blue }}
           >
-            <DeleteIcon />
+            <DeleteIcon sx={{ color: style.red }} />
+          </Button>
+        )}
+        { type === 'track' && (
+          <Button
+            onClick={() => {
+              window.open(url_sample, name, `width=300,height=100,left=${(window.innerWidth / 2) - 150},top=${(window.innerHeight / 2)}`);
+            }}
+          >
+            <PlayCircleFilledOutlinedIcon sx={{ color: style['dark-grey'] }} />
           </Button>
         )}
       </CardActions>
