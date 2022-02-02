@@ -7,6 +7,12 @@ module.exports = {
 
     // Méthode pour se créer un compte : ajouter un user en bdd
     // Intégrer la méthode makeToken 
+    /**
+     * 
+     * @param {*} request 
+     * @param {*} response 
+     * @returns 
+     */
     validSignup: async (request, response) => {
         try {
             const mail = request.body.mail;

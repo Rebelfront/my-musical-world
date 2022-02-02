@@ -26,7 +26,14 @@ router.post('/signup', validateBody(userSchema), userController.validSignup);
  * 
  */
 router.get('/user', authentification, userController.getUserInfos);
+
+/**
+ * 
+ */
 router.patch('/user',authentification, validateBody(userSchema), userController.updateUser);
+
+
+
 router.delete('/user',authentification, userController.deleteUser);
 /**
  * 

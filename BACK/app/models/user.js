@@ -92,7 +92,12 @@ class User {
 
     }
 
-    // enregistrer un user en bdd
+    /**
+     * 
+     * @param {*} mail 
+     * @param {*} password 
+     * @returns 
+     */
     async addUser(mail, password) {
 
         try {
