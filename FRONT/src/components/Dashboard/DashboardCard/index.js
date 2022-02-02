@@ -4,7 +4,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button, CardActions } from '@mui/material';
+import {
+  Alert, Button, ButtonGroup, CardActions,
+} from '@mui/material';
 import PlayCircleFilledOutlinedIcon from '@mui/icons-material/PlayCircleFilledOutlined';
 
 import PropTypes from 'prop-types';
@@ -13,6 +15,7 @@ import './style.scss';
 import style from 'src/styles/_exports.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const DashboardCard = ({
   name,
@@ -26,6 +29,7 @@ const DashboardCard = ({
   url_sample,
 }) => {
   const dispatch = useDispatch();
+  const [showAlert, setShowAlert] = useState(false);
 
   const { isLogged } = useSelector((state) => state.user);
 
@@ -66,7 +70,7 @@ const DashboardCard = ({
         {isLogged && (
           <Button
             onClick={() => {
-              handleCardDelete(api_id, type);
+              setShowAlert(true);
             }}
             size="small"
             sx={{ color: style.blue }}
@@ -84,6 +88,33 @@ const DashboardCard = ({
           </Button>
         )}
       </CardActions>
+      {showAlert && (
+        <Alert
+          severity="error"
+          action={(
+            <ButtonGroup orientation="vertical">
+              <Button
+                onClick={() => {
+                  setShowAlert(false);
+                }}
+                color="inherit"
+                size="small"
+              >
+                Annuler
+              </Button>
+              <Button
+                onClick={() => handleCardDelete(api_id, type)}
+                color="inherit"
+                size="small"
+              >
+                Confirmer
+              </Button>
+            </ButtonGroup>
+        )}
+        >
+          Confirmer la suppression ?
+        </Alert>
+      )}
     </Card>
   );
 };

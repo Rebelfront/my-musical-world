@@ -22,8 +22,10 @@
 }
 
 .dashboard__cat-title {
+  @include mq-mobile {
+    justify-content: center;
+  }
   display: flex;
-  justify-content: center;
   align-items: center;
   font-size: rem(19);
   color: $dark-grey;
