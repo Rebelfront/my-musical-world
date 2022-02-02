@@ -1,5 +1,5 @@
 @host=http://localhost:3200
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo2MSwiaWF0IjoxNjQzMjk4OTU4LCJleHAiOjE2NDMzMjA1NTh9.FvOD6n6o06apkxB8G59fEDNcnWM0PQI5pNZ5qe1OJ5E
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo0OCwiaWF0IjoxNjQzODExMzYxLCJleHAiOjE2NDM4MzI5NjF9.qYmeEHkL7sp8ZLohq68vwrsApZPxj7i4u6vSjy8wCUY
 
 ### récupérer 1 User
 GET {{host}}/user
@@ -16,7 +16,8 @@ Content-Type: application/json
     "lastname": "Bowie",
     "firstname": "David",
     "pseudo": "starman",
-    "password":"ziggy"
+    "password":"ziggy",
+    "password_confirmation":"ziggy"
      }
 
 ###se connecter
