@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Container from '@mui/material/Container';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import ShareIcon from '@mui/icons-material/Share';
 import { Box } from '@mui/material';
 import Fab from '@mui/material/Fab';
@@ -61,7 +60,7 @@ const Dashboard = () => {
                     <PersonIcon sx={{ mr: '10px' }} fontSize="large" />
                     <span>Artistes</span>
                   </h3>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                  <Box sx={artists.length > 2 ? { display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' } : { display: 'flex', flexWrap: 'wrap' }}>
                     {artists.map((artist) => <DashboardCard type="artist" key={artist.api_id} {...artist} />)}
                   </Box>
                 </Box>
@@ -72,7 +71,7 @@ const Dashboard = () => {
                     <AlbumIcon sx={{ mr: '10px' }} fontSize="large" />
                     <span>Albums</span>
                   </h3>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                  <Box sx={albums.length > 2 ? { display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' } : { display: 'flex', flexWrap: 'wrap' }}>
                     {albums.map((album) => <DashboardCard type="album" key={album.api_id} {...album} />)}
                   </Box>
                 </Box>
@@ -83,7 +82,7 @@ const Dashboard = () => {
                     <AudiotrackIcon sx={{ mr: '10px' }} fontSize="large" />
                     Titres
                   </h3>
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                  <Box sx={tracks.length > 2 ? { display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' } : { display: 'flex', flexWrap: 'wrap' }}>
                     {tracks.map((track) => <DashboardCard type="track" key={track.api_id} {...track} />)}
                   </Box>
                 </Box>

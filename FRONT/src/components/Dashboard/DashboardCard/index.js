@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
-  Alert, Button, ButtonGroup, CardActions,
+  Alert, Button, ButtonGroup, CardActions, Divider,
 } from '@mui/material';
 import PlayCircleFilledOutlinedIcon from '@mui/icons-material/PlayCircleFilledOutlined';
 
@@ -66,6 +66,7 @@ const DashboardCard = ({
           </Typography>
         )}
       </CardContent>
+      <Divider />
       <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
         {isLogged && (
           <Button
