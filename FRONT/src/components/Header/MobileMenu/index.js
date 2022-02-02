@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
@@ -61,12 +60,12 @@ const MobileMenu = () => {
       {!isLogged ? (
         <List>
           <ListItem onClick={handleOpenLoginModal}>
-            <Button sx={{margin: '0 auto' }} className="button-green">
+            <Button sx={{ margin: '0 auto' }} className="button-green">
               <ListItemText primary="Se connecter" />
             </Button>
           </ListItem>
           <ListItem onClick={handleOpenSignupModal}>
-            <Button sx={{margin: '0 auto' }} className="button-green">
+            <Button sx={{ margin: '0 auto' }} className="button-green">
               <ListItemText primary="S'inscrire" />
             </Button>
           </ListItem>
@@ -88,11 +87,11 @@ const MobileMenu = () => {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ display: 'flex', flexDirection: 'column' }}>
-                <Button className="button-green" sx={{ display: 'block', mb: '10px'}} onClick={handleOpenProfileModal}>
+                <Button className="button-green" sx={{ display: 'block', mb: '10px' }} onClick={handleOpenProfileModal}>
                   <ListItemText primary="Mon profil" />
                 </Button>
-                <NavLink to="/dashboard">Ma bibliothèque</NavLink>
-                <Button sx={{ display: 'block', mt: '20px'}} className="button-red" onClick={handleLogout}>
+                <NavLink to="/dashboard" onClick={handleMenuToggle}>Ma bibliothèque</NavLink>
+                <Button sx={{ display: 'block', mt: '20px' }} className="button-red" onClick={handleLogout}>
                   <ListItemText primary="Se déconnecter" />
                 </Button>
               </AccordionDetails>
@@ -100,8 +99,8 @@ const MobileMenu = () => {
           </ListItem>
         </List>
       )}
-      <NavLink className="mobile-menu__link" to="/about">A propos &gt;</NavLink>
-      <NavLink className="mobile-menu__link" to="/legal">Mentions légales &gt;</NavLink>
+      <NavLink className="mobile-menu__link" to="/about" onClick={handleMenuToggle}>A propos &gt;</NavLink>
+      <NavLink className="mobile-menu__link" to="/legal" onClick={handleMenuToggle}>Mentions légales &gt;</NavLink>
     </Box>
   );
 

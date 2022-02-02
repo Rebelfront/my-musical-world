@@ -1,6 +1,6 @@
 import { TOGGLE_SHARING_MODAL, SAVE_DASHBOARD_DATA, DELETE_DASHBOARD_ITEM } from 'src/actions/dashboard';
-
 import { SUBMIT_ADD_MUSIC } from 'src/actions/addMusic';
+import { USER_LOGOUT } from 'src/actions/user';
 
 const initialState = {
   pseudo: '',
@@ -21,10 +21,6 @@ const dashboard = (state = initialState, action = {}) => {
     case SAVE_DASHBOARD_DATA:
       return {
         ...state,
-        // pseudo: action.payload.pseudo,
-        // artists: action.payload.artists,
-        // albums: action.payload.albums,
-        // tracks: action.payload.tracks,
         ...action.payload,
         dashboardChanged: false,
       };
@@ -37,6 +33,10 @@ const dashboard = (state = initialState, action = {}) => {
       return {
         ...state,
         dashboardChanged: true,
+      };
+    case USER_LOGOUT:
+      return {
+        ...initialState,
       };
     default:
       return state;

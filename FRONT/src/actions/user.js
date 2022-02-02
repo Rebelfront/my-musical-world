@@ -20,9 +20,9 @@ export const userLogout = () => ({
 });
 
 export const deleteUser = () => ({
-  type : USER_DELETE,
+  type: USER_DELETE,
 });
 
 export const resetUser = () => ({
-  type : USER_RESET,
+  type: USER_RESET,
 });
