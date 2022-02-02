@@ -11,7 +11,6 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -62,15 +61,17 @@ const MobileMenu = () => {
     >
       {!isLogged ? (
         <List>
-          <ListItem onClick={handleOpenLoginModal}>
-            <Button sx={{ margin: '0 auto' }} className="button-green">
-              <ListItemText primary="Se connecter" />
-            </Button>
+          <ListItem sx={{ padding: 0 }}>
+            <button type="button" onClick={handleOpenLoginModal} className="mobile-menu__link">
+              <span>Se connecter</span>
+              <ArrowForwardIosIcon sx={{ ml: 'auto' }} fontSize="small" />
+            </button>
           </ListItem>
-          <ListItem onClick={handleOpenSignupModal}>
-            <Button sx={{ margin: '0 auto' }} className="button-green">
-              <ListItemText primary="S'inscrire" />
-            </Button>
+          <ListItem sx={{ padding: 0 }}>
+            <button type="button" onClick={handleOpenSignupModal} className="mobile-menu__link">
+              <span>S'inscrire</span>
+              <ArrowForwardIosIcon sx={{ ml: 'auto' }} fontSize="small" />
+            </button>
           </ListItem>
         </List>
       ) : (
