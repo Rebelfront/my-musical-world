@@ -23,6 +23,7 @@ module.exports = {
             // } else {
                 const instance = new User(request.body);
                 const user = await instance.addUser(mail, password);
+                console.log('typeof user', typeof user);
                 console.log('userconstroller', user.id);
 
                 const token = jwt.makeToken(user.id);
@@ -38,7 +39,7 @@ module.exports = {
     },
 
     // Pour se connecter : retrouver un user enregistré en bdd à partir de son mail
-    // TODO : intégrer la méthode makeToken 
+    
     validLogin: async (request, response) => {
         try {
             const mail = request.body.mail;
@@ -65,7 +66,7 @@ module.exports = {
             const id = request.userId;
             console.log('request', id);
             const user = await User.findOne(id);
-            console.log('user', user);
+            console.log('topito', typeof user);
             response.json(user);
         } catch (error) {
             console.log(error);
