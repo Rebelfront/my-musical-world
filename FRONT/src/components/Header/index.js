@@ -1,5 +1,4 @@
 import './style.scss';
-import styles from '../../styles/_exports.module.scss';
 import logo from 'src/assets/logo.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -7,13 +6,14 @@ import { openLoginModal } from 'src/actions/login';
 import { openSignUpModal } from 'src/actions/signup';
 import { toggleProfileModal } from 'src/actions/header';
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Box } from '@mui/system';
 import {
   AppBar, Avatar, Button, Container, Divider, IconButton, ListItemIcon, Menu, MenuItem, Toolbar, Tooltip, Typography,
 } from '@mui/material';
 import { Logout } from '@mui/icons-material';
 import AlbumIcon from '@mui/icons-material/Album';
+import styles from '../../styles/_exports.module.scss';
 import ProfileModal from './ProfileModal';
 import MobileMenu from './MobileMenu';
 import SignUpModal from './SignUpModal';
@@ -71,7 +71,7 @@ const Header = () => {
                 <Button
                   className="button-green"
                   onClick={handleOpenLoginModal}
-                  sx={{ mr: '10px'}}
+                  sx={{ mr: '10px' }}
                 >
                   Se connecter
                 </Button>
@@ -97,7 +97,11 @@ const Header = () => {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                   >
-                    <Avatar sx={{ width: 32, height: 32, backgroundColor: '#ffffff', color: styles['dark-grey'] }}>{pseudo.slice(0, 1).toUpperCase()}</Avatar>
+                    <Avatar sx={{
+                      width: 32, height: 32, backgroundColor: '#ffffff', color: styles['dark-grey'],
+                    }}
+                    >{pseudo.slice(0, 1).toUpperCase()}
+                    </Avatar>
                   </IconButton>
                 </Tooltip>
               </Box>
@@ -144,7 +148,7 @@ const Header = () => {
                   <ListItemIcon>
                     <AlbumIcon />
                   </ListItemIcon>
-                  <Link className="decoration-none" to="/dashboard">Ma bibliothèque</Link>
+                  <NavLink className={({ isActive }) => (isActive ? 'header__link header__link--active' : 'header__link')} to="/dashboard">Ma bibliothèque</NavLink>
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleUserLogout}>

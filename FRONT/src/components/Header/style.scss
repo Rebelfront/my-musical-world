@@ -21,3 +21,21 @@
   background-color: $green !important;
   color: #ffffff;
 }
+
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root:hover .header__link--active {
+    @include mq-desktop {
+      color: #ffffff;
+    }
+}
+
+.header__link.header__link {
+  @include mq-desktop {
+    text-decoration: none;
+  }
+}
+
+.header__link--active {
+  @include mq-desktop {
+    color: $green;
+  }
+}
