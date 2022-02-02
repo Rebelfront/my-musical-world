@@ -31,7 +31,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={!actionLogged ? <Homepage /> : <Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={!actionUnLogged ? <Dashboard /> : <Navigate to="/" replace />} />
-          <Route path="/shared-space/:pseudoSharedSpace" element={<Dashboard />} />
+          <Route path="/shared-space/:pseudoSharedSpace" element={!actionLogged ? <Dashboard /> : <Navigate to="/dashboard" replace />} />
           <Route path="/about" element={!actionLogged ? <About /> : <Navigate to="/dashboard" replace />} />
           <Route path="/legal" element={!actionLogged ? <Legal /> : <Navigate to="/dashboard" replace />} />
           <Route path="*" element={!actionLogged ? <NotFound /> : <Navigate to="/dashboard" replace />} />
