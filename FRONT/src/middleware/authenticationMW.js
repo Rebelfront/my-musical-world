@@ -1,7 +1,10 @@
+/* eslint-disable no-lone-blocks */
 import axios from 'axios';
 import { SUBMIT_LOGIN } from 'src/actions/login';
 import { SUBMIT_SIGNUP } from 'src/actions/signup';
-import { saveUser, USER_LOGOUT, USER_CHECK } from 'src/actions/user';
+import {
+  saveUser, USER_LOGOUT, USER_CHECK, setActionLogged,
+} from 'src/actions/user';
 
 const authenticationMW = (store) => (next) => (action) => {
   const rootAPIUrl = process.env.ROOT_API_URL;
@@ -38,6 +41,8 @@ const authenticationMW = (store) => (next) => (action) => {
           localStorage.setItem('token', res.headers.authorization);
           const actionSaveUser = saveUser(res.data);
           store.dispatch(actionSaveUser);
+          const actionLogged = setActionLogged(res.data);
+          store.dispatch(actionLogged);
         })
         .catch((err) => console.log(err));
     }
@@ -60,6 +65,8 @@ const authenticationMW = (store) => (next) => (action) => {
           localStorage.setItem('token', res.headers.authorization);
           const actionSaveUser = saveUser(res.data);
           store.dispatch(actionSaveUser);
+          const actionLogged = setActionLogged(res.data);
+          store.dispatch(actionLogged);
         })
         .catch((err) => console.log(err));
     }

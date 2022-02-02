@@ -1,0 +1,72 @@
+@import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+@import 'src/styles/abstracts/functions';
+
+.not-found {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  
+  @include mq-mobile {
+    
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.not-found__title {
+  margin: 0 0 50px 0;
+  text-align: center;
+  font-weight: unset;
+  font-family: 'Monoton';
+  font-size: rem(40);
+  letter-spacing: 5px;
+
+  @include mq-mobile {
+    
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.not-found__content {
+  margin: 0;
+  font-size: rem(200);
+  font-weight: bold;
+
+  @include mq-mobile {
+    
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+.not-found__logo {
+  width: 160px;
+  animation: rotating 2s linear infinite;
+
+  @include mq-mobile {
+    
+  }
+
+  @include mq-desktop {
+    
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

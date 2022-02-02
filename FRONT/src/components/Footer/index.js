@@ -1,13 +1,17 @@
 import './style.scss';
 
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const Footer = () => (
-  <div className="footer">
-    <Link to="/about" className="footer-link">A propos</Link>
-    <p>2022 | My Musical World</p>
-    <Link to="/legal" className="footer-link">Mentions légales</Link>
-  </div>
-);
+const Footer = () => {
+  const getActiveClassname = ({ isActive }) => (isActive ? 'txt-underlined' : 'footer-link');
+
+  return (
+    <div className="footer">
+      <NavLink to="/about" className={getActiveClassname}>A propos</NavLink>
+      <p>2022 | My Musical World</p>
+      <NavLink to="/legal" className={getActiveClassname}>Mentions légales</NavLink>
+    </div>
+  );
+};
 
 export default Footer;
