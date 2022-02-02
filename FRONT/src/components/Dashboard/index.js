@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 
 import Container from '@mui/material/Container';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
@@ -9,6 +9,7 @@ import { Box } from '@mui/material';
 
 import { toggleAddMusicModal } from 'src/actions/addMusic';
 import { toggleSharingModal, getDashboardData } from 'src/actions/dashboard';
+import { unsetActionLogged } from 'src/actions/user';
 
 import DashboardCard from 'src/components/Dashboard/DashboardCard';
 import AddMusicModal from 'src/components/AddMusicModal';
@@ -23,7 +24,7 @@ const Dashboard = () => {
 
   const { isLogged } = useSelector((state) => state.user);
   const {
-    pseudo, artists, albums, tracks, dashboardChanged,
+    pseudo, artists, albums, tracks, dashboardChanged, pseudoNotExist,
   } = useSelector((state) => state.dashboard);
 
   const handleOpenAddMusicModal = () => {
@@ -37,9 +38,18 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    const action = unsetActionLogged();
+    dispatch(action);
+  }, []);
+
+  useEffect(() => {
     const action = getDashboardData(pseudoSharedSpace);
     dispatch(action);
   }, [dashboardChanged, pseudoSharedSpace]);
+
+  if (pseudoNotExist) {
+    return <Navigate to="/error" />;
+  }
 
   return (
     <div className="dashboard">

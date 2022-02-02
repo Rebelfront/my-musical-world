@@ -1,4 +1,6 @@
-import { TOGGLE_SHARING_MODAL, SAVE_DASHBOARD_DATA, DELETE_DASHBOARD_ITEM } from 'src/actions/dashboard';
+import {
+  TOGGLE_SHARING_MODAL, SAVE_DASHBOARD_DATA, DELETE_DASHBOARD_ITEM, PSEUDO_NOT_EXIST,
+} from 'src/actions/dashboard';
 import { SUBMIT_ADD_MUSIC } from 'src/actions/addMusic';
 import { USER_LOGOUT } from 'src/actions/user';
 
@@ -9,6 +11,7 @@ const initialState = {
   tracks: [],
   sharingModalOpened: false,
   dashboardChanged: false,
+  pseudoNotExist: false,
 };
 
 const dashboard = (state = initialState, action = {}) => {
@@ -37,6 +40,11 @@ const dashboard = (state = initialState, action = {}) => {
     case USER_LOGOUT:
       return {
         ...initialState,
+      };
+    case PSEUDO_NOT_EXIST:
+      return {
+        ...state,
+        pseudoNotExist: true,
       };
     default:
       return state;
