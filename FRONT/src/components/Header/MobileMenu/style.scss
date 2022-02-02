@@ -12,6 +12,14 @@
   }
 }
 
+.mobile_menu__title {
+  @include mq-mobile {
+    text-align: center;
+    font-size: rem(16);
+    font-weight: 600;
+  }
+}
+
 .mobile-menu__link {
   @include mq-mobile {
     display: block;
@@ -40,5 +48,11 @@
     display: flex;
     align-items: center;
     padding-right: 10px;
+  }
+}
+
+.mobile-menu__link--active {
+  @include mq-mobile {
+    color: $green;
   }
 }
