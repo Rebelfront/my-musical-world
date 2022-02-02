@@ -24,7 +24,7 @@ POST {{host}}/login
 Content-Type: application/json
 
 {
-        "mail": "alentin.deschins@gmail.com",
+        "mail": "valentin.deschins@gmail.com",
         "lastname": "",
         "firstname": "",
         "pseudo": "",
