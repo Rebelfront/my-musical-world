@@ -1,13 +1,13 @@
-@import 'src/styles/abstracts/vars';
-@import 'src/styles/abstracts/mixins';
 @import 'src/styles/abstracts/functions';
 
 .homepage {
     flex-grow: 1;
     background: url("src/assets/vinyles.jpg");
+    display: flex;
 }
 .homepage__wrapper {
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     align-items: center;
     margin: auto 60px;
