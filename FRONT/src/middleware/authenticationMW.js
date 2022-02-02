@@ -2,6 +2,7 @@ import axios from 'axios';
 import { SUBMIT_LOGIN } from 'src/actions/login';
 import { SUBMIT_SIGNUP } from 'src/actions/signup';
 import { saveUser, USER_LOGOUT, USER_CHECK } from 'src/actions/user';
+import { signupFailure, openSignUpModal } from 'src/actions/signup';
 
 const authenticationMW = (store) => (next) => (action) => {
   const rootAPIUrl = process.env.ROOT_API_URL;
@@ -61,7 +62,14 @@ const authenticationMW = (store) => (next) => (action) => {
           const actionSaveUser = saveUser(res.data);
           store.dispatch(actionSaveUser);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          const action = signupFailure(err.message);
+          const openModal = openSignUpModal();
+          store.dispatch(action);
+          store.dispatch(openModal);
+        });
+
     }
       break;
     case USER_LOGOUT: {

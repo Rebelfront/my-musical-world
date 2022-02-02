@@ -6,6 +6,7 @@ import user from './user';
 import header from './header';
 import addMusic from './addMusic';
 import dashboard from './dashboard';
+import errors from './errors';
 
 export default combineReducers({
   login,
@@ -14,4 +15,5 @@ export default combineReducers({
   header,
   addMusic,
   dashboard,
+  errors,
 });
