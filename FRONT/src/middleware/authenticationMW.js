@@ -1,8 +1,7 @@
 /* eslint-disable no-lone-blocks */
 import axios from 'axios';
 import { SUBMIT_LOGIN } from 'src/actions/login';
-import { SUBMIT_SIGNUP } from 'src/actions/signup';
-import { signupFailure, openSignUpModal } from 'src/actions/signup';
+import { SUBMIT_SIGNUP, signupFailure, openSignUpModal } from 'src/actions/signup';
 import {
   saveUser, USER_LOGOUT, USER_CHECK, setActionLogged,
 } from 'src/actions/user';
@@ -51,7 +50,7 @@ const authenticationMW = (store) => (next) => (action) => {
     case SUBMIT_SIGNUP: {
       const {
         signup: {
-          mail, pseudo, firstname, lastname, password,
+          mail, pseudo, firstname, lastname, password, passwordConfirm,
         },
       } = store.getState();
 
@@ -61,6 +60,7 @@ const authenticationMW = (store) => (next) => (action) => {
         firstname,
         lastname,
         password,
+        password_confirmation: passwordConfirm,
       })
         .then((res) => {
           localStorage.setItem('token', res.headers.authorization);
@@ -76,7 +76,6 @@ const authenticationMW = (store) => (next) => (action) => {
           store.dispatch(action);
           store.dispatch(openModal);
         });
-
     }
       break;
     case USER_LOGOUT: {
