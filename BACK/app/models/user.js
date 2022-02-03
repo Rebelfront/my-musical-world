@@ -33,7 +33,7 @@ class User {
     /**
      * Fetches a single user with the given id from the database, used to get the connected user profile infos
      * @param {number} id 
-     * @returns {Object} User
+     * @returns {Object<User>} User
      * @throws {Error} a potential SQL error, or if no user with the given id is found in the database
      * @static
      * @async
@@ -172,7 +172,7 @@ class User {
     }
 
     /**
-     * Delete the user with the given id in the database
+     * remove the user with the given id in the database
      * @param {Number} id 
      * @throws {Error} a potential SQL error
      * @static

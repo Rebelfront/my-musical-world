@@ -5,6 +5,8 @@ const authentification = require('./middlewares/jsonWebToken');
 
 const userSchema = require('./schemas/userSchema');
 const { validateBody } = require('./middlewares/Validation');
+const { JsonWebTokenError } = require('jsonwebtoken');
+const User = require('./models/user');
 
 const router = Router();
 
@@ -34,8 +36,9 @@ router.post('/signup', validateBody(userSchema), userController.validSignup);
  * @route GET /user
  * @tags User
  * @security JWT middleware
- * @returns {object} 200 - success response - application/json
- * @returns {String} 500 - Internal Server Error 
+ * @param {JsonWebTokenError} request.userId
+ * @returns {User} 200 - success response - application/json
+ * @returns {Error} 500 - Internal Server Error 
  */
 router.get('/user', authentification, userController.getUserInfos);
 

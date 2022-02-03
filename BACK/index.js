@@ -1,8 +1,12 @@
 require('dotenv').config();
 const express = require('express');
-const expressJSDocSwagger = require('express-jsdoc-swagger');
 const router = require('./app/router');
+const cors = require('cors');
+
 const app = express();
+const port = process.env.PORT || 5050;
+
+const expressJSDocSwagger = require('express-jsdoc-swagger');
 
 const options = {
   info: {
@@ -18,6 +22,12 @@ const options = {
       type: 'http',
       scheme: 'basic',
     },
+    JWT: {
+      type: 'apiKey',
+      description: 'JWT authorization of an API',
+      name: 'Authorization',
+      in: 'header',
+    }
   },
   baseDir: __dirname,
   // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
@@ -44,7 +54,6 @@ const firstFunction = expressJSDocSwagger(app)(options);
 
 
 
-const port = process.env.PORT || 5050;
 
 // /**
 //  * GET /api/v1
@@ -64,8 +73,7 @@ app.use((request, response, next) => {
   next();
 })
 
-// on importe le module cors
-const cors = require('cors');
+
 //on met à jour les options de notre module cors
 const corsOptions = {
   exposedHeaders: `Authorization`,
@@ -79,6 +87,7 @@ app.use(express.json());
 app.use(router)
 
 app.listen(port, () => {
-    console.log(`Server started on http://localhost:${port}`);
+    console.log(`Server started on http://localhost:${port}`)
+    console.log(`api-docs on http://localhost:${port}/api-docs`);
 });
 
