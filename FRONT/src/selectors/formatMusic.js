@@ -18,7 +18,7 @@ export const formatTracks = async (tracks) => {
         trackFormated.artist = res.data.artist.name;
         trackFormated.year = Number(res.data.release_date.substring(0, 4));
         trackFormated.album = res.data.album.title;
-        trackFormated.urlImage = res.data.album.cover;
+        trackFormated.urlImage = res.data.album.cover_xl;
         trackFormated.apiId = res.data.id;
         trackFormated.urlSample = res.data.preview;
         albumId = res.data.album.id;
@@ -45,7 +45,7 @@ export const formatAlbums = async (albums) => {
         albumFormated.name = res.data.title;
         albumFormated.artist = res.data.artist.name;
         albumFormated.year = Number(res.data.release_date.substring(0, 4));
-        albumFormated.urlImage = res.data.cover;
+        albumFormated.urlImage = res.data.cover_xl;
         albumFormated.apiId = res.data.id;
         albumFormated.genre = res.data.genres.data[0].name;
       })
@@ -59,7 +59,7 @@ export const formatArtists = (artists) => {
   const artistsFormated = artists.map((artist) => {
     const artistFormated = {
       name: artist.name,
-      urlImage: artist.picture,
+      urlImage: artist.picture_xl,
       apiId: artist.id,
     };
     return artistFormated;

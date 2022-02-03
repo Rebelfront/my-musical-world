@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { GET_DASHBOARD_DATA, saveDashboardData, DELETE_DASHBOARD_ITEM } from 'src/actions/dashboard';
+import {
+  GET_DASHBOARD_DATA, saveDashboardData, DELETE_DASHBOARD_ITEM, pseudoNotExist,
+} from 'src/actions/dashboard';
 
 const dashboardMW = (store) => (next) => (action) => {
   const rootAPIUrl = process.env.ROOT_API_URL;
@@ -32,6 +34,8 @@ const dashboardMW = (store) => (next) => (action) => {
             store.dispatch(actionDashboardSave);
           })
           .catch((err) => {
+            const actionPseudoNotExist = pseudoNotExist();
+            store.dispatch(actionPseudoNotExist);
             console.log(err);
           });
       }

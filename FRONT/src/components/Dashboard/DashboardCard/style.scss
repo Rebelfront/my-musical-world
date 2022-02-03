@@ -1,0 +1,16 @@
+@import 'src/styles/abstracts/vars';
+@import 'src/styles/abstracts/mixins';
+
+.dashboard-card.dashboard-card {
+  box-shadow: 1px 2px 5px rgb(0 0 0 / 10%);
+  border-radius: 10px;
+  @include mq-mobile {
+    width: 100%;
+    margin: 0 auto 30px;
+    max-width: 300px;
+  }
+  @include mq-desktop {
+    margin-right: 30px;
+    width: 300px;
+  }
+}
