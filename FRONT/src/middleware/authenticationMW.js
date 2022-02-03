@@ -70,8 +70,7 @@ const authenticationMW = (store) => (next) => (action) => {
           store.dispatch(actionLogged);
         })
         .catch((err) => {
-          console.log(err);
-          const action = signupFailure(err.message);
+          const action = signupFailure(err.response.data);
           const openModal = openSignUpModal();
           store.dispatch(action);
           store.dispatch(openModal);
