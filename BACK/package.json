@@ -25,6 +25,7 @@
     "express-jsdoc-swagger": "^1.6.7",
     "joi": "^17.5.0",
     "jsonwebtoken": "^8.5.1",
-    "pg": "^8.7.1"
+    "pg": "^8.7.1",
+    "swagger-ui-express": "^4.3.0"
   }
 }
