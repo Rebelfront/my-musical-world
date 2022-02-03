@@ -151,6 +151,11 @@ class User {
 
             } else {
 
+                await client.query('DELETE FROM USER_LIKES_ALBUM WHERE user_id=$1', [id]);
+                await client.query('DELETE FROM USER_LIKES_ARTIST WHERE user_id=$1', [id]);
+                await client.query('DELETE FROM USER_LIKES_TRACK WHERE user_id=$1', [id]);
+
+
                 await client.query('DELETE FROM "USER" WHERE id=$1', [id]);
 
             }
