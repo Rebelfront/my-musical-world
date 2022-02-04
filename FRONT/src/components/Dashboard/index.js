@@ -10,6 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 import AlbumIcon from '@mui/icons-material/Album';
 import PersonIcon from '@mui/icons-material/Person';
 import AudiotrackIcon from '@mui/icons-material/Audiotrack';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 import { toggleAddMusicModal } from 'src/actions/addMusic';
 import { toggleSharingModal, getDashboardData } from 'src/actions/dashboard';
@@ -110,7 +111,8 @@ const Dashboard = () => {
             )}
             {isLogged && (
               <Fab size="medium" onClick={handleOpenAddMusicModal} sx={{ backgroundColor: style.blue }} className="dashboard__add-mobile" aria-label="add music">
-                <AddIcon sx={{ fontSize: '30px' }} />
+                <MusicNoteIcon sx={{ fontSize: '30px' }} />
+                <AddIcon sx={{ fontSize: '18px' }} />
               </Fab>
             )}
           </>
