@@ -84,30 +84,7 @@ module.exports = {
 
     },
 
-    
 
-
-    getAllItems: async (_, response) => {
-        const userId = request.userId;
-        const tracks = await Track.findAllByUser(userId);
-        const albums = await Album.findAllByUser(userId);
-        const artists = await Artist.findAllByUser(userId);
-        const items = { tracks, albums, artists };
-        //je ne sais pas si c'est possible de renvoyer la réponse comme ça
-        response.json(items);
-    },
-
-    findOne: async (request, response) => {
-        const id = parseInt(request.params.id, 10);
-        const type = request.params.type;
-        if (type == artist) {
-            const artist = await Artist.findOne(id);
-            response.json(artist);
-        } else if (type == album) {
-
-        }
-
-    },
 
     deleteOneItem: async (request, response) => {
         try {
@@ -117,8 +94,6 @@ module.exports = {
 
             if (itemType === 'album') {
               
-
-
                const album = await Album.delete(userId, itemId);
 
                 response.json(`l'album ${album} a été supprimé de votre discothèque`);

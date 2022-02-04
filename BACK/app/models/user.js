@@ -23,7 +23,6 @@ class User {
     * The User constructor
     * @param {object} obj a litteral object with properties copied into the instance
     */
-
     constructor(obj = {}) {
         for (const propName in obj) {
             this[propName] = obj[propName];
