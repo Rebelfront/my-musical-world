@@ -37,6 +37,10 @@
   padding: 0;
 }
 
+.result__card .card__content:last-child {
+  padding-bottom: 0;
+}
+
 .result__card .content__title {
 
   @include mq-mobile {
