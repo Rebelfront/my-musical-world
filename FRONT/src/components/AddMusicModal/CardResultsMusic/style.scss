@@ -2,13 +2,13 @@
 @import 'src/styles/abstracts/mixins';
 @import 'src/styles/abstracts/functions';
 
-.result__card {
+.addmusic__modal .result__card {
   display: flex;
   align-items: center;
+  margin: 0;
 
   @include mq-desktop {
     width: 435px;
-
   }
 }
 
@@ -34,6 +34,7 @@
 
 .result__card .card__content {
   text-align: center;
+  padding: 0;
 }
 
 .result__card .content__title {
@@ -79,8 +80,4 @@
 .result__card .button-green {
   margin-top: 5px;
   padding: 0 5px;
-}
-
-.css-46bh2p-MuiCardContent-root:last-child.css-46bh2p-MuiCardContent-root:last-child {
-  padding: 0;
 }

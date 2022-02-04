@@ -2,24 +2,17 @@
 @import 'src/styles/abstracts/mixins';
 @import 'src/styles/abstracts/functions';
 
-.sharing-modal .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+.sharing-modal__modal .MuiPaper-root.MuiPaper-root {
   width: 100%;
   max-width: 500px;
   margin: 15px;
 }
 
 .sharing-modal .sharing-modal__input.sharing-modal__input {
-
-  @include mq-mobile {
-    width: calc(100% - 15px);
-  }
-
-  @include mq-desktop {
-    width: calc(100% - 15px);
-  }
+  width: calc(100% - 15px);
 }
 
-.sharing-modal .css-1x51dt5-MuiInputBase-input-MuiInput-input {
+.sharing-modal__input .MuiInput-input {
   
   @include mq-mobile {
     font-size: rem(13);

@@ -2,7 +2,7 @@
 @import 'src/styles/abstracts/mixins';
 @import 'src/styles/abstracts/functions';
 
-.addmusic__modal .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+.addmusic__modal .MuiPaper-root {
   width: 100%;
   max-width: 915px;
   margin: 15px;
@@ -21,7 +21,7 @@
 
 }
 
-.addmusic__modal .css-13r4j3i {
+.addmusic__search .MuiBox-root {
   display: flex;
 
   @include mq-mobile {
