@@ -37,7 +37,6 @@ const SignUpModal = () => {
     const action = submitSignUp();
     dispatch(action);
   };
-  console.log(error);
   return (
     <div>
       <Dialog open={modalOpened} onClose={handleClose}>
@@ -124,11 +123,12 @@ const SignUpModal = () => {
               value={passwordConfirm}
               onChange={handleChangeInput}
             />
-            <DialogActions>
+            <DialogActions sx={{display: 'flex', alignContent: 'space-between', flexWrap: 'wrap'}}>
               {error && (
-                <Alert sx={{ mr: '166px' }} className="signupModal__error" severity="error">{error}</Alert>
+                <Alert className="signupModal__error" severity="error">{error}</Alert>
               )}
               <Button
+                sx={{ml:"auto", mt:"10px"}}
                 onClick={() => {
                   handleClose();
                   handleSubmit();

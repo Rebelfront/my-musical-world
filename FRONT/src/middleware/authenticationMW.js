@@ -1,10 +1,8 @@
 /* eslint-disable no-lone-blocks */
 import axios from 'axios';
-import { SUBMIT_LOGIN } from 'src/actions/login';
+import { SUBMIT_LOGIN, loginFailure, openLoginModal } from 'src/actions/login';
 import { SUBMIT_SIGNUP, signupFailure, openSignUpModal } from 'src/actions/signup';
-import {
-  saveUser, USER_LOGOUT, USER_CHECK, setActionLogged,
-} from 'src/actions/user';
+import { saveUser, USER_LOGOUT, USER_CHECK, setActionLogged } from 'src/actions/user';
 
 const authenticationMW = (store) => (next) => (action) => {
   const rootAPIUrl = process.env.ROOT_API_URL;
@@ -44,7 +42,12 @@ const authenticationMW = (store) => (next) => (action) => {
           const actionLogged = setActionLogged(res.data);
           store.dispatch(actionLogged);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          const action = loginFailure(err.response.data);
+          const openModal = openLoginModal();
+          store.dispatch(action);
+          store.dispatch(openModal);
+        });
     }
       break;
     case SUBMIT_SIGNUP: {
@@ -70,8 +73,7 @@ const authenticationMW = (store) => (next) => (action) => {
           store.dispatch(actionLogged);
         })
         .catch((err) => {
-          console.log(err);
-          const action = signupFailure(err.message);
+          const action = signupFailure(err.response.data);
           const openModal = openSignUpModal();
           store.dispatch(action);
           store.dispatch(openModal);

@@ -11,10 +11,12 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
+import { Alert } from '@mui/material';
 
 const LoginModal = () => {
   const dispatch = useDispatch();
   const { modalOpened, mail, password } = useSelector((state) => state.login);
+  const { error } = useSelector((state) => state.errors);
   const handleClose = () => {
     const action = closeLoginModal();
     dispatch(action);
@@ -66,8 +68,12 @@ const LoginModal = () => {
               value={password}
               onChange={handleChangeInput}
             />
-            <DialogActions>
+            <DialogActions sx={{display: 'flex', alignContent: 'space-between', flexWrap: 'wrap'}}>
+              {error && (
+                <Alert className="signupModal__error" severity="error">{error}</Alert>
+              )}
               <Button
+                sx={{ml:"auto", mt:"10px"}}
                 onClick={() => {
                   handleClose();
                   handleSubmit();
