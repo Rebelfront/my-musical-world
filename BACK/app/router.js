@@ -29,7 +29,7 @@ const router = Router();
  * @route POST /signup
  * @tags User
  * @param {SignUpPostJson} request.body.required Post infos to add in database
- * @param
+ * @param {JWT}
  * @returns {object} 201 - creation response - application/json
  * @returns {string} 500 - Internal Server Error 
  */
