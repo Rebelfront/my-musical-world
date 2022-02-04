@@ -41,6 +41,12 @@
   }
 }
 
+.dashboard__card-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  gap: 1rem;
+}
+
 .dashboard__add-mobile.dashboard__add-mobile, .dashboard__share-mobile.dashboard__share-mobile {
   position: fixed;
   right: 30px;
