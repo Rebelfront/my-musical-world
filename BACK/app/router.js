@@ -16,7 +16,7 @@ const router = Router();
  * @route POST /login
  * @tags Login
  * @returns {object} 200 - success response - application/json
- * @returns {String} 500 - Internal Server Error 
+ * @returns {string} 500 - Internal Server Error 
  */
 router.post('/login', userController.validLogin);
 
@@ -26,7 +26,7 @@ router.post('/login', userController.validLogin);
  * @route POST /signup
  * @tags SignUp
  * @returns {object} 201 - creation response - application/json
- * @returns {String} 500 - Internal Server Error 
+ * @returns {string} 500 - Internal Server Error 
  */
 router.post('/signup', validateBody(userSchema), userController.validSignup);
 
@@ -36,9 +36,9 @@ router.post('/signup', validateBody(userSchema), userController.validSignup);
  * @route GET /user
  * @tags User
  * @security JWT middleware
- * @param {JsonWebTokenError} request.userId
+ * @param {security} request.userId
  * @returns {User} 200 - success response - application/json
- * @returns {Error} 500 - Internal Server Error 
+ * @returns {error} 500 - Internal Server Error 
  */
 router.get('/user', authentification, userController.getUserInfos);
 
@@ -59,7 +59,7 @@ router.patch('/user', authentification, validateBody(userSchema), userController
  * @tags User
  * @security JWT middleware
  * @returns {object} 200 - success response - application/json
- * @returns {String} 500 - Internal Server Error 
+ * @returns {string} 500 - Internal Server Error 
  */
 router.delete('/user', authentification, userController.deleteUser);
 

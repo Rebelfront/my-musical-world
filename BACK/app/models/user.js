@@ -4,13 +4,13 @@ const bcrypt = require('bcrypt');
 
 /**
  * An entity representing a user of the website
- * @typedef {Object} User
- * @property {Number} id
- * @property {String} mail
- * @property {String} lastname
- * @property {String} firstname
- * @property {String} pseudo
- * @property {String} password
+ * @typedef {object} User
+ * @property {number} id
+ * @property {string} mail
+ * @property {string} lastname
+ * @property {string} firstname
+ * @property {string} pseudo
+ * @property {string} password
  */
 
 /**
@@ -21,7 +21,7 @@ class User {
 
     /**
     * The User constructor
-    * @param {Object} obj a litteral object with properties copied into the instance
+    * @param {object} obj a litteral object with properties copied into the instance
     */
 
     constructor(obj = {}) {
@@ -33,8 +33,7 @@ class User {
     /**
      * Fetches a single user with the given id from the database, used to get the connected user profile infos
      * @param {number} id 
-     * @returns {Object<User>} User
-     * @throws {Error} a potential SQL error, or if no user with the given id is found in the database
+     * @returns {object<User>|null} User, null if no user found
      * @static
      * @async
      */
@@ -55,10 +54,10 @@ class User {
 
     /**
      * Fetches a single user with the given mail and password from the database, used to log in a user
-     * @param {String} mail 
-     * @param {String} password 
-     * @returns {Object} User
-     * @throws {Error} a potential SQL error, if the password does not match the mail or if no user with the given mail is found in the database
+     * @param {string} mail user's mail
+     * @param {string} password user's password
+     * @returns {object} User
+     * @throws {error} a potential SQL error, if the password does not match the mail or if no user with the given mail is found in the database
      * @static
      * @async
      */
@@ -100,10 +99,10 @@ class User {
 
     /**
      * Add a User to the database, use to sign up a new user
-     * @param {String} mail 
-     * @param {String} password 
-     * @returns {Object} the newly created user
-     * @throws {Error} a potential SQL error, as if a user with the given mail already exists in the database
+     * @param {string} mail 
+     * @param {string} password 
+     * @returns {object} the newly created user
+     * @throws {error} a potential SQL error, as if a user with the given mail already exists in the database
      * @static
      * @async
      */
@@ -145,9 +144,9 @@ class User {
 
     /**
      * Update the User infos with the given token, hash the new password if a password is filled-out
-     * @param {String} password 
-     * @returns {Object} the user with the updated infos
-     * @throws {Error} a potential SQL error
+     * @param {string} password 
+     * @returns {object} the user with the updated infos
+     * @throws {error} a potential SQL error
      * @async
      */
     async updateUser(password) {
@@ -173,8 +172,8 @@ class User {
 
     /**
      * remove the user with the given id in the database
-     * @param {Number} id 
-     * @throws {Error} a potential SQL error
+     * @param {number} id 
+     * @throws {error} a potential SQL error
      * @static
      * @async
      */
@@ -192,7 +191,7 @@ class User {
                 await client.query('DELETE FROM "USER" WHERE id=$1', [id]);
 
             }
-        } catch (error) {
+        } catch (error) { 
             if (error.detail) {
                 throw new Error(error.detail);
             }

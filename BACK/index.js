@@ -27,7 +27,7 @@ const options = {
       description: 'JWT authorization of an API',
       name: 'Authorization',
       in: 'header',
-    }
+    },
   },
   baseDir: __dirname,
   // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
@@ -48,9 +48,9 @@ const options = {
   swaggerUiOptions: {},
 };
 
-const firstFunction = expressJSDocSwagger(app)(options);
+const firstFunction = expressJSDocSwagger(app);
 
-// firstFunction(options);
+firstFunction(options);
 
 
 
