@@ -19,12 +19,12 @@ const options = {
   },
 
   securityDefinitions: {
-    APIKey: {
-      type: 'apiKey',
-      description: 'JWT authorization of an API',
-      name: 'Authorization',
-      in: 'header'
-    },
+    // APIKey: {
+    //   type: 'apiKey',
+    //   description: 'JWT authorization of an API',
+    //   name: 'Authorization',
+    //   in: 'header'
+    // },
 
     BasicAuth: {
       type: 'http',

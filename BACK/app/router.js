@@ -12,6 +12,29 @@ const router = Router();
 
 
 
+
+/**
+ * Expected json object in request.body for signup
+ * @typedef {object} SignUpPostJson
+ * @property {string} mail
+ * @property {string} lastname
+ * @property {string} firstname
+ * @property {string} pseudo
+ * @property {string} password
+ */
+
+/**
+ * POST /signup
+ * @summary Responds with the newly created User object
+ * @route POST /signup
+ * @tags User
+ * @param {SignUpPostJson} request.body.required Post infos to add in database
+ * @param
+ * @returns {object} 201 - creation response - application/json
+ * @returns {string} 500 - Internal Server Error 
+ */
+ router.post('/signup', validateBody(userSchema), userController.validSignup);
+
 /**
  * Expected json object in request.body for login
  * @typedef {object} LoginPostJson
@@ -31,26 +54,7 @@ const router = Router();
 router.post('/login', userController.validLogin);
 
 
-/**
- * Expected json object in request.body for signup
- * @typedef {object} SignUpPostJson
- * @property {string} mail
- * @property {string} lastname
- * @property {string} firstname
- * @property {string} pseudo
- * @property {string} password
- */
 
-/**
- * POST /signup
- * @summary Responds with the newly created User object
- * @route POST /signup
- * @tags User
- * @param {SignUpPostJson} request.body.required Post infos to add in database
- * @returns {object} 201 - creation response - application/json
- * @returns {string} 500 - Internal Server Error 
- */
-router.post('/signup', validateBody(userSchema), userController.validSignup);
 
 /**
  * GET /user
