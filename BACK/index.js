@@ -17,18 +17,22 @@ const options = {
       name: 'MIT',
     },
   },
-  security: {
+
+  securityDefinitions: {
+    APIKey: {
+      type: 'apiKey',
+      description: 'JWT authorization of an API',
+      name: 'Authorization',
+      in: 'header'
+    },
+
     BasicAuth: {
       type: 'http',
       scheme: 'basic',
     },
-    JWT: {
-      type: 'apiKey',
-      description: 'JWT authorization of an API',
-      name: 'Authorization',
-      in: 'header',
-    },
+   
   },
+  
   baseDir: __dirname,
   // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
   filesPattern: './**/*.js',
@@ -55,14 +59,6 @@ firstFunction(options);
 
 
 
-// /**
-//  * GET /api/v1
-//  * @summary This is the summary of the endpoint
-//  * @return {object} 200 - success response
-//  */
-//  app.get('/api/v1', (req, res) => res.json({
-//   success: true,
-// }));
 
 // On passe l'app express en paramètre, puis on ré-exécute cette fonction
 // en passant l'objet de config en argument

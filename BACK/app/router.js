@@ -10,21 +10,43 @@ const User = require('./models/user');
 
 const router = Router();
 
+
+
+/**
+ * Expected json object in request.body for login
+ * @typedef {object} LoginPostJson
+ * @property {string} mail
+ * @property {string} password
+ */
+
 /**
  * POST /login
  * @summary Responds with the user token in the header
  * @route POST /login
- * @tags Login
+ * @tags User
+ * @param {LoginPostJson} request.body.required Post infos to add in database
  * @returns {object} 200 - success response - application/json
  * @returns {string} 500 - Internal Server Error 
  */
 router.post('/login', userController.validLogin);
 
+
+/**
+ * Expected json object in request.body for signup
+ * @typedef {object} SignUpPostJson
+ * @property {string} mail
+ * @property {string} lastname
+ * @property {string} firstname
+ * @property {string} pseudo
+ * @property {string} password
+ */
+
 /**
  * POST /signup
  * @summary Responds with the newly created User object
  * @route POST /signup
- * @tags SignUp
+ * @tags User
+ * @param {SignUpPostJson} request.body.required Post infos to add in database
  * @returns {object} 201 - creation response - application/json
  * @returns {string} 500 - Internal Server Error 
  */
@@ -36,7 +58,7 @@ router.post('/signup', validateBody(userSchema), userController.validSignup);
  * @route GET /user
  * @tags User
  * @security JWT middleware
- * @param {security} request.userId
+ * @param {security} userId.path.requested
  * @returns {User} 200 - success response - application/json
  * @returns {error} 500 - Internal Server Error 
  */
@@ -63,7 +85,19 @@ router.patch('/user', authentification, validateBody(userSchema), userController
  */
 router.delete('/user', authentification, userController.deleteUser);
 
+
+/**
+ * GET dashboard/{pseudo}
+ * @route GET /dashboard/{pseudo}
+ * @tags Dashboard
+ * @param {string} pseudo.path.required The user's pseudo of the albumms, artists and tracks to fetch
+ * 
+ */
 router.get('/dashboard/:pseudo', dashboardController.getUserItems);
+
+
+
+
 router.get('/dashboard', authentification, dashboardController.getUserItems);
 router.post('/dashboard/:type', authentification, dashboardController.addOneItem);
 router.delete('/dashboard/:type', authentification, dashboardController.deleteOneItem);

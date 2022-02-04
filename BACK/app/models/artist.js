@@ -15,7 +15,7 @@ const client = require('../database');
 class Artist {
 
     /**
-    * The Album constructor
+    * The Artist constructor
     * @param {object} obj a litteral object with properties copied into the instance
     */
     constructor(obj = {}) {
@@ -24,6 +24,14 @@ class Artist {
         }
     }
 
+    /**
+     * Add an artist to the user's dashboard
+     * @param {number} userId 
+     * @param {number} itemId 
+     * @returns {object<Artist>}
+     * @throws {error} a potential SQL error
+     * @async
+     */
     async addArtist(userId, itemId) {
 
         try {
@@ -67,6 +75,15 @@ class Artist {
 
     }
 
+    /**
+     * remove the Artist with the given itemId from the user's dashboard
+     * @param {number} userId 
+     * @param {number} itemId 
+     * @returns {string} artistName - the name of the artist that has been removed from the dashboard
+     * @throws {error} a potential SQL error
+     * @static
+     * @async
+     */
     static async delete(userId, itemId) {
 
         try {

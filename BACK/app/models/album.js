@@ -35,7 +35,7 @@ class Album {
      * @param {number} userId 
      * @param {number} itemId 
      * @returns {object<Album>}
-     * @throws {error} a potential SQL error, if the password does not match the mail or if no user with the given mail is found in the database
+     * @throws {error} a potential SQL error
      * @async
      */
     async addAlbum(userId, itemId) {
@@ -98,7 +98,7 @@ class Album {
      * remove the Album with the given itemId from the user's dashboard
      * @param {number} userId 
      * @param {number} itemId 
-     * @returns {string} albumName - the name of the album that has been removed from the dashbard
+     * @returns {string} albumName - the name of the album that has been removed from the dashboard
      * @throws {error} a potential SQL error
      * @static
      * @async
