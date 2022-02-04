@@ -41,7 +41,6 @@ const AddMusicModal = () => {
   };
 
   return (
-    <div className="addmusic">
       <Dialog className="addmusic__modal" open={modalOpened} onClose={handleClose}>
         <DialogTitle className="addmusic__title">Ajouter un titre / album / artiste</DialogTitle>
         <DialogContent className="addmusic__search">
@@ -124,7 +123,6 @@ const AddMusicModal = () => {
           </div>
         )}
       </Dialog>
-    </div>
   );
 };
 
