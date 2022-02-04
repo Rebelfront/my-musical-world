@@ -65,7 +65,7 @@ module.exports = {
             if (request.userId){
             const id = request.userId;
             const user = await User.findOne(id);
-            console.log(user); 
+            // console.log(user); 
             const music  = await Music.getMusic(user.pseudo);    
             response.json(music);
 
