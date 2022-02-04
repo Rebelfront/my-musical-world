@@ -37,7 +37,6 @@ const SignUpModal = () => {
     const action = submitSignUp();
     dispatch(action);
   };
-  console.log(error);
   return (
     <div>
       <Dialog open={modalOpened} onClose={handleClose}>
