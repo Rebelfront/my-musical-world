@@ -1,4 +1,6 @@
 import { deleteDashboardItem } from 'src/actions/dashboard';
+import { toggleAddMusicModal } from 'src/actions/addMusic';
+
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -13,6 +15,8 @@ import PropTypes from 'prop-types';
 
 import './style.scss';
 import style from 'src/styles/_exports.module.scss';
+
+import logo from 'src/assets/vinyles.jpg';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -38,6 +42,11 @@ const DashboardCard = ({
     dispatch(action);
   };
 
+  const handleOpenAddMusicModal = () => {
+    const action = toggleAddMusicModal();
+    dispatch(action);
+  };
+
   return (
     <Card className="dashboard-card" sx={{ mb: '20px' }}>
       <CardMedia
@@ -47,7 +56,7 @@ const DashboardCard = ({
         image={url_image}
       />
       <CardContent sx={{ textAlign: 'center' }}>
-        {type !== 'artist' && (
+        {type !== 'artist' && type !== 'empty' && (
           <Typography gutterBottom variant="h5" component="div">
             {artist}
           </Typography>
@@ -66,9 +75,9 @@ const DashboardCard = ({
           </Typography>
         )}
       </CardContent>
-      <Divider />
+      { (type === 'track' || (isLogged && type !== 'empty')) && <Divider sx={{ mt: 'auto' }} /> }
       <CardActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        {isLogged && (
+        {isLogged && type !== 'empty' && (
           <Button
             onClick={() => {
               setShowAlert(true);
@@ -86,6 +95,11 @@ const DashboardCard = ({
             }}
           >
             <PlayCircleFilledOutlinedIcon sx={{ color: style['dark-grey'] }} />
+          </Button>
+        )}
+        { type === 'empty' && (
+          <Button sx={{ margin: '0 auto' }} onClick={handleOpenAddMusicModal}>
+            Ajouter de la musique
           </Button>
         )}
       </CardActions>
@@ -130,6 +144,13 @@ DashboardCard.propTypes = {
   url_sample: PropTypes.string,
   genre: PropTypes.string,
   type: PropTypes.string.isRequired,
+};
+
+DashboardCard.defaultProps = {
+  name: 'Mon album favori',
+  type: 'empty',
+  api_id: 1,
+  url_image: logo,
 };
 
 export default DashboardCard;
