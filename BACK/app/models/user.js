@@ -40,8 +40,8 @@ class User {
 
                 if (isPwdValid === false) {
 
-                    console.log('Mot de passe incorrect.');
-                    throw new Error('Mot de passe incorrect.');
+                    console.log('Email ou mot de passe invalide.');
+                    throw new Error('Email ou mot de passe invalide.');
 
                 } else {
                     const user = new User(rows[0]);
@@ -50,8 +50,8 @@ class User {
                     return user;
                 }
             } else {
-                console.log(`Aucun utilisateur enregistré avec cet email.`);
-                throw new Error(`Aucun utilisateur enregistré avec cet email.`);
+                console.log(`Email ou mot de passe invalide.`);
+                throw new Error(`Email ou mot de passe invalide.`);
 
 
             }
