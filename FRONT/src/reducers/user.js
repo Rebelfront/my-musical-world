@@ -30,6 +30,7 @@ const user = (state = initialState, action = {}) => {
     case USER_RESET:
       return {
         ...initialState,
+        actionUnLogged: true,
       };
     case SET_ACTION_LOGGED:
       return {

@@ -4,7 +4,7 @@
 
 .addmusic__modal .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   width: 100%;
-  max-width: 900px;
+  max-width: 915px;
   margin: 15px;
 }
 
@@ -74,7 +74,10 @@
 
   @include mq-mobile {
     flex-direction: column;
-   
+  }
+
+  @include mq-desktop {
+    justify-content: center;
   }
 
 }
