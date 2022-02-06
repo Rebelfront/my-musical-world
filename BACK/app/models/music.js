@@ -2,38 +2,25 @@ const client = require('../database');
 
 class Music {
 
+
     static async getMusic(pseudo) {
         try {
 
             const music = await client.query('SELECT * FROM user_music WHERE pseudo=$1', [pseudo]);
-            //   console.log('music', music);
-            const rows = music.rows[0];
-            const row1 = rows[0];
-            delete rows.pseudo;
 
 
 
+            if (music.rows[0].artists[0] === null) {
+                music.rows[0].artists[0] = '';
+            }
 
-            // Object.entries(rows).forEach(entry => {
-            //     let [key, value] = entry;
-            //     console.log(value);
-            //     if (value == [null]) {
-            //         value = [];
+            if (music.rows[0].tracks[0] === null) {
+                music.rows[0].tracks[0] = '';
+            }
 
-            //     }
-
-            // });
-
-            // for (let row in rows) {
-            //     if (row = [null]) {
-            //         row = [];
-
-            //     }
-
-            //     console.log(typeof row)
-            // };
-
-            console.log(rows);
+            if (music.rows[0].albums[0] === null) {
+                music.rows[0].albums[0] = '';
+            }
 
             return music.rows[0];
 
