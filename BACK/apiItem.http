@@ -1,5 +1,5 @@
 @host=http://localhost:3200
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo3MCwiaWF0IjoxNjQ0MTA0MTcwLCJleHAiOjE2NDQxMjU3NzB9.qBWxK0zgQmZ9N5qmJdH2wlz5fzKmlbu1ms-t6nIHp7c
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo3MCwiaWF0IjoxNjQ0MjI0MTAxLCJleHAiOjE2NDQyNDU3MDF9.uqyiLVTmWjJsXmUt1u8V2xpTpWCw3bcDk62jCsxVxhU
 
 ###se connecter
 POST {{host}}/login
