@@ -1,10 +1,10 @@
 import { OPEN_LOGIN_MODAL, CLOSE_LOGIN_MODAL } from '../actions/login';
-import { CHANGE_INPUT } from '../actions';
+// import { CHANGE_INPUT } from '../actions';
 
 const initialState = {
   modalOpened: false,
-  mail: '',
-  password: '',
+  // mail: '',
+  // password: '',
 };
 
 const login = (state = initialState, action = {}) => {
@@ -19,11 +19,11 @@ const login = (state = initialState, action = {}) => {
         ...state,
         modalOpened: false,
       };
-    case CHANGE_INPUT:
-      return {
-        ...state,
-        [action.payload.name]: action.payload.value,
-      };
+    // case CHANGE_INPUT:
+    //   return {
+    //     ...state,
+    //     [action.payload.name]: action.payload.value,
+    //   };
     default:
       return state;
   }

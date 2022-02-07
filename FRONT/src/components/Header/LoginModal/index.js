@@ -31,13 +31,13 @@ const LoginModal = () => {
 
   const validationSchema = yup.object({
     mail: yup
-      .string('Enter your email')
-      .email('Enter a valid email')
-      .required('Email is required'),
+      .string('Entrez votre email')
+      .email('Entrez un email valide.')
+      .required('Le champ "Email" est requis'),
     password: yup
-      .string('Enter your password')
-      .matches('^[a-zA-Z0-9]{5,30}$')
-      .required('Password is required'),
+      .string('Entrez votre mot de passe')
+      .matches('^[a-zA-Z0-9]{5,30}$', 'Votre mot de passe doit contenir entre 5 et 30 caractères.')
+      .required('Le champ "Mot de passe" est requis'),
   });
 
   const formik = useFormik({
@@ -47,8 +47,7 @@ const LoginModal = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      const action = submitLogin();
+      const action = submitLogin(values);
       dispatch(action);
     },
   });
@@ -66,52 +65,51 @@ const LoginModal = () => {
             noValidate
             autoComplete="off"
           >
-            <form onSubmit={formik.handleSubmit}>
-              <TextField
-                autoFocus
-                margin="dense"
-                name="mail"
-                id="mail"
-                label="Email"
-                type="email"
-                fullWidth
-                variant="standard"
-                placeholder="Entrez votre email"
-                value={formik.values.mail}
-                onChange={formik.handleChange}
-                error={formik.touched.mail && Boolean(formik.errors.mail)}
-                helperText={formik.touched.mail && formik.errors.mail}
-              />
-              <TextField
-                margin="dense"
-                name="password"
-                id="password"
-                label="Mot de passe"
-                type="password"
-                fullWidth
-                variant="standard"
-                placeholder="Entrez votre mot de passe"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                error={formik.touched.password && Boolean(formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
-              />
-              <DialogActions sx={{ display: 'flex', alignContent: 'space-between', flexWrap: 'wrap' }}>
-                {error && (
+            <TextField
+              autoFocus
+              margin="dense"
+              name="mail"
+              id="mail"
+              label="Email"
+              type="email"
+              fullWidth
+              variant="standard"
+              placeholder="Entrez votre email"
+              value={formik.values.mail}
+              onChange={formik.handleChange}
+              error={formik.touched.mail && Boolean(formik.errors.mail)}
+              helperText={formik.touched.mail && formik.errors.mail}
+            />
+            <TextField
+              margin="dense"
+              name="password"
+              id="password"
+              label="Mot de passe"
+              type="password"
+              fullWidth
+              variant="standard"
+              placeholder="Entrez votre mot de passe"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+            />
+            <DialogActions sx={{ display: 'flex', alignContent: 'space-between', flexWrap: 'wrap' }}>
+              {error && (
                 <Alert className="signupModal__error" severity="error">{error}</Alert>
-                )}
-                <Button
-                  sx={{ ml: 'auto', mt: '10px' }}
-                  onClick={() => {
-                    handleClose();
-                  }}
-                  className="button-green"
-                  type="submit"
-                >
-                  Se connecter
-                </Button>
-              </DialogActions>
-            </form>
+              )}
+              <Button
+                sx={{ ml: 'auto', mt: '10px' }}
+                onClick={() => {
+                  formik.handleSubmit();
+                  // handleClose();
+                }}
+                className="button-green"
+                type="submit"
+              >
+                Se connecter
+              </Button>
+            </DialogActions>
           </Box>
         </DialogContent>
         <IconButton

@@ -2,7 +2,9 @@
 import axios from 'axios';
 import { SUBMIT_LOGIN, loginFailure, openLoginModal } from 'src/actions/login';
 import { SUBMIT_SIGNUP, signupFailure, openSignUpModal } from 'src/actions/signup';
-import { saveUser, USER_LOGOUT, USER_CHECK, setActionLogged } from 'src/actions/user';
+import {
+  saveUser, USER_LOGOUT, USER_CHECK, setActionLogged,
+} from 'src/actions/user';
 
 const authenticationMW = (store) => (next) => (action) => {
   const rootAPIUrl = process.env.ROOT_API_URL;
@@ -29,11 +31,10 @@ const authenticationMW = (store) => (next) => (action) => {
       break;
     case SUBMIT_LOGIN: {
       // double destructuration
-      const { login: { mail, password } } = store.getState();
+      // const { login: { mail, password } } = store.getState();
 
       axios.post(`${rootAPIUrl}/login`, {
-        mail,
-        password,
+        ...action.payload,
       })
         .then((res) => {
           localStorage.setItem('token', res.headers.authorization);
