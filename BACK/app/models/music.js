@@ -11,15 +11,15 @@ class Music {
 
 
             if (music.rows[0].artists[0] === null) {
-                music.rows[0].artists[0] = '';
+                music.rows[0].artists = [];
             }
 
             if (music.rows[0].tracks[0] === null) {
-                music.rows[0].tracks[0] = '';
+                music.rows[0].tracks = [];
             }
 
             if (music.rows[0].albums[0] === null) {
-                music.rows[0].albums[0] = '';
+                music.rows[0].albums = [];
             }
 
             return music.rows[0];
