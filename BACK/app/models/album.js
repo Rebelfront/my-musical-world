@@ -51,20 +51,16 @@ class Album {
                 const checkUserLikesAlbum = await client.query(`SELECT * FROM USER_LIKES_ALBUM WHERE (api_id, user_id)=($1, $2);`, [itemId, userId]);
 
                 if (checkUserLikesAlbum.rows[0]) {
-                    console.log('album deja liké');
                     throw new Error('album déjà liké');
                 }
 
             } else {
 
-                const { rows } = await client.query('INSERT INTO ALBUM(name, genre, artist, year, url_image, api_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', [this.name, this.genre, this.artist, this.year, this.urlImage, itemId]);
-
-                //this.id = rows[0].id;
+                const { rows } = await client.query('INSERT INTO ALBUM(name, genre, artist, year, url_image, api_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING id', 
+                [this.name, this.genre, this.artist, this.year, this.urlImage, itemId]);
                 itemId = this.apiId;
 
             }
-
-            // console.log('this', this);
 
             await client.query('INSERT INTO USER_LIKES_ALBUM (api_id, user_id) VALUES ($1, $2)', [itemId, userId]);
             console.log('album ajouté à votre bibliotheque')
@@ -81,18 +77,6 @@ class Album {
         }
 
     }
-
-    // static async findAllByUser(id) {
-    //     try {
-    //         const { rows } = await db.query('SELECT tracks, artists, albums FROM userTracksAlbumsArtists WHERE id=$1');
-    //         return rows.map(row => new Track(row));
-    //     } catch (error) {
-    //         if (error.detail) {
-    //             throw new Error(error.detail);
-    //         }
-    //         throw error;
-    //     }
-    // }
 
     /**
      * remove the Album with the given itemId from the user's dashboard

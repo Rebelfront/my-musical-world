@@ -1,3 +1,5 @@
+-- A retirer avant de merger sur master ---
+
 CREATE VIEW albumWithUserId AS 
 SELECT pseudo,
 ARRAY_AGG (ALBUM) AS albums

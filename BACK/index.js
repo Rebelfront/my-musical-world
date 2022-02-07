@@ -19,39 +19,15 @@ const options = {
     },
   },
 
-  components: {
-    securitySchemes: {
-      jwt: {
-        type: "http",
-        scheme: "bearer",
-        in: "header",
-        bearerFormat: "JWT"
-      },
-    }
-  },
-
-  security: [{
-    jwt: []
-  }],
-
-swagger: "2.0",
-
-
-  securityDefinitions: {
-    // APIKey: {
-    //   type: 'apiKey',
-    //   description: 'JWT authorization of an API',
-    //   name: 'Authorization',
-    //   in: 'header'
-    // },
-
-    BasicAuth: {
+  security: {
+    BearerAuth: {
       type: 'http',
-      scheme: 'basic',
+      scheme: 'bearer',
+      bearerFormat: 'JWT'
     },
-   
+
   },
-  
+
   baseDir: __dirname,
   // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
   filesPattern: './**/*.js',
@@ -69,6 +45,8 @@ swagger: "2.0",
   // you can extend swagger-ui-express config. You can checkout an example of this
   // in the `example/configuration/swaggerOptions.js`
   swaggerUiOptions: {},
+  // multiple option in case you want more that one instance
+  multiple: true,
 };
 
 const firstFunction = expressJSDocSwagger(app);
@@ -76,25 +54,11 @@ const firstFunction = expressJSDocSwagger(app);
 firstFunction(options);
 
 
-
-
-
-// On passe l'app express en paramètre, puis on ré-exécute cette fonction
-// en passant l'objet de config en argument
-
-
-app.use((request, response, next) => {
-  console.log('passé par là')
-  next();
-})
-
-
-//on met à jour les options de notre module cors
+//Mise à jour des options du module cors
 const corsOptions = {
   exposedHeaders: `Authorization`,
 };
-// et on l'applique dans un middleware pour autoriser tous les domaines à se connecter à notre API
-// app.use(cors('*'));
+// Middleware pour autoriser tous les domaines à se connecter à notre API
 app.use(cors(corsOptions));
 
 app.use(express.json());

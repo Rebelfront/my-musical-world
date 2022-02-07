@@ -70,20 +70,16 @@ class User {
 
                 if (isPwdValid === false) {
 
-                    console.log('password not good');
                     throw new Error('password not good');
 
                 } else {
                     const user = new User(rows[0]);
                     delete user.password
-                    console.log('model validMail', user);
                     return user;
                 }
             } else {
-                console.log(`No user found for mail ${mail}`);
+
                 throw new Error(`No user found for mail ${mail}`);
-
-
             }
         } catch (error) {
             console.log(error);
@@ -125,14 +121,13 @@ class User {
                 delete this.password;
                 return this;
             } else {
-                console.log('checkUser exist')
+   
                 throw new Error('user already exists');
             }
 
 
         } catch (error) {
 
-            console.log(error);
             if (error.detail) {
                 throw new Error(error.detail);
             }
@@ -179,7 +174,6 @@ class User {
     static async delete(id) {
 
         try {
-
             const { rows } = await client.query(`SELECT FROM "USER" WHERE id=$1`, [id]);
 
             if (rows[0] === undefined) {
@@ -188,7 +182,6 @@ class User {
             } else {
 
                 await client.query('DELETE FROM "USER" WHERE id=$1', [id]);
-
             }
         } catch (error) { 
             if (error.detail) {

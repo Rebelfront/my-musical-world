@@ -44,18 +44,16 @@ class Track {
         try {
 
             const checkTrack = await client.query(`SELECT * FROM TRACK WHERE api_id=$1`, [itemId]);
-            //console.log(checkTrack.rows[0]);
+       
 
             if (checkTrack.rows[0]) {
-                //this.id = checkTrack.rows[0].id;
-                //console.log(checkTrack.rows[0].id);
+
                 const checkUserLikesTrack = await client.query(`SELECT * FROM USER_LIKES_TRACK WHERE (api_id, user_id)=($1, $2);`, [itemId, userId]);
 
                 if (checkUserLikesTrack.rows[0]) {
                     console.log('chanson deja likée');
                     throw new Error('chanson déjà likée');
                 }
-
             } else {
 
                 const { rows } = await client.query(
@@ -68,18 +66,13 @@ class Track {
                     this.urlImage,
                         itemId,
                     this.urlSample]);
-
-                // this.id = rows[0].id;
                 itemId = this.apiId;
 
             }
 
-            // console.log('this', this);
-
             await client.query('INSERT INTO USER_LIKES_TRACK (api_id, user_id) VALUES ($1, $2)', [itemId, userId]);
             console.log('Chanson ajoutée à votre bibliotheque')
             return this;
-
 
         } catch (error) {
 
@@ -91,6 +84,7 @@ class Track {
         }
 
     }
+
     /**
      * remove the Track with the given itemId from the user's dashboard
      * @param {number} userId 
@@ -108,8 +102,6 @@ class Track {
             const track = await client.query('SELECT * FROM TRACK WHERE api_id=$1', [itemId]);
             const trackName = track.rows[0].name;
             return trackName;
-            // console.log('track.rows[0].name', track.rows[0].name);
-
 
         } catch (error) {
             if (error.detail) {
@@ -119,6 +111,5 @@ class Track {
         }
     }
 }
-
 
 module.exports = Track;

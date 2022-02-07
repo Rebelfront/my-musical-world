@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const users = require('./user.json');
 
-const client = require('../database');
+const client = require('../app/database');
 
 
 // Method to import some json data in "USER" table

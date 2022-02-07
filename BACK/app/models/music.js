@@ -6,10 +6,19 @@ class Music {
         try {
 
             const music = await client.query('SELECT * FROM user_music WHERE pseudo=$1', [pseudo]);
-            //   console.log('music', music);
-            console.log('musicrows', music.rows[0].artists);
 
-            // return rows.map(row => new Music(row));
+            if (music.rows[0].artists[0] === null) {
+                music.rows[0].artists = [];
+            }
+
+            if (music.rows[0].tracks[0] === null) {
+                music.rows[0].tracks = [];
+            }
+
+            if (music.rows[0].albums[0] === null) {
+                music.rows[0].albums = [];
+            }
+
             return music.rows[0];
 
         } catch (error) {
