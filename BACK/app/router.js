@@ -33,7 +33,7 @@ const router = Router();
  * @returns {object} 201 - creation response - application/json
  * @returns {string} 500 - Internal Server Error 
  */
- router.post('/signup', validateBody(userSchema), userController.validSignup);
+router.post('/signup', validateBody(userSchema), userController.validSignup);
 
 /**
  * Expected json object in request.body for login
@@ -69,11 +69,12 @@ router.get('/user', authentification, userController.getUserInfos);
 
 /**
  * PATCH /user
- * @summary Responds
+ * @summary Update the user infos with the ones we send in the body
  * @route PATCH /user
+ * @param {SignUpPostJson} request.body.required Post infos to update in database
  * @tags User
  * @security BearerAuth 
- * @returns {object} 200 - success response - application/json
+ * @returns {object} 201 - success response - application/json
  * @returns {error} 500 - Internal Server Error  
  */
 router.patch('/user', authentification, validateBody(userSchema), userController.updateUser);
@@ -91,47 +92,38 @@ router.patch('/user', authentification, validateBody(userSchema), userController
 router.delete('/user', authentification, userController.deleteUser);
 
 
-/**
- * GET dashboard/{pseudo}
- * @summary Get a user's shared dashboard 
- * @route GET /dashboard/{pseudo}
- * @tags Dashboard
- * @param {string} pseudo.path.required The user's pseudo of the items to fetch
- * @returns {object} 200 - success response - application/json
- * @returns {string} 500 - Internal Server Error 
- */
-router.get('/dashboard/:pseudo', dashboardController.getUserItems);
-
-
-
 
 /**
- * Expected json object in request.body for post type = album
+ * Expected json object in request.body for post type = album 
  * @typedef {object} postAlbum
  * @property {string} name
  * @property {string} genre
  * @property {string} artist
  * @property {number} year
- * @property {string} urlImage - can be empty
+ * @property {string} urlImage
  * @property {number} apiId
+ * @example 
  */
 
 /**
  * Expected json object in request.body for for post type = artist
  * @typedef {object} postArtist
- * @property {string} name (Beatles)
- * @property {string} urlImage - can be empty
+ * @property {string} name 
+ * @property {string} urlImage
  * @property {number} apiId 
  */
 
 /**
  * Expected json object in request.body for for post type = track
  * @typedef {object} postTrack
- * @property {string} mail
- * @property {string} lastname
- * @property {string} firstname
- * @property {string} pseudo
- * @property {string} password
+ * @property {string} name
+ * @property {string} genre
+ * @property {string} artist
+ * @property {string} year
+ * @property {string} album
+ * @property {string} urlImage
+ * @property {number} apiId
+ * @property {string} urlSample
  */
 
 /**
@@ -146,20 +138,24 @@ router.get('/dashboard/:pseudo', dashboardController.getUserItems);
 router.get('/dashboard', authentification, dashboardController.getUserItems);
 
 /**
+ * GET /dashboard/{pseudo}
+ * @summary Get a user's shared dashboard 
+ * @route GET /dashboard/{pseudo}
+ * @tags Dashboard
+ * @param {string} pseudo.path.required - user's pseudo we want to see the dashboard
+ * @returns {object} 200 - success response - application/json
+ * @returns {string} 500 - Internal Server Error 
+ */
+ router.get('/dashboard/:pseudo', dashboardController.getUserItems);
+
+
+/**
  * POST /dashboard/{type}
  * @summary Post a new item in the user's dashboard
  * @route POST /dashboard/{type}
  * @tags Dashboard
- * @param {string} request.params.type - le type d'item  
- * @param {object} request.body - l'objet à ajouter au format json
- * @example request.body - [{
-        "name": "Abbey Road (Remastered)",
-        "genre": "rock",
-        "artist": "The Beatles",
-        "year": "2015",
-        "urlImage": "https://e-cdns-images.dzcdn.net/images/cover/aa94ab293730bb7845d2aa8c672b2c29/1000x1000-000000-80-0-0.jpg",
-        "apiId": 12047952
-    }]
+ * @param {string} type.path.required - le type d'item  
+ * @param {postAlbum | postArtist | postTrack} request.body.required - l'objet à ajouter au format json
  * @security BearerAuth
  * @returns {object} 200 - success response - application/json
  * @returns {string} 500 - Internal Server Error 
@@ -171,10 +167,10 @@ router.post('/dashboard/:type', authentification, dashboardController.addOneItem
  * @summary Delete items from the user's librairy 
  * @route DELETE /dashboard/{type}
  * @tags Dashboard
- * @param {string} request.params.type - le type d'item 
- * @param {number} request.body.apiId - l'id de l'item à supprimer
+ * @param {string} type.path.required - le type d'item  
+ * @param {postAlbum | postArtist | postTrack} request.body.required - l'objet à supprimer au format json
  * @security BearerAuth
- * @returns {object} 200 - success response - application/json
+ * @returns {string} 200 - success response - application/json
  * @returns {string} 500 - Internal Server Error 
  */
 router.delete('/dashboard/:type', authentification, dashboardController.deleteOneItem);

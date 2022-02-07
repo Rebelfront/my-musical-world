@@ -104,3 +104,7 @@ Content-Type: application/json
 GET {{host}}/dashboard
 Authorization:{{token}}
 Content-Type: application/json
+
+### Récupérer la musique d'un utilisateur
+GET {{host}}/dashboard/CortoMaltese
+Content-Type: application/json
