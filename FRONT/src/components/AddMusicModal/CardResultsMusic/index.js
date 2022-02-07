@@ -1,4 +1,5 @@
 import './style.scss';
+import styles from 'src/styles/_exports.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { submitAddMusic } from 'src/actions/addMusic';
@@ -10,17 +11,17 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 const CardResultsMusic = ({ music }) => {
   const dispatch = useDispatch();
   const { typeMusic } = useSelector((state) => state.addMusic);
-  const { artists, albums, tracks} = useSelector((state) => state.dashboard);
-  const isAlreadyAdded = (id) => {
-    return [...artists, ...albums, ...tracks].some(element => element?.api_id === id);
-    // here "element && element.apiId" would have had the same effect, "?" is checking if element exists before testing the condition
-  };
-  const handleSubmit = (event) => {
-    const action = submitAddMusic(Number(event.target.id));
+  const { artists, albums, tracks } = useSelector((state) => state.dashboard);
+  const isAlreadyAdded = (id) => [...artists, ...albums, ...tracks].some((element) => element?.api_id === id)
+  // here "element && element.apiId" would have had the same effect, "?" is checking if element exists before testing the condition
+  ;
+  const handleSubmit = (apiId) => {
+    const action = submitAddMusic(apiId);
     dispatch(action);
   };
 
@@ -42,11 +43,11 @@ const CardResultsMusic = ({ music }) => {
             </Typography>
             {(typeMusic === 1 || typeMusic === 2) && (
               <Typography className="content__infos" component="div" variant="body2" color="text.secondary">
-                <p>{music.album}</p>
+                <p className="infos__txt">{music.album}</p>
                 {(typeMusic === 1) && (
-                  <p>{music.artist}</p>
+                  <p className="infos__txt">{music.artist}</p>
                 )}
-                <p>{music.year} / {music.genre}</p>
+                <p className="infos__txt">{music.year} / {music.genre}</p>
               </Typography>
             )}
             <div className="card__buttons">
@@ -61,20 +62,19 @@ const CardResultsMusic = ({ music }) => {
               </Button>
               )}
               {isAlreadyAdded(music.apiId) ? (
-                <Button
-                  id={music.apiId}
-                  className="button-green"
+                <Typography
+                  sx={{ display: 'flex', alignItems: 'center', color: styles.green }}
                 >
-                  Déjà ajouté !
-                </Button>
+                  <CheckCircleOutlineIcon />
+                  Ajouté
+                </Typography>
               ) : (
                 <Button
-                id={music.apiId}
-                onClick={handleSubmit}
-                className="button-green"
+                  onClick={() => handleSubmit(music.apiId)}
+                  className="button-green"
                 >
                   Ajouter
-              </Button>
+                </Button>
               )}
             </div>
           </CardContent>
