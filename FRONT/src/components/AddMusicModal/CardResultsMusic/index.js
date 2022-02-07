@@ -17,8 +17,7 @@ const CardResultsMusic = ({ music }) => {
   const { artists, albums, tracks} = useSelector((state) => state.dashboard);
   const isAlreadyAdded = (id) => {
     return [...artists, ...albums, ...tracks].some(element => element?.api_id === id);
-    // içi j'aurais pu mettre element && element.apiId ce qui aurait donné le même résultat
-    // l'operateur ? vérifie qu'element existe avant de tester l'égalité
+    // here "element && element.apiId" would have had the same effect, "?" is checking if element exists before testing the condition
   };
   const handleSubmit = (event) => {
     const action = submitAddMusic(Number(event.target.id));
