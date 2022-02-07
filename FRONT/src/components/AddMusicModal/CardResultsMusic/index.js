@@ -14,6 +14,11 @@ import Button from '@mui/material/Button';
 const CardResultsMusic = ({ music }) => {
   const dispatch = useDispatch();
   const { typeMusic } = useSelector((state) => state.addMusic);
+  const { artists, albums, tracks} = useSelector((state) => state.dashboard);
+  const isAlreadyAdded = (id) => {
+    return [...artists, ...albums, ...tracks].some(element => element?.api_id === id);
+    // here "element && element.apiId" would have had the same effect, "?" is checking if element exists before testing the condition
+  };
   const handleSubmit = (event) => {
     const action = submitAddMusic(Number(event.target.id));
     dispatch(action);
@@ -55,13 +60,22 @@ const CardResultsMusic = ({ music }) => {
               >Ecouter un extrait
               </Button>
               )}
-              <Button
+              {isAlreadyAdded(music.apiId) ? (
+                <Button
+                  id={music.apiId}
+                  className="button-green"
+                >
+                  Déjà ajouté !
+                </Button>
+              ) : (
+                <Button
                 id={music.apiId}
                 onClick={handleSubmit}
                 className="button-green"
-              >
-                Ajouter
+                >
+                  Ajouter
               </Button>
+              )}
             </div>
           </CardContent>
         </div>
