@@ -1,16 +1,16 @@
 @host=http://localhost:3200
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoyLCJpYXQiOjE2NDM2NDE3ODUsImV4cCI6MTY0MzY2MzM4NX0.2RzAEQUbcLHAgeG8TFgJTyup7mmneMJhA9tFeShjUHg
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo3MCwiaWF0IjoxNjQ0MTA0MTcwLCJleHAiOjE2NDQxMjU3NzB9.qBWxK0zgQmZ9N5qmJdH2wlz5fzKmlbu1ms-t6nIHp7c
 
 ###se connecter
 POST {{host}}/login
 Content-Type: application/json
 
 {
-        "mail": "valentin.deschins@gmail.com",
+        "mail": "zigg@gmail.com",
         "lastname": "",
         "firstname": "",
         "pseudo": "",
-        "password": "Valentin"
+        "password": "ziggy"
     }
 
 
@@ -105,6 +105,6 @@ Content-Type: application/json
     }
 
 ### Récupérer la musique d'un utilisateur
-GET {{host}}/dashboard/claire
+GET {{host}}/dashboard
 Authorization:{{token}}
 Content-Type: application/json

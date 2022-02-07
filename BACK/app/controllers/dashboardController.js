@@ -10,7 +10,7 @@ const Music = require('../models/music');
 
 module.exports = {
 
-     // ajouter un album/artiste/chanson au dashboard
+    // ajouter un album/artiste/chanson au dashboard
     addOneItem: async (request, response) => {
 
         try {
@@ -60,23 +60,25 @@ module.exports = {
 
     //afficher/get toute la bibliotheque de l'user
     getUserItems: async (request, response) => {
-        
+
         try {
-            if (request.userId){
-            const id = request.userId;
-            const user = await User.findOne(id);
-            console.log(user); 
-            const music  = await Music.getMusic(user.pseudo);    
-            response.json(music);
+            if (request.userId) {
+                const id = request.userId;
+                const user = await User.findOne(id);
+                const music = await Music.getMusic(user.pseudo);
+
+                console.log('music', music);
+                response.json(music);
+
 
             } else {
                 const pseudo = request.params.pseudo;
-                const music  = await Music.getMusic(pseudo);    
+                const music = await Music.getMusic(pseudo);
                 response.json(music);
 
-                    }
-            
-            
+            }
+
+
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);
@@ -84,7 +86,7 @@ module.exports = {
 
     },
 
-    
+
 
 
     getAllItems: async (_, response) => {
@@ -116,10 +118,10 @@ module.exports = {
             const userId = request.userId;
 
             if (itemType === 'album') {
-              
 
 
-               const album = await Album.delete(userId, itemId);
+
+                const album = await Album.delete(userId, itemId);
 
                 response.json(`l'album ${album} a été supprimé de votre discothèque`);
                 // response.json(`l'album est supprmé`);
