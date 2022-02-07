@@ -9,6 +9,7 @@ const port = process.env.PORT || 5050;
 const expressJSDocSwagger = require('express-jsdoc-swagger');
 
 const options = {
+  openapi: "3.0.0",
   info: {
     version: '1.0.0',
     title: 'API-MyMusicalWorld',
@@ -17,6 +18,24 @@ const options = {
       name: 'MIT',
     },
   },
+
+  components: {
+    securitySchemes: {
+      jwt: {
+        type: "http",
+        scheme: "bearer",
+        in: "header",
+        bearerFormat: "JWT"
+      },
+    }
+  },
+
+  security: [{
+    jwt: []
+  }],
+
+swagger: "2.0",
+
 
   securityDefinitions: {
     // APIKey: {

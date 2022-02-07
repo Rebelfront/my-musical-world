@@ -61,10 +61,19 @@ router.post('/login', userController.validLogin);
  * @summary Responds with one User from the database
  * @route GET /user
  * @tags User
- * @security JWT middleware
+ * @security JWT middleware bearerAuth: [] 
  * @param {security} userId.path.requested
- * @returns {User} 200 - success response - application/json
+ * @returns {object} 200 - success response - application/json
  * @returns {error} 500 - Internal Server Error 
+ * @swagger
+ * components:
+ *  securitySchemes:
+ *      bearerAuth: login Authorization 
+ *          type: http
+ *          scheme: bearer
+ *          bearerFormat: JWT    
+ * security:
+ *  - bearerAuth: [] 
  */
 router.get('/user', authentification, userController.getUserInfos);
 
@@ -100,10 +109,15 @@ router.delete('/user', authentification, userController.deleteUser);
 router.get('/dashboard/:pseudo', dashboardController.getUserItems);
 
 
-
-
+/**
+ * 
+ */
 router.get('/dashboard', authentification, dashboardController.getUserItems);
+
+
 router.post('/dashboard/:type', authentification, dashboardController.addOneItem);
+
+
 router.delete('/dashboard/:type', authentification, dashboardController.deleteOneItem);
 
 module.exports = router;
