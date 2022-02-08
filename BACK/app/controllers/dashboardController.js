@@ -34,7 +34,7 @@ module.exports = {
                 const album = await instance.addAlbum(userId, itemId);
 
                 // On retourne un message de validation au format JSON pour le front
-                return response.json(`Album ${album} ajouté`);
+                return response.json(`Album ${album.name} ajouté`);
 
                 // si type = artist
             } else if (itemType === 'artist') {
@@ -149,7 +149,6 @@ module.exports = {
             }
 
         } catch (error) {
-            console.log('error du controller');
             response.status(500).json(error.message);
         }
 

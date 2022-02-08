@@ -11,24 +11,11 @@ module.exports = {
 
             const mail = request.body.mail;
             const password = request.body.password;
-<<<<<<< HEAD
             const instance = new User(request.body);
             const user = await instance.addUser(mail, password);
             const token = jwt.makeToken(user.id);
 
             return response.setHeader('Authorization', 'Bearer ' + token).status(201).json(user);
-=======
-            const pseudo = request.body.pseudo;
-           
-                const instance = new User(request.body);
-                const user = await instance.addUser(mail, pseudo, password);
-                console.log('userconstroller', user.id);
-
-                const token = jwt.makeToken(user.id);
-
-                return response.setHeader('Authorization', 'Bearer ' + token).status(201).json(user);
-       
->>>>>>> develop
 
         } catch (error) {
             console.log(error);

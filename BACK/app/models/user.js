@@ -118,7 +118,9 @@ class User {
                         hashedPwd]);
 
                 this.id = rows[0].id;
-                delete this.password;
+                console.log('password', this.password);
+                delete this.password; 
+                delete this.password_confirmation;
                 return this;
             } else {
    
@@ -151,6 +153,8 @@ class User {
 
             await client.query('SELECT * FROM update_user($1)', [this]);
             delete this.password;
+            delete this.password_confirmation;
+
             return this;
 
         } catch (error) {

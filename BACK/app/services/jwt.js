@@ -30,7 +30,7 @@ module.exports = {
                     algorithms: ['HS256']
                 }
             );
-            console.log('truc', truc);
+            
             return truc;
         } catch(error) {
             console.log(error);
