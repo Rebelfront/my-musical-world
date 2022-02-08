@@ -1,9 +1,5 @@
 @host=http://localhost:3200
-<<<<<<< HEAD
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoyLCJpYXQiOjE2NDM3OTIxNDYsImV4cCI6MTY0Mzc5MzM0Nn0.lpobXkGnc6MMaRivZ1Vc_HpNNNe_km-eGurWml5EyPw
-=======
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo2NSwiaWF0IjoxNjQ0MTA0MTQxLCJleHAiOjE2NDQxMjU3NDF9.YErIbIKl-OMAAkut2MVLptNcAnmKw2aEd64VCLjTluY
->>>>>>> develop
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo4MywiaWF0IjoxNjQ0MzE0MDU2LCJleHAiOjE2NDQzMTUyNTZ9.2xS6zaMJbwzcuK-hzyIivg7Ow_7oRSxcg-ACAXh8-cs
 
 ### récupérer 1 User
 GET {{host}}/user
@@ -16,20 +12,12 @@ POST {{host}}/signup
 Content-Type: application/json
 
 {
-<<<<<<< HEAD
     "mail": "bossman@mail.fr",
     "lastname": "Bosse",
     "firstname": "Uggo",
     "pseudo": "Alive",
-    "password":"bossman"
-=======
-    "mail": "zigg@gmail.com",
-    "lastname": "Bowie",
-    "firstname": "David",
-    "pseudo": "starman",
-    "password":"ziggy",
-    "password_confirmation":"ziggy"
->>>>>>> develop
+    "password":"bossman",
+    "password_confirmation": "bossman"
      }
 
 ###se connecter
@@ -37,11 +25,11 @@ POST {{host}}/login
 Content-Type: application/json
 
 {
-        "mail": "valentin.deschins@gmail.com",
+        "mail": "bossman@mail.fr",
         "lastname": "",
         "firstname": "",
         "pseudo": "",
-        "password": "Valentin"
+        "password": "bossman"
     }
 
 ### update user
@@ -50,11 +38,12 @@ Authorization:{{token}}
 Content-Type: application/json
 
 {
-  "mail": "zigg@gmail.fr",
-  "lastname": "Bowie",
-  "firstname": "dave",
-  "pseudo": "jackB",
-  "password": "blabla"
+  "mail": "bossman@mail.fr",
+    "lastname": "Bosse",
+    "firstname": "Uggo",
+    "pseudo": "Alive",
+    "password":"bossman",
+    "password_confirmation": "bossman"
 }
 
 ### supprimer son compte
