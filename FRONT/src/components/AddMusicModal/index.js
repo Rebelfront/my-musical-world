@@ -19,7 +19,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 import CardResultsMusic from 'src/components/AddMusicModal/CardResultsMusic';
-import Loading from 'src/components/AddMusicModal/Loading';
+import Loading from 'src/components/Loading';
 
 const AddMusicModal = () => {
   const dispatch = useDispatch();

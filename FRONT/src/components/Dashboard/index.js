@@ -19,6 +19,7 @@ import { unsetActionLogged } from 'src/actions/user';
 import DashboardCard from 'src/components/Dashboard/DashboardCard';
 import AddMusicModal from 'src/components/AddMusicModal';
 import SharingModal from 'src/components/Dashboard/SharingModal';
+import Loading from 'src/components/Loading';
 
 import './style.scss';
 import style from 'src/styles/_exports.module.scss';
@@ -30,7 +31,7 @@ const Dashboard = () => {
 
   const { isLogged } = useSelector((state) => state.user);
   const {
-    pseudo, artists, albums, tracks, dashboardChanged, pseudoNotExist,
+    pseudo, artists, albums, tracks, dashboardChanged, pseudoNotExist, loading
   } = useSelector((state) => state.dashboard);
 
   const handleOpenAddMusicModal = () => {
@@ -59,6 +60,11 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
+       {loading ? (
+        <div className="result__loading">
+          <Loading />
+        </div>
+       ) : (
       <main className="dashboard__content">
         <Container maxWidth="lg">
           <>
@@ -118,6 +124,7 @@ const Dashboard = () => {
           </>
         </Container>
       </main>
+      )}
       <AddMusicModal />
       <SharingModal />
     </div>
