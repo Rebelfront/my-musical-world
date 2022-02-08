@@ -11,8 +11,9 @@ export const closeLoginModal = () => ({
   type: CLOSE_LOGIN_MODAL,
 });
 
-export const submitLogin = () => ({
+export const submitLogin = (payload) => ({
   type: SUBMIT_LOGIN,
+  payload,
 });
 
 export const loginFailure = (payload) => ({
