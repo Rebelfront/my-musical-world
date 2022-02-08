@@ -70,7 +70,7 @@ class User {
 
                 if (isPwdValid === false) {
 
-                    throw new Error('Mot de passe incorrect.');
+                    throw new Error('Email ou mot de passe incorrect.');
 
                 } else {
                     const user = new User(rows[0]);
@@ -79,7 +79,7 @@ class User {
                 }
             } else {
 
-                throw new Error('Aucun utilisateur enregistré avec cet email.');
+                throw new Error('Email ou mot de passe incorrect.');
             }
         } catch (error) {
             console.log(error);
