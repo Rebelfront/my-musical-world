@@ -52,7 +52,7 @@ const ProfileModal = () => {
       .string('Entrez votre mot de passe')
       .matches('^[a-zA-Z0-9]{5,30}$', 'Votre mot de passe doit contenir entre 5 et 30 caractères.')
       .required('Le champ "Mot de passe" est requis'),
-    passwordConfirm: yup
+    password_confirmation: yup
       .string('Entrez votre confirmation de mot de passe')
       .oneOf([yup.ref('password'), null], 'Confirmation et mot de passe non identiques')
       .required('Le champ "Confirmation de mot de passe" est requis'),
@@ -65,12 +65,13 @@ const ProfileModal = () => {
       mail,
       pseudo,
       password: '',
-      passwordConfirm: '',
+      password_confirmation: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       const action = submitModifiedProfile(values);
       dispatch(action);
+      handleProfileModalToggle();
     },
   });
 
@@ -161,26 +162,23 @@ const ProfileModal = () => {
             />
             <TextField
               margin="dense"
-              name="passwordConfirm"
-              id="passwordConfirm"
+              name="password_confirmation"
+              id="password_confirmation"
               label="Confirmation de mot de passe"
               type="password"
               fullWidth
               variant="standard"
               placeholder="Confirmez votre mot de passe"
-              value={formik.values.passwordConfirm}
+              value={formik.values.password_confirmation}
               onChange={formik.handleChange}
-              error={formik.touched.passwordConfirm && Boolean(formik.errors.passwordConfirm)}
-              helperText={formik.touched.passwordConfirm && formik.errors.passwordConfirm}
+              error={formik.touched.password_confirmation && Boolean(formik.errors.password_confirmation)}
+              helperText={formik.touched.password_confirmation && formik.errors.password_confirmation}
             />
             <DialogActions>
               <Button
                 type="submit"
                 className="button-green"
-                onClick={() => {
-                  // handleProfileModalToggle();
-                  formik.handleSubmit();
-                }}
+                onClick={formik.handleSubmit}
               >
                 Enregistrer
               </Button>
