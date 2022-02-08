@@ -84,7 +84,7 @@ module.exports = {
             const id = request.userId;
             await User.delete(id);
 
-            response.json(`user with id ${id} is deleted`);
+            response.json(`L'utilisateur ayant l'id ${id} a bien été supprimé.`);
 
         } catch (error) {
             response.status(500).json(error.message);

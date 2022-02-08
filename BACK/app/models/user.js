@@ -70,7 +70,7 @@ class User {
 
                 if (isPwdValid === false) {
 
-                    throw new Error('Invalid password');
+                    throw new Error('Mot de passe incorrect.');
 
                 } else {
                     const user = new User(rows[0]);
@@ -79,7 +79,7 @@ class User {
                 }
             } else {
 
-                throw new Error(`No user found for mail ${mail}`);
+                throw new Error('Aucun utilisateur enregistré avec cet email.');
             }
         } catch (error) {
             console.log(error);
@@ -104,29 +104,35 @@ class User {
     async addUser(mail, password) {
 
         try {
+            const checkMail = await client.query(`SELECT * FROM "USER" WHERE mail=$1`, [mail]);
 
-            const checkUser = await client.query(`SELECT * FROM "USER" WHERE mail=$1`, [mail]);
+            if (!checkMail.rows[0]) {
+                
+                const checkPseudo = await client.query(`SELECT * FROM "USER" WHERE pseudo=$1`, [pseudo]);
 
-            if (!checkUser.rows[0]) {
-                const hashedPwd = await bcrypt.hash(password, 10);
+                if (!checkPseudo.rows[0]) {
 
-                const { rows } = await client.query('INSERT INTO "USER"(mail, lastname, firstname, pseudo, "password") VALUES($1, $2, $3, $4, $5) RETURNING id',
-                    [this.mail,
-                    this.lastname,
-                    this.firstname,
-                    this.pseudo,
-                        hashedPwd]);
+                    const hashedPwd = await bcrypt.hash(password, 10);
 
-                this.id = rows[0].id;
-                console.log('password', this.password);
-                delete this.password; 
-                delete this.password_confirmation;
-                return this;
+                    const {rows} = await client.query('INSERT INTO "USER"(mail, lastname, firstname, pseudo, "password") VALUES($1, $2, $3, $4, $5) RETURNING id',
+                        [this.mail,
+                        this.lastname,
+                        this.firstname,
+                        this.pseudo,
+                            hashedPwd]);
+
+                    this.id = rows[0].id;
+                    delete this.password;
+                    delete this.password_confirmation;
+                    return this;
+
+                } else {
+                    throw new Error('Ce pseudo est déjà pris.');
+                }
+
             } else {
-   
-                throw new Error('user already exists');
+                throw new Error('Un utilisateur avec cet email existe déjà.');
             }
-
         } catch (error) {
             if (error.detail) {
                 throw new Error(error.detail);
@@ -152,9 +158,9 @@ class User {
             }
 
             await client.query('SELECT * FROM update_user($1)', [this]);
+            
             delete this.password;
             delete this.password_confirmation;
-
             return this;
 
         } catch (error) {

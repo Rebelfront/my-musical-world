@@ -90,11 +90,18 @@ class Album {
     static async delete(userId, itemId) {
 
         try {
+            const checkDelete = await client.query('SELECT "api_id" FROM USER_LIKES_ALBUM WHERE api_id=$1', [itemId]); 
+
+            if(!checkDelete.rows[0]) {         
+                throw new Error('album déjà supprimé');
+                
+            } else {
+
             await client.query('DELETE FROM USER_LIKES_ALBUM WHERE (api_id, user_id)=($1, $2)', [itemId, userId]);
 
-            const album = await client.query('SELECT * FROM ALBUM WHERE api_id=$1', [itemId]);
-            const albumName = album.rows[0].name;
-            return albumName;
+            const album = await client.query('SELECT "name" FROM ALBUM WHERE api_id=$1', [itemId]);
+            return album.rows[0].name;
+            }
 
         } catch (error) {
             if (error.detail) {

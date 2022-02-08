@@ -1,5 +1,5 @@
 @host=http://localhost:3200
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo4OCwiaWF0IjoxNjQ0MzE3MjcyLCJleHAiOjE2NDQzMTg0NzJ9.j3d6cCY7LGrcvd777pT6p2i-rMg1FGHTmDmDZyAH-5c
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo4OCwiaWF0IjoxNjQ0MzI4MzIyLCJleHAiOjE2NDQzMjk1MjJ9.-cA464tvKSeokXiPCoAsdWXzYHH8qTNNhF2htX0UMfE
 Authorization:{{token}}
 Content-Type: application/json
 
@@ -26,7 +26,7 @@ Content-Type: application/json
         "lastname": "",
         "firstname": "",
         "pseudo": "",
-        "password": "bossman12$$_"
+        "password": "bossman"
     }
 
 ### update user
@@ -39,8 +39,8 @@ Content-Type: application/json
     "lastname": "Bosse",
     "firstname": "Uggo",
     "pseudo": "Alive",
-    "password":"boss",
-    "password_confirmation": "boss"
+    "password":"bossman12",
+    "password_confirmation": "bossman12"
 }
 
 ### supprimer son compte
