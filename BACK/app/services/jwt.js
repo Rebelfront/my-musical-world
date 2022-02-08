@@ -12,27 +12,30 @@ module.exports = {
                 process.env.JWT_SECRET,
                 {
                     algorithm: 'HS256',
-                    expiresIn: '360m'
+                    expiresIn: '20m'
                 }
             );
         } catch(error) {
             console.log(error);
-            throw error;
+            throw new Error('maketoken error jwt');
         }
     },
 
     validateToken: token => {
         try {
-            return JWT.verify(
+            const truc = JWT.verify(
                 token,
                 process.env.JWT_SECRET,
                 {
                     algorithms: ['HS256']
                 }
             );
+            console.log('truc', truc);
+            return truc;
         } catch(error) {
             console.log(error);
             throw error;
+            // throw new Error('validate error jwt, session expirée');
         }
     }
 }

@@ -6,6 +6,12 @@ SELECT * FROM TRACK;
 
 SELECT * FROM "USER";
 
+INSERT INTO "USER"(mail, lastname, firstname, pseudo, 'password') VALUES
+('Monroe.Kshlerin14@gmail.com','Wehrsen', 'Salome','Ephraim18','5NPET4JC3AKCEHCA2'),
+('Lamar_Kuphal@gmail.com','Hache','Loris','Alex_Treutel','1FDFS24LXXCGK0D4M'), 
+('Green_Howe@yahoo.com','Steinert','Arvid','Antonietta.Schuster88','3G5DB03E55B5UEEX3'),
+('Emmitt.Marvin19@gmail.com','Schirmer','Alisha','Melissa0','5XYKT3A18B0X1DTGN');
+
 INSERT INTO ALBUM (name, genre, artist, year, url_image, api_id) VALUES
 ('abbey road', 'rock', 'beatles', 1969, 'balbal', 1),
 ('sticky fingers', 'rock', 'rolling stones',  1971, 'balbal', 2),

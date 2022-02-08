@@ -2,18 +2,40 @@ const { response } = require('express');
 const client = require('../database.js');
 const bcrypt = require('bcrypt');
 
+/**
+ * An entity representing a user of the website
+ * @typedef {object} User
+ * @property {number} id
+ * @property {string} mail
+ * @property {string} lastname
+ * @property {string} firstname
+ * @property {string} pseudo
+ * @property {string} password
+ */
 
+/**
+ * A model representing a user of the website
+ * @class User
+ */
 class User {
 
+    /**
+    * The User constructor
+    * @param {object} obj a litteral object with properties copied into the instance
+    */
     constructor(obj = {}) {
         for (const propName in obj) {
             this[propName] = obj[propName];
         }
     }
 
-    // Récupérer tous les users : pas besoin d'une méthode findAll pour la table user pour l'instant
-
-    // Récupérer un user par son id 
+    /**
+     * Fetches a single user with the given id from the database, used to get the connected user profile infos
+     * @param {number} id 
+     * @returns {object<User>|null} User, null if no user found
+     * @static
+     * @async
+     */
     static async findOne(id) {
         const { rows } = await client.query(`SELECT * FROM "USER" WHERE id=$1`, [id]);
 
@@ -29,7 +51,15 @@ class User {
 
     }
 
-    //TODO : récupérer un user par son email 
+    /**
+     * Fetches a single user with the given mail and password from the database, used to log in a user
+     * @param {string} mail user's mail
+     * @param {string} password user's password
+     * @returns {object} User
+     * @throws {error} a potential SQL error, if the password does not match the mail or if no user with the given mail is found in the database
+     * @static
+     * @async
+     */
     static async findByMail(mail, password) {
 
         try {
@@ -40,20 +70,16 @@ class User {
 
                 if (isPwdValid === false) {
 
-                    console.log('Email ou mot de passe invalide.');
-                    throw new Error('Email ou mot de passe invalide.');
+                    throw new Error('Invalid password');
 
                 } else {
                     const user = new User(rows[0]);
                     delete user.password
-                    console.log('model validMail', user);
                     return user;
                 }
             } else {
-                console.log(`Email ou mot de passe invalide.`);
-                throw new Error(`Email ou mot de passe invalide.`);
 
-
+                throw new Error(`No user found for mail ${mail}`);
             }
         } catch (error) {
             console.log(error);
@@ -66,47 +92,40 @@ class User {
 
     }
 
-    // enregistrer un user en bdd
-    async addUser(mail, pseudo, password) {
+    /**
+     * Add a User to the database, use to sign up a new user
+     * @param {string} mail 
+     * @param {string} password 
+     * @returns {object} the newly created user
+     * @throws {error} a potential SQL error, as if a user with the given mail already exists in the database
+     * @static
+     * @async
+     */
+    async addUser(mail, password) {
 
         try {
 
-            const checkMail = await client.query(`SELECT * FROM "USER" WHERE mail=$1`, [mail]);
-            // console.log('userPseudo',checkUser.rows[0].pseudo)
+            const checkUser = await client.query(`SELECT * FROM "USER" WHERE mail=$1`, [mail]);
 
-            if (!checkMail.rows[0]) {
-                const checkPseudo = await client.query(`SELECT * FROM "USER" WHERE pseudo=$1`, [pseudo]);
+            if (!checkUser.rows[0]) {
+                const hashedPwd = await bcrypt.hash(password, 10);
 
-                if (!checkPseudo.rows[0]) {
+                const { rows } = await client.query('INSERT INTO "USER"(mail, lastname, firstname, pseudo, "password") VALUES($1, $2, $3, $4, $5) RETURNING id',
+                    [this.mail,
+                    this.lastname,
+                    this.firstname,
+                    this.pseudo,
+                        hashedPwd]);
 
-                    const hashedPwd = await bcrypt.hash(password, 10);
-
-                    const { rows } = await client.query('INSERT INTO "USER"(mail, lastname, firstname, pseudo, "password") VALUES($1, $2, $3, $4, $5) RETURNING id',
-                        [this.mail,
-                        this.lastname,
-                        this.firstname,
-                        this.pseudo,
-                            hashedPwd]);
-
-                    this.id = rows[0].id;
-                    delete this.password;
-                    return this;
-                } else {
-                    console.log('Ce pseudo est déjà pris.')
-                    throw new Error('Ce pseudo est déjà pris.');
-                }
-
-
-
+                this.id = rows[0].id;
+                delete this.password;
+                return this;
             } else {
-                console.log('Un utilisateur avec cet email existe déjà.')
-                throw new Error('Un utilisateur avec cet email existe déjà.');
+   
+                throw new Error('user already exists');
             }
 
-
         } catch (error) {
-
-            console.log(error);
             if (error.detail) {
                 throw new Error(error.detail);
             }
@@ -115,8 +134,13 @@ class User {
 
     }
 
-    // TODO : const {rows} = await client.query('SELECT * FROM add_user($1)', [this])
-
+    /**
+     * Update the User infos with the given token, hash the new password if a password is filled-out
+     * @param {string} password 
+     * @returns {object} the user with the updated infos
+     * @throws {error} a potential SQL error
+     * @async
+     */
     async updateUser(password) {
         try {
             if (password) {
@@ -138,12 +162,16 @@ class User {
 
     }
 
-
-    // supprimer un user de la bdd
+    /**
+     * remove the user with the given id in the database
+     * @param {number} id 
+     * @throws {error} a potential SQL error
+     * @static
+     * @async
+     */
     static async delete(id) {
 
         try {
-
             const { rows } = await client.query(`SELECT FROM "USER" WHERE id=$1`, [id]);
 
             if (rows[0] === undefined) {
@@ -155,11 +183,9 @@ class User {
                 await client.query('DELETE FROM USER_LIKES_ARTIST WHERE user_id=$1', [id]);
                 await client.query('DELETE FROM USER_LIKES_TRACK WHERE user_id=$1', [id]);
 
-
                 await client.query('DELETE FROM "USER" WHERE id=$1', [id]);
-
             }
-        } catch (error) {
+        } catch (error) { 
             if (error.detail) {
                 throw new Error(error.detail);
             }

@@ -5,12 +5,19 @@ const jwt = require('../services/jwt');
 module.exports = {
 
 
-    // Méthode pour se créer un compte : ajouter un user en bdd
-    // Intégrer la méthode makeToken 
+    // Créer un compte : ajouter un user en bdd
     validSignup: async (request, response) => {
         try {
+
             const mail = request.body.mail;
             const password = request.body.password;
+<<<<<<< HEAD
+            const instance = new User(request.body);
+            const user = await instance.addUser(mail, password);
+            const token = jwt.makeToken(user.id);
+
+            return response.setHeader('Authorization', 'Bearer ' + token).status(201).json(user);
+=======
             const pseudo = request.body.pseudo;
            
                 const instance = new User(request.body);
@@ -21,6 +28,7 @@ module.exports = {
 
                 return response.setHeader('Authorization', 'Bearer ' + token).status(201).json(user);
        
+>>>>>>> develop
 
         } catch (error) {
             console.log(error);
@@ -29,19 +37,17 @@ module.exports = {
 
     },
 
-    // Pour se connecter : retrouver un user enregistré en bdd à partir de son mail
-    // TODO : intégrer la méthode makeToken 
+    // Se connecter : retrouver un user enregistré en bdd à partir de son mail
     validLogin: async (request, response) => {
         try {
+
             const mail = request.body.mail;
             const password = request.body.password;
             const user = await User.findByMail(mail, password);
-
             const token = jwt.makeToken(user.id);
 
+            // Envoyer le token généré dans le header de la réponse
             return response.setHeader('Authorization', 'Bearer ' + token).status(200).json(user);
-
-            //    return response.status(200).json(user);
 
         } catch (error) {
             console.log(error);
@@ -54,11 +60,12 @@ module.exports = {
     // récupérer un user en bdd 
     getUserInfos: async (request, response) => {
         try {
+
             const id = request.userId;
-            console.log('request', id);
             const user = await User.findOne(id);
-            console.log('user', user);
+
             response.json(user);
+
         } catch (error) {
             console.log(error);
             response.status(500).json(error.message);
@@ -92,19 +99,7 @@ module.exports = {
 
             response.json(`user with id ${id} is deleted`);
 
-
-            // const password = request.body.password;
-            // console.log(password);
-            // if (password === undefined) {
-            //     console.log('This password doesn\'t exists');
-            // } else {
-            //     const id = request.user.id;
-            //     await User.delete(id, password);
-
-            //     response.json(`user with id ${id} is deleted`);
-            // }
         } catch (error) {
-            console.log(error);
             response.status(500).json(error.message);
         }
 

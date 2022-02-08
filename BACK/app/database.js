@@ -5,7 +5,7 @@ const config = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    // Je dois adapter ma config car je suis sur l'env heroku
+    // Configuration pour l'environnement Heroku
     config.ssl = {
         rejectUnauthorized : false
     }
