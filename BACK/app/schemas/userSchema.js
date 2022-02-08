@@ -6,7 +6,7 @@ const schema = Joi.object({
     lastname: Joi.string().required(), 
     firstname: Joi.string().required(),
     pseudo: Joi.string().required(),
-    password: Joi.string().required().pattern(new RegExp('^[a-zA-Z0-9\W]{5,30}$')),
+    password: Joi.string().required().pattern(new RegExp('^[a-zA-Z0-9\\W_]{5,30}$')).error(new Error (`Le mot de passe doit contenir au minimum 5 caractères.`)),
     password_confirmation: Joi.string().required().valid(Joi.ref('password')).error(new Error ('Les mots de passe ne sont pas identiques.'))
 
 });

@@ -15,7 +15,6 @@ module.exports = {
             const user = await instance.addUser(mail, password);
             const token = jwt.makeToken(user.id);
 
-            delete request.body.password_confirmation
             return response.setHeader('Authorization', 'Bearer ' + token).status(201).json(user);
 
         } catch (error) {

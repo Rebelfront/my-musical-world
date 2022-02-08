@@ -1,8 +1,5 @@
 @host=http://localhost:3200
-@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo4MywiaWF0IjoxNjQ0MzE0MDU2LCJleHAiOjE2NDQzMTUyNTZ9.2xS6zaMJbwzcuK-hzyIivg7Ow_7oRSxcg-ACAXh8-cs
-
-### récupérer 1 User
-GET {{host}}/user
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo4OCwiaWF0IjoxNjQ0MzE3MjcyLCJleHAiOjE2NDQzMTg0NzJ9.j3d6cCY7LGrcvd777pT6p2i-rMg1FGHTmDmDZyAH-5c
 Authorization:{{token}}
 Content-Type: application/json
 
@@ -29,7 +26,7 @@ Content-Type: application/json
         "lastname": "",
         "firstname": "",
         "pseudo": "",
-        "password": "bossman"
+        "password": "bossman12$$_"
     }
 
 ### update user
@@ -42,8 +39,8 @@ Content-Type: application/json
     "lastname": "Bosse",
     "firstname": "Uggo",
     "pseudo": "Alive",
-    "password":"bossman",
-    "password_confirmation": "bossman"
+    "password":"boss",
+    "password_confirmation": "boss"
 }
 
 ### supprimer son compte
