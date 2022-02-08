@@ -105,6 +105,7 @@ const DashboardCard = ({
       </CardActions>
       {showAlert && (
         <Alert
+          sx={{ flexDirection: 'column', alignItems: 'center' }}
           severity="error"
           action={(
             <ButtonGroup orientation="vertical">
