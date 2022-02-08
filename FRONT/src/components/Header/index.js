@@ -88,7 +88,7 @@ const Header = () => {
           ) : (
             <>
               <Box className="hidden-mobile" sx={{ ml: 'auto' }}>
-                <Tooltip title="User menu">
+                <Tooltip title="Menu utilisateur">
                   <IconButton
                     onClick={handleUserMenuClick}
                     size="small"

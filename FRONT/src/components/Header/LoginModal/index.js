@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { closeLoginModal, submitLogin } from 'src/actions/login';
-import { changeInput } from 'src/actions';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -17,17 +16,12 @@ import { Alert } from '@mui/material';
 
 const LoginModal = () => {
   const dispatch = useDispatch();
-  const { modalOpened, mail, password } = useSelector((state) => state.login);
+  const { modalOpened } = useSelector((state) => state.login);
   const { error } = useSelector((state) => state.errors);
   const handleClose = () => {
     const action = closeLoginModal();
     dispatch(action);
   };
-
-  // const handleChangeInput = (event) => {
-  //   const action = changeInput(event.target.value, event.target.name);
-  //   dispatch(action);
-  // };
 
   const validationSchema = yup.object({
     mail: yup
