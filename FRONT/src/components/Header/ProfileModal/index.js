@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { submitModifiedProfile } from 'src/actions/profile';
 import { toggleProfileModal } from 'src/actions/header';
 import { deleteUser } from 'src/actions/user';
-import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -50,7 +49,7 @@ const ProfileModal = () => {
       .required('Le champ "Email" est requis'),
     password: yup
       .string('Entrez votre mot de passe')
-      .matches('^[a-zA-Z0-9]{5,30}$', 'Votre mot de passe doit contenir entre 5 et 30 caractères.')
+      .matches('^[a-zA-Z0-9\\W_]{5,30}$', 'Votre mot de passe doit contenir entre 5 et 30 caractères.')
       .required('Le champ "Mot de passe" est requis'),
     password_confirmation: yup
       .string('Entrez votre confirmation de mot de passe')

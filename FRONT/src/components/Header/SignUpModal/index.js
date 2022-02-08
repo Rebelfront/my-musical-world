@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { closeSignUpModal, submitSignUp, signupFailure } from 'src/actions/signup';
-import { changeInput } from 'src/actions';
+import { closeSignUpModal, submitSignUp } from 'src/actions/signup';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -17,29 +16,13 @@ import { Alert } from '@mui/material';
 
 const SignUpModal = () => {
   const dispatch = useDispatch();
-  const {
-    modalOpened,
-    lastname,
-    firstname,
-    mail,
-    pseudo,
-    password,
-    passwordConfirm,
-  } = useSelector((state) => state.signup);
+  const { modalOpened } = useSelector((state) => state.signup);
   const { error } = useSelector((state) => state.errors);
 
   const handleClose = () => {
     const action = closeSignUpModal();
     dispatch(action);
   };
-  // const handleChangeInput = (event) => {
-  //   const action = changeInput(event.target.value, event.target.name);
-  //   dispatch(action);
-  // };
-  // const handleSubmit = () => {
-  //   const action = submitSignUp();
-  //   dispatch(action);
-  // };
 
   const validationSchema = yup.object({
     lastname: yup
@@ -57,11 +40,11 @@ const SignUpModal = () => {
       .required('Le champ "Pseudo" est requis'),
     password: yup
       .string('Entrez votre mot de passe')
-      .matches('^[a-zA-Z0-9]{5,30}$', 'Votre mot de passe doit contenir entre 5 et 30 caractères.')
+      .matches('^[a-zA-Z0-9\\W_]{5,30}$', 'Votre mot de passe doit contenir entre 5 et 30 caractères.')
       .required('Le champ "Mot de passe" est requis'),
     passwordConfirm: yup
       .string('Entrez votre mot de passe')
-      .matches('^[a-zA-Z0-9]{5,30}$', 'Votre mot de passe doit contenir entre 5 et 30 caractères.')
+      .oneOf([yup.ref('password'), null], 'Confirmation et mot de passe non identiques')
       .required('Le champ "Mot de passe de confirmation" est requis'),
   });
 
@@ -76,11 +59,6 @@ const SignUpModal = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      if (formik.values.password !== formik.values.passwordConfirm) {
-        const action = signupFailure('Votre mot de passe de confirmation doit correspondre à votre mot de passe.');
-        dispatch(action);
-        return;
-      }
       const action = submitSignUp(values);
       dispatch(action);
       handleClose();

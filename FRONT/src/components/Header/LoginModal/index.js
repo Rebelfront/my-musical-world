@@ -30,7 +30,7 @@ const LoginModal = () => {
       .required('Le champ "Email" est requis'),
     password: yup
       .string('Entrez votre mot de passe')
-      .matches('^[a-zA-Z0-9]{5,30}$', 'Votre mot de passe doit contenir entre 5 et 30 caractères.')
+      .matches('^[a-zA-Z0-9\\W_]{5,30}$', 'Votre mot de passe doit contenir entre 5 et 30 caractères.')
       .required('Le champ "Mot de passe" est requis'),
   });
 

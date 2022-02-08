@@ -31,7 +31,7 @@ const Dashboard = () => {
 
   const { isLogged } = useSelector((state) => state.user);
   const {
-    pseudo, artists, albums, tracks, dashboardChanged, pseudoNotExist, loading
+    pseudo, artists, albums, tracks, dashboardChanged, pseudoNotExist, loading,
   } = useSelector((state) => state.dashboard);
 
   const handleOpenAddMusicModal = () => {
@@ -60,70 +60,70 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-       {loading ? (
+      {loading ? (
         <div className="dashboard__loading">
           <Loading />
         </div>
-       ) : (
-      <main className="dashboard__content">
-        <Container maxWidth="lg">
-          <>
-            <h2 className="dashboard__title">{isLogged ? 'Ma bibliothèque' : `Bibliothèque de ${pseudo}`}</h2>
-            { artists[0] || albums[0] || tracks[0] ? (
-              <>
-                {artists[0] && (
-                <Box sx={{ mb: '10px' }}>
-                  <h3 className="dashboard__cat-title">
-                    <PersonIcon sx={{ mr: '10px' }} fontSize="large" />
-                    <span>Artistes</span>
-                  </h3>
-                  <Box className="dashboard__card-wrapper">
-                    {artists.map((artist) => <DashboardCard type="artist" key={artist.api_id} {...artist} />)}
+      ) : (
+        <main className="dashboard__content">
+          <Container maxWidth="lg">
+            <>
+              <h2 className="dashboard__title">{isLogged ? 'Ma bibliothèque' : `Bibliothèque de ${pseudo}`}</h2>
+              { artists[0] || albums[0] || tracks[0] ? (
+                <>
+                  {artists[0] && (
+                  <Box sx={{ mb: '10px' }}>
+                    <h3 className="dashboard__cat-title">
+                      <PersonIcon sx={{ mr: '10px' }} fontSize="large" />
+                      <span>Artistes</span>
+                    </h3>
+                    <Box className="dashboard__card-wrapper">
+                      {artists.map((artist) => <DashboardCard type="artist" key={artist.api_id} {...artist} />)}
+                    </Box>
                   </Box>
-                </Box>
-                )}
-                {albums[0] && (
-                <Box sx={{ mb: '10px' }}>
-                  <h3 className="dashboard__cat-title">
-                    <AlbumIcon sx={{ mr: '10px' }} fontSize="large" />
-                    <span>Albums</span>
-                  </h3>
-                  <Box className="dashboard__card-wrapper">
-                    {albums.map((album) => <DashboardCard type="album" key={album.api_id} {...album} />)}
+                  )}
+                  {albums[0] && (
+                  <Box sx={{ mb: '10px' }}>
+                    <h3 className="dashboard__cat-title">
+                      <AlbumIcon sx={{ mr: '10px' }} fontSize="large" />
+                      <span>Albums</span>
+                    </h3>
+                    <Box className="dashboard__card-wrapper">
+                      {albums.map((album) => <DashboardCard type="album" key={album.api_id} {...album} />)}
+                    </Box>
                   </Box>
-                </Box>
-                )}
-                {tracks[0] && (
-                <Box>
-                  <h3 className="dashboard__cat-title">
-                    <AudiotrackIcon sx={{ mr: '10px' }} fontSize="large" />
-                    Titres
-                  </h3>
-                  <Box className="dashboard__card-wrapper">
-                    {tracks.map((track) => <DashboardCard type="track" key={track.api_id} {...track} />)}
+                  )}
+                  {tracks[0] && (
+                  <Box>
+                    <h3 className="dashboard__cat-title">
+                      <AudiotrackIcon sx={{ mr: '10px' }} fontSize="large" />
+                      Titres
+                    </h3>
+                    <Box className="dashboard__card-wrapper">
+                      {tracks.map((track) => <DashboardCard type="track" key={track.api_id} {...track} />)}
+                    </Box>
                   </Box>
-                </Box>
-                )}
-                {isLogged && (
+                  )}
+                  {isLogged && (
                   <Fab size="medium" onClick={handleToggleSharingModal} className="dashboard__share-mobile" aria-label="share dashboard">
                     <ShareIcon sx={{ width: '35px', height: '35px' }} />
                   </Fab>
-                )}
-              </>
-            ) : (
-              <Box className="dashboard__card-wrapper">
-                <DashboardCard />
-              </Box>
-            )}
-            {isLogged && (
+                  )}
+                </>
+              ) : (
+                <Box className="dashboard__card-wrapper">
+                  <DashboardCard />
+                </Box>
+              )}
+              {isLogged && (
               <Fab size="medium" onClick={handleOpenAddMusicModal} sx={{ backgroundColor: style.blue }} className="dashboard__add-mobile" aria-label="add music">
                 <MusicNoteIcon sx={{ fontSize: '30px' }} />
                 <AddIcon sx={{ fontSize: '18px' }} />
               </Fab>
-            )}
-          </>
-        </Container>
-      </main>
+              )}
+            </>
+          </Container>
+        </main>
       )}
       <AddMusicModal />
       <SharingModal />
