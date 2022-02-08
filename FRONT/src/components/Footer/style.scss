@@ -12,6 +12,15 @@
     justify-content: space-around;
     align-items: center;
     position: sticky;
-    border-top: 1px solid $grey;
+    background-color: $dark-grey;
+    color: white;
   }
+}
+
+.footer-link {
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
 }

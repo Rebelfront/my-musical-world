@@ -1,20 +1,23 @@
 import './style.scss';
 
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { checkUser } from 'src/actions/user';
 
 import Header from 'src/components/Header';
 import About from 'src/components/About';
 import Legal from 'src/components/Legal';
 import Footer from 'src/components/Footer';
 import Homepage from 'src/components/Homepage';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { checkUser } from 'src/actions/user';
-import SharingModal from '../SharingModal';
-import Dashboard from '../Dashboard';
+import Dashboard from 'src/components/Dashboard';
+import NotFound from 'src/components/NotFound';
 
 const App = () => {
   const dispatch = useDispatch();
+
+  const { actionLogged, actionUnLogged } = useSelector((state) => state.user);
 
   useEffect(() => {
     const action = checkUser();
@@ -25,15 +28,13 @@ const App = () => {
     <div className="app">
       <div className="app__main">
         <Header />
-        <SharingModal />
         <Routes>
-          <Route
-            path="/"
-            element={<Homepage />}
-          />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/legal" element={<Legal />} />
+          <Route path="/" element={!actionLogged ? <Homepage /> : <Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={!actionUnLogged ? <Dashboard /> : <Navigate to="/" replace />} />
+          <Route path="/shared-space/:pseudoSharedSpace" element={!actionLogged ? <Dashboard /> : <Navigate to="/dashboard" replace />} />
+          <Route path="/about" element={!actionLogged ? <About /> : <Navigate to="/dashboard" replace />} />
+          <Route path="/legal" element={!actionLogged ? <Legal /> : <Navigate to="/dashboard" replace />} />
+          <Route path="*" element={!actionLogged ? <NotFound /> : <Navigate to="/dashboard" replace />} />
         </Routes>
       </div>
       <Footer />

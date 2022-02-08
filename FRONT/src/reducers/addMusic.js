@@ -1,4 +1,6 @@
-import { TOGGLE_ADD_MUSIC_MODAL, SAVE_RESULTS_MUSIC, SUBMIT_SEARCH_MUSIC } from '../actions/addMusic';
+import {
+  TOGGLE_ADD_MUSIC_MODAL, SAVE_RESULTS_MUSIC, SUBMIT_SEARCH_MUSIC,
+} from '../actions/addMusic';
 import { CHANGE_INPUT } from '../actions';
 
 const initialState = {
@@ -22,6 +24,7 @@ const addMusic = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.payload.name]: action.payload.value,
+        resultsMusic: [],
       };
     case SUBMIT_SEARCH_MUSIC:
       return {

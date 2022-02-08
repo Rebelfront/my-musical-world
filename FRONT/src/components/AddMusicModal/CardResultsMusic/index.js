@@ -1,4 +1,5 @@
 import './style.scss';
+import styles from 'src/styles/_exports.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { submitAddMusic } from 'src/actions/addMusic';
@@ -10,37 +11,48 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 const CardResultsMusic = ({ music }) => {
   const dispatch = useDispatch();
   const { typeMusic } = useSelector((state) => state.addMusic);
-  const handleSubmit = (event) => {
-    const action = submitAddMusic(Number(event.target.id));
+  const { artists, albums, tracks } = useSelector((state) => state.dashboard);
+  const isAlreadyAdded = (id) => [...artists, ...albums, ...tracks].some((element) => element?.api_id === id)
+  // here "element && element.apiId" would have had the same effect, "?" is checking if element exists before testing the condition
+  ;
+  const handleSubmit = (apiId) => {
+    const action = submitAddMusic(apiId);
     dispatch(action);
   };
 
   return (
     <div>
       <Card className="result__card">
-        <CardMedia
-          className="card__image"
-          component="img"
-          height="100"
-          image={music.urlImage}
-          alt={`photo de ${music.name}`}
-        />
-        <div className="card__wrapper">
+        <div className="card__left">
+          <CardMedia
+            className="card__image"
+            component="img"
+            image={music.urlImage}
+            alt={`photo de ${music.name}`}
+          />
+        </div>
+        <div className="card__right">
           <CardContent className="card__content">
             <Typography className="content__title" gutterBottom variant="h5" component="div">
               {music.name}
             </Typography>
-            <Typography className="content__infos" component="div" variant="body2" color="text.secondary">
-              <p>{music.album}</p>
-              <p>{music.artist}</p>
-              <p>{music.year} / {music.genre}</p>
-            </Typography>
-            {/* typeMusic: 1 - Titre, 2 - Album, 3 - Artiste */}
-            {(typeMusic === 1) && (
+            {(typeMusic === 1 || typeMusic === 2) && (
+              <Typography className="content__infos" component="div" variant="body2" color="text.secondary">
+                <p className="infos__txt">{music.album}</p>
+                {(typeMusic === 1) && (
+                  <p className="infos__txt">{music.artist}</p>
+                )}
+                <p className="infos__txt">{music.year} / {music.genre}</p>
+              </Typography>
+            )}
+            <div className="card__buttons">
+              {/* typeMusic: 1 - Titre, 2 - Album, 3 - Artiste */}
+              {(typeMusic === 1) && (
               <Button
                 className="content__button"
                 onClick={() => {
@@ -48,15 +60,24 @@ const CardResultsMusic = ({ music }) => {
                 }}
               >Ecouter un extrait
               </Button>
-            )}
+              )}
+              {isAlreadyAdded(music.apiId) ? (
+                <Typography
+                  sx={{ display: 'flex', alignItems: 'center', color: styles.green }}
+                >
+                  <CheckCircleOutlineIcon />
+                  Ajouté
+                </Typography>
+              ) : (
+                <Button
+                  onClick={() => handleSubmit(music.apiId)}
+                  className="button-green"
+                >
+                  Ajouter
+                </Button>
+              )}
+            </div>
           </CardContent>
-          <Button
-            id={music.apiId}
-            onClick={handleSubmit}
-            className="card__button button-green"
-          >
-            Ajouter
-          </Button>
         </div>
       </Card>
     </div>
@@ -67,7 +88,7 @@ CardResultsMusic.propTypes = {
   music: PropTypes.shape({
     name: PropTypes.string.isRequired,
     artist: PropTypes.string,
-    year: PropTypes.number,
+    year: PropTypes.number || PropTypes.string,
     album: PropTypes.string,
     urlImage: PropTypes.string.isRequired,
     apiId: PropTypes.number.isRequired,

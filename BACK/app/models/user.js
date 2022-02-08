@@ -70,7 +70,7 @@ class User {
 
                 if (isPwdValid === false) {
 
-                    throw new Error('password not good');
+                    throw new Error('Invalid password');
 
                 } else {
                     const user = new User(rows[0]);
@@ -125,9 +125,7 @@ class User {
                 throw new Error('user already exists');
             }
 
-
         } catch (error) {
-
             if (error.detail) {
                 throw new Error(error.detail);
             }
@@ -180,6 +178,10 @@ class User {
                 throw new Error(`il n'existe aucun compte avec cet id`);
 
             } else {
+
+                await client.query('DELETE FROM USER_LIKES_ALBUM WHERE user_id=$1', [id]);
+                await client.query('DELETE FROM USER_LIKES_ARTIST WHERE user_id=$1', [id]);
+                await client.query('DELETE FROM USER_LIKES_TRACK WHERE user_id=$1', [id]);
 
                 await client.query('DELETE FROM "USER" WHERE id=$1', [id]);
             }

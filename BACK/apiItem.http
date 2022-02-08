@@ -1,17 +1,29 @@
 @host=http://localhost:3200
+<<<<<<< HEAD
 @token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo2LCJpYXQiOjE2NDM3MjUxMDMsImV4cCI6MTY0Mzc0NjcwM30.YFe3wgrpqLyh20dTHqNvA5CpUs4uOfaLpkoA4PQ9pPI
 Content-Type: application/json; charset=utf-8
+=======
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjo3MCwiaWF0IjoxNjQ0MjI0MTAxLCJleHAiOjE2NDQyNDU3MDF9.uqyiLVTmWjJsXmUt1u8V2xpTpWCw3bcDk62jCsxVxhU
+>>>>>>> develop
 
 ###se connecter
 POST {{host}}/login
 Content-Type: application/json
 
 {
+<<<<<<< HEAD
         "mail": "delaunayherve@gmail.com",
         "lastname": "",
         "firstname": "",
         "pseudo": "",
         "password": "12345"
+=======
+        "mail": "zigg@gmail.com",
+        "lastname": "",
+        "firstname": "",
+        "pseudo": "",
+        "password": "ziggy"
+>>>>>>> develop
     }
 
 

@@ -73,10 +73,8 @@ module.exports = {
 
     //afficher/get toute la bibliotheque de l'utilisateur
     getUserItems: async (request, response) => {
-        
-        try {
-            // On regarde si on récupère bien un token valide, et donc un userId via le service jwt
 
+        try {
             // si on a un token valide
             if (request.userId){
                 
@@ -95,8 +93,7 @@ module.exports = {
                 // on va chercher le pseudo dans les params
                 const pseudo = request.params.pseudo;
                 // On récupère les items (artistes, albums ou chansons) de cet utilisateur via la méthode getMusic du modèle Music en lui donnant le pseudo du user
-                const music  = await Music.getMusic(pseudo);
-                
+                const music  = await Music.getMusic(pseudo);       
                 // On renvoit la liste au front au format JSON
                 response.json(music);
 

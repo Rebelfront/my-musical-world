@@ -1,7 +1,10 @@
+/* eslint-disable no-lone-blocks */
 import axios from 'axios';
-import { SUBMIT_LOGIN } from 'src/actions/login';
-import { SUBMIT_SIGNUP } from 'src/actions/signup';
-import { saveUser, USER_LOGOUT, USER_CHECK } from 'src/actions/user';
+import { SUBMIT_LOGIN, loginFailure, openLoginModal } from 'src/actions/login';
+import { SUBMIT_SIGNUP, signupFailure, openSignUpModal } from 'src/actions/signup';
+import {
+  saveUser, USER_LOGOUT, USER_CHECK, setActionLogged,
+} from 'src/actions/user';
 
 const authenticationMW = (store) => (next) => (action) => {
   const rootAPIUrl = process.env.ROOT_API_URL;
@@ -28,24 +31,30 @@ const authenticationMW = (store) => (next) => (action) => {
       break;
     case SUBMIT_LOGIN: {
       // double destructuration
-      const { login: { mail, password } } = store.getState();
+      // const { login: { mail, password } } = store.getState();
 
       axios.post(`${rootAPIUrl}/login`, {
-        mail,
-        password,
+        ...action.payload,
       })
         .then((res) => {
           localStorage.setItem('token', res.headers.authorization);
           const actionSaveUser = saveUser(res.data);
           store.dispatch(actionSaveUser);
+          const actionLogged = setActionLogged(res.data);
+          store.dispatch(actionLogged);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          const action = loginFailure(err.response.data);
+          const openModal = openLoginModal();
+          store.dispatch(action);
+          store.dispatch(openModal);
+        });
     }
       break;
     case SUBMIT_SIGNUP: {
       const {
         signup: {
-          mail, pseudo, firstname, lastname, password,
+          mail, pseudo, firstname, lastname, password, passwordConfirm,
         },
       } = store.getState();
 
@@ -55,13 +64,21 @@ const authenticationMW = (store) => (next) => (action) => {
         firstname,
         lastname,
         password,
+        password_confirmation: passwordConfirm,
       })
         .then((res) => {
           localStorage.setItem('token', res.headers.authorization);
           const actionSaveUser = saveUser(res.data);
           store.dispatch(actionSaveUser);
+          const actionLogged = setActionLogged(res.data);
+          store.dispatch(actionLogged);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          const action = signupFailure(err.response.data);
+          const openModal = openSignUpModal();
+          store.dispatch(action);
+          store.dispatch(openModal);
+        });
     }
       break;
     case USER_LOGOUT: {

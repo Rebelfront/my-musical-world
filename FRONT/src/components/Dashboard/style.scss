@@ -9,59 +9,66 @@
   }
 }
 
-.dashboard__menu {
-  @include mq-mobile {
-    display: none;
-  }
-  @include mq-desktop {
-    box-sizing: border-box;
-    width: 200px;
-    background-color: #ffffff;
-    padding-top: 20px;
-    top: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
 .dashboard__title {
-  @include mq-desktop {
-    font-size: rem(17);
-    text-align: center;
-    text-decoration: underline;
-    top: 10%;
+  @include mq-mobile {
+    font-size: rem(20);
   }
+  @include mq-desktop {
+    font-size: rem(30);
+  }
+  text-align: center;
+  text-decoration: underline;
+  color: $dark-grey;
 }
 
-.dashboard__add-btn {
-  border-radius: 100%;
-  border: 0;
+.dashboard__cat-title {
+  @include mq-mobile {
+    justify-content: center;
+  }
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: $blue;
-  height: 55px;
-  width: 55px;
-  color: #ffffff;
-}
-
-.dashboard__add-btn:hover {
-  background-color: darken($color: $blue, $amount: 10);
-  cursor: pointer;
-}
-
-.dashboard__share {
-  @include mq-desktop {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
+  font-size: rem(19);
+  color: $dark-grey;
 }
 
 .dashboard__content {
+  @include mq-mobile {
+    padding-top: 10px;
+  }
   @include mq-desktop {
-    padding-top: 150px;
+    padding-top: 50px;
     flex-grow: 1;
+  }
+}
+
+.dashboard__card-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  gap: 1rem;
+}
+
+.dashboard__add-mobile.dashboard__add-mobile, .dashboard__share-mobile.dashboard__share-mobile {
+  position: fixed;
+  right: 30px;
+  @include mq-mobile {
+    right: 20px;
+  }
+}
+
+.dashboard__add-mobile.dashboard__add-mobile {
+  @include mq-mobile {
+    bottom: 90px;
+  }
+  @include mq-desktop {
+    bottom: 170px;
+  }
+}
+
+.dashboard__share-mobile.dashboard__share-mobile {
+  @include mq-mobile {
+    bottom: 20px;
+  }
+  @include mq-desktop {
+    bottom: 100px;
   }
 }
