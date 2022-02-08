@@ -8,14 +8,6 @@
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
-  
-  @include mq-mobile {
-    
-  }
-
-  @include mq-desktop {
-    
-  }
 }
 
 .not-found__title {
@@ -23,42 +15,39 @@
   text-align: center;
   font-weight: unset;
   font-family: 'Monoton';
-  font-size: rem(40);
   letter-spacing: 5px;
 
   @include mq-mobile {
-    
+    font-size: rem(30);
   }
 
   @include mq-desktop {
-    
+    font-size: rem(40);
   }
 }
 
 .not-found__content {
   margin: 0;
-  font-size: rem(200);
   font-weight: bold;
 
   @include mq-mobile {
-    
+    font-size: rem(100);
   }
 
   @include mq-desktop {
-    
+    font-size: rem(200);
   }
 }
 
 .not-found__logo {
-  width: 160px;
   animation: rotating 2s linear infinite;
 
   @include mq-mobile {
-    
+    width: 80px;
   }
 
   @include mq-desktop {
-    
+    width: 160px;
   }
 }
 
