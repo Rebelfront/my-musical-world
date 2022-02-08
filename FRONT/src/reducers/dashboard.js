@@ -1,5 +1,5 @@
 import {
-  TOGGLE_SHARING_MODAL, SAVE_DASHBOARD_DATA, DELETE_DASHBOARD_ITEM, PSEUDO_NOT_EXIST,
+  TOGGLE_SHARING_MODAL, SAVE_DASHBOARD_DATA, DELETE_DASHBOARD_ITEM, PSEUDO_NOT_EXIST, GET_DASHBOARD_DATA
 } from 'src/actions/dashboard';
 import { SUBMIT_ADD_MUSIC } from 'src/actions/addMusic';
 import { USER_LOGOUT } from 'src/actions/user';
@@ -12,6 +12,7 @@ const initialState = {
   sharingModalOpened: false,
   dashboardChanged: false,
   pseudoNotExist: false,
+  loading: false,
 };
 
 const dashboard = (state = initialState, action = {}) => {
@@ -26,6 +27,7 @@ const dashboard = (state = initialState, action = {}) => {
         ...state,
         ...action.payload,
         dashboardChanged: false,
+        loading: false,
       };
     case SUBMIT_ADD_MUSIC:
       return {
@@ -45,6 +47,11 @@ const dashboard = (state = initialState, action = {}) => {
       return {
         ...state,
         pseudoNotExist: true,
+      };
+    case GET_DASHBOARD_DATA:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

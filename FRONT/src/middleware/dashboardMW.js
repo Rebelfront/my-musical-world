@@ -39,6 +39,7 @@ const dashboardMW = (store) => (next) => (action) => {
             console.log(err);
           });
       }
+      next(action);
       break;
 
     case DELETE_DASHBOARD_ITEM:
