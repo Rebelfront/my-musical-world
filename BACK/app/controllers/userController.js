@@ -11,8 +11,9 @@ module.exports = {
 
             const mail = request.body.mail;
             const password = request.body.password;
+            const pseudo = request.body.pseudo;
             const instance = new User(request.body);
-            const user = await instance.addUser(mail, password);
+            const user = await instance.addUser(mail, password, pseudo);
             const token = jwt.makeToken(user.id);
 
             return response.setHeader('Authorization', 'Bearer ' + token).status(201).json(user);

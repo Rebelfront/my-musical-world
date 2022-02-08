@@ -101,7 +101,7 @@ class User {
      * @static
      * @async
      */
-    async addUser(mail, password) {
+    async addUser(mail, password, pseudo) {
 
         try {
             const checkMail = await client.query(`SELECT * FROM "USER" WHERE mail=$1`, [mail]);
