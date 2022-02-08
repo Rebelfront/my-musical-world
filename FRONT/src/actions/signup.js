@@ -11,8 +11,9 @@ export const closeSignUpModal = () => ({
   type: CLOSE_SIGNUP_MODAL,
 });
 
-export const submitSignUp = () => ({
+export const submitSignUp = (payload) => ({
   type: SUBMIT_SIGNUP,
+  payload,
 });
 
 export const signupFailure = (payload) => ({
