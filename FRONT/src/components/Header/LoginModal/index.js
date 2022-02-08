@@ -49,6 +49,7 @@ const LoginModal = () => {
     onSubmit: (values) => {
       const action = submitLogin(values);
       dispatch(action);
+      handleClose();
     },
   });
 

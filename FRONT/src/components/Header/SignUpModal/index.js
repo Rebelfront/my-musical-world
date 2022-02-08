@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { closeSignUpModal, submitSignUp } from 'src/actions/signup';
+import { closeSignUpModal, submitSignUp, signupFailure } from 'src/actions/signup';
 import { changeInput } from 'src/actions';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -25,25 +27,73 @@ const SignUpModal = () => {
     passwordConfirm,
   } = useSelector((state) => state.signup);
   const { error } = useSelector((state) => state.errors);
+
   const handleClose = () => {
     const action = closeSignUpModal();
     dispatch(action);
   };
-  const handleChangeInput = (event) => {
-    const action = changeInput(event.target.value, event.target.name);
-    dispatch(action);
-  };
-  const handleSubmit = () => {
-    const action = submitSignUp();
-    dispatch(action);
-  };
+  // const handleChangeInput = (event) => {
+  //   const action = changeInput(event.target.value, event.target.name);
+  //   dispatch(action);
+  // };
+  // const handleSubmit = () => {
+  //   const action = submitSignUp();
+  //   dispatch(action);
+  // };
+
+  const validationSchema = yup.object({
+    lastname: yup
+      .string('Entrez votre nom')
+      .required('Le champ "Nom" est requis'),
+    firstname: yup
+      .string('Entrez votre prénom')
+      .required('Le champ "Prénom" est requis'),
+    mail: yup
+      .string('Entrez votre email')
+      .email('Entrez un email valide.')
+      .required('Le champ "Email" est requis'),
+    pseudo: yup
+      .string('Entrez votre pseudo')
+      .required('Le champ "Pseudo" est requis'),
+    password: yup
+      .string('Entrez votre mot de passe')
+      .matches('^[a-zA-Z0-9]{5,30}$', 'Votre mot de passe doit contenir entre 5 et 30 caractères.')
+      .required('Le champ "Mot de passe" est requis'),
+    passwordConfirm: yup
+      .string('Entrez votre mot de passe')
+      .matches('^[a-zA-Z0-9]{5,30}$', 'Votre mot de passe doit contenir entre 5 et 30 caractères.')
+      .required('Le champ "Mot de passe de confirmation" est requis'),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      lastname: '',
+      firstname: '',
+      mail: '',
+      pseudo: '',
+      password: '',
+      passwordConfirm: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      if (formik.values.password !== formik.values.passwordConfirm) {
+        const action = signupFailure('Votre mot de passe de confirmation doit correspondre à votre mot de passe.');
+        dispatch(action);
+        return;
+      }
+      const action = submitSignUp(values);
+      dispatch(action);
+      handleClose();
+    },
+  });
+
   return (
     <div>
       <Dialog open={modalOpened} onClose={handleClose}>
         <DialogTitle>Inscription</DialogTitle>
         <DialogContent>
           <Box
-            component="form"
+            component="div"
             sx={{
               '& .MuiTextField-root': { m: 1, width: '25ch' },
             }}
@@ -60,8 +110,10 @@ const SignUpModal = () => {
               fullWidth
               variant="standard"
               placeholder="Entrez votre nom"
-              value={lastname}
-              onChange={handleChangeInput}
+              value={formik.values.lastname}
+              onChange={formik.handleChange}
+              error={formik.touched.lastname && Boolean(formik.errors.lastname)}
+              helperText={formik.touched.lastname && formik.errors.lastname}
             />
             <TextField
               margin="dense"
@@ -72,20 +124,24 @@ const SignUpModal = () => {
               fullWidth
               variant="standard"
               placeholder="Entrez votre prénom"
-              value={firstname}
-              onChange={handleChangeInput}
+              value={formik.values.firstname}
+              onChange={formik.handleChange}
+              error={formik.touched.firstname && Boolean(formik.errors.firstname)}
+              helperText={formik.touched.firstname && formik.errors.firstname}
             />
             <TextField
               margin="dense"
               name="mail"
-              id="email"
+              id="mail"
               label="Email"
               type="email"
               fullWidth
               variant="standard"
               placeholder="Entrez votre email"
-              value={mail}
-              onChange={handleChangeInput}
+              value={formik.values.mail}
+              onChange={formik.handleChange}
+              error={formik.touched.mail && Boolean(formik.errors.mail)}
+              helperText={formik.touched.mail && formik.errors.mail}
             />
             <TextField
               margin="dense"
@@ -96,8 +152,10 @@ const SignUpModal = () => {
               fullWidth
               variant="standard"
               placeholder="Entrez votre pseudo"
-              value={pseudo}
-              onChange={handleChangeInput}
+              value={formik.values.pseudo}
+              onChange={formik.handleChange}
+              error={formik.touched.pseudo && Boolean(formik.errors.pseudo)}
+              helperText={formik.touched.pseudo && formik.errors.pseudo}
             />
             <TextField
               margin="dense"
@@ -108,8 +166,10 @@ const SignUpModal = () => {
               fullWidth
               variant="standard"
               placeholder="Entrez votre mot de passe"
-              value={password}
-              onChange={handleChangeInput}
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
             />
             <TextField
               margin="dense"
@@ -120,19 +180,18 @@ const SignUpModal = () => {
               fullWidth
               variant="standard"
               placeholder="Confirmez votre mot de passe"
-              value={passwordConfirm}
-              onChange={handleChangeInput}
+              value={formik.values.passwordConfirm}
+              onChange={formik.handleChange}
+              error={formik.touched.passwordConfirm && Boolean(formik.errors.passwordConfirm)}
+              helperText={formik.touched.passwordConfirm && formik.errors.passwordConfirm}
             />
-            <DialogActions sx={{display: 'flex', alignContent: 'space-between', flexWrap: 'wrap'}}>
+            <DialogActions sx={{ display: 'flex', alignContent: 'space-between', flexWrap: 'wrap' }}>
               {error && (
                 <Alert className="signupModal__error" severity="error">{error}</Alert>
               )}
               <Button
-                sx={{ml:"auto", mt:"10px"}}
-                onClick={() => {
-                  handleClose();
-                  handleSubmit();
-                }}
+                sx={{ ml: 'auto', mt: '10px' }}
+                onClick={formik.handleSubmit}
                 className="button-green"
               >
                 S'inscrire

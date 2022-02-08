@@ -52,19 +52,19 @@ const authenticationMW = (store) => (next) => (action) => {
     }
       break;
     case SUBMIT_SIGNUP: {
-      const {
-        signup: {
-          mail, pseudo, firstname, lastname, password, passwordConfirm,
-        },
-      } = store.getState();
+      // const {
+      //   signup: {
+      //     mail, pseudo, firstname, lastname, password, passwordConfirm,
+      //   },
+      // } = store.getState();
 
       axios.post(`${rootAPIUrl}/signup`, {
-        mail,
-        pseudo,
-        firstname,
-        lastname,
-        password,
-        password_confirmation: passwordConfirm,
+        lastname: action.payload.lastname,
+        firstname: action.payload.firstname,
+        mail: action.payload.mail,
+        pseudo: action.payload.pseudo,
+        password: action.payload.password,
+        password_confirmation: action.payload.passwordConfirm,
       })
         .then((res) => {
           localStorage.setItem('token', res.headers.authorization);
