@@ -100,10 +100,7 @@ const LoginModal = () => {
               )}
               <Button
                 sx={{ ml: 'auto', mt: '10px' }}
-                onClick={() => {
-                  formik.handleSubmit();
-                  // handleClose();
-                }}
+                onClick={formik.handleSubmit}
                 className="button-green"
                 type="submit"
               >
