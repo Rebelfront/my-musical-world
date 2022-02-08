@@ -3,10 +3,13 @@
 @import 'src/styles/abstracts/functions';
 
 .dashboard {
-  @include mq-desktop {
-    display: flex;
-    flex-grow: 1;
-  }
+  display: flex;
+  flex-grow: 1;
+}
+.dashboard__loading {
+  display: flex;
+  margin: auto;
+  align-items: center;
 }
 
 .dashboard__title {

@@ -61,7 +61,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
        {loading ? (
-        <div className="result__loading">
+        <div className="dashboard__loading">
           <Loading />
         </div>
        ) : (
